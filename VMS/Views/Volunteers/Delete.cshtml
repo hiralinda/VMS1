@@ -1,0 +1,22 @@
+﻿@model VMS.Models.Volunteer
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="card">
+    <div class="card-header bg-light">
+        <h5>Are you sure?</h5>
+    </div>
+    <div class="card-body">
+        <p>Are you sure you want to delete @Html.DisplayFor(model => model.firstName)?</p>
+    </div>
+    <div class="card-footer">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>
+

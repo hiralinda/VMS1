@@ -1,0 +1,252 @@
+﻿@model VMS.Models.Volunteer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Volunteer Details</h4>
+    </div>
+    <div class="card-body">
+        <div>
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.firstName)*@First Name
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.firstName)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.lastName)*@Last Name
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.lastName)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.userName)*@Username
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.userName)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.password)*@Password
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.password)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.preferences)*@Preferences
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.preferences)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.skills)*@Skills
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.skills)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.availability)*@Availability
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.availability)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.address)*@Address
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.address)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.phoneNumber)*@Phone #
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.phoneNumber)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.email)*@Email
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.education)*@Education
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.education)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.licenses)*@Professional Licenses
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.licenses)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.emergName)*@Emergency Contact Name
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.emergName)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.emergPhone)*@Emergency Phone
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.emergPhone)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.emergEmail)*@Emergency Email
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.emergEmail)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.emergAdd)*@Emergency Address
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.emergAdd)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.approvalStatus)*@Approval Status
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.approvalStatus)
+                </dd>
+                <dt class="col-sm-3">
+                    @*@Html.DisplayNameFor(model => model.approvalStatus)*@Active Status
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.activeStatus)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@
+            <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@*<h1>Details</h1>
+
+<div>
+    <h4>Volunteer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.password)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.preferences)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.preferences)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.skills)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.skills)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.availability)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.availability)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.education)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.education)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.licenses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.licenses)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.emergName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.emergName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.emergPhone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.emergPhone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.emergEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.emergEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.emergAdd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.emergAdd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.approvalStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.approvalStatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.activeStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.activeStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@

@@ -1,0 +1,71 @@
+﻿@model VMS.Models.Opportunity
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Opportunity Details</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-2">
+                Opportunity Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.opportunityName)
+            </dd>
+            <dt class="col-sm-2">
+                Center
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.center)
+            </dd>
+            <dt class="col-sm-2">
+                Date Posted
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.datePosted)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="mt-3">
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>*@
+    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+</div>
+
+
+
+@*<h1>Details</h1>
+
+<div>
+    <h4>Opportunity</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.opportunityName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.opportunityName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.center)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.center)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.datePosted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.datePosted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
