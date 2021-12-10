@@ -1,0 +1,22 @@
+﻿@page
+@model VMS.Pages.Notifications.IndexModel
+@{
+}
+
+<form>
+    <h3>Choose your interests, to be notified when opportunities are posted!</h3>
+    @foreach (var interest in Model.Interests)
+    {
+
+        <label for="@interest.Id" class="btn btn-outline-primary">
+
+            <input type="checkbox" class="btn-check" id="@interest.Id" checked="@interest.Selected" autocomplete="off" />
+
+            @interest.Name
+
+        </label>
+
+    }
+    <br />
+    <input type="submit" id="saveChanges" value="Save Changes" />
+</form>
