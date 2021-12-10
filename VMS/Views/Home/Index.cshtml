@@ -3,14 +3,25 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Volunteer Management System</h1>
-    <p>Pre-semester assignment digitech. </p>
-    <p>Choose either Volunteers or Opportunities to get started</p>
-    <a type="button" class="btn btn-outline-primary" asp-controller="Volunteers" asp-action="Index">Volunteers</a>
-    <a type="button" class="btn btn-outline-secondary" asp-controller="Opportunities" asp-action="Index">Opportunities</a>
-    <hr />
+    <h1 class="display-4">Welcome</h1>
 
-
-
-    <p class="mt-5 ml-lg-5 text-sm-right text-secondary text-muted">(whoops, this application is missing a few components)</p>
+    <br />
+    <div class="container">
+        <p>Please Choose Your Access Type</p>
+        <div class="jumbotron" align="center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <a asp-area="" asp-controller="" asp-action="">Administrator</a>
+                    </div>
+                    <div class="col-sm">
+                        <a asp-area="" asp-controller="Organizations" asp-action="Index">Organization</a>
+                    </div>
+                    <div class="col-sm">
+                        <a asp-area="" asp-controller="" asp-action="">Volunteer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

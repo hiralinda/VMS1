@@ -15,5 +15,6 @@ namespace VMS.Data
         }
         public DbSet<VMS.Models.Volunteer> Volunteer { get; set; }
         public DbSet<VMS.Models.Opportunity> Opportunity { get; set; }
+        public DbSet<VMS.Models.Organization> Organization { get; set; }
     }
 }
