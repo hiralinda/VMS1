@@ -21,28 +21,28 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Index()
         {
             return View(await _context.Opportunity.ToListAsync());
         }
 
         // GET: Opportunities/ShowSearchForm
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> ShowSearchForm()
         {
             return View();
         }
 
         // POST: Opportunities/ShowSearchResults
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
             return View("Index", await _context.Opportunity.Where( j => j.opportunityName.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Opportunities/Details/5
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -61,7 +61,7 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities/Create
-        [Authorize]
+        /*[Authorize]*/
         public IActionResult Create()
         {
             return View();
@@ -70,7 +70,7 @@ namespace VMS.Controllers
         // POST: Opportunities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        /*[Authorize]*/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,opportunityName,center,datePosted")] Opportunity opportunity)
@@ -86,7 +86,7 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities/Edit/5
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -105,7 +105,7 @@ namespace VMS.Controllers
         // POST: Opportunities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        /*[Authorize]*/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,opportunityName,center,datePosted")] Opportunity opportunity)
@@ -140,7 +140,7 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities/Delete/5
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -159,7 +159,7 @@ namespace VMS.Controllers
         }
 
         // POST: Opportunities/Delete/5
-        [Authorize]
+        /*[Authorize]*/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
