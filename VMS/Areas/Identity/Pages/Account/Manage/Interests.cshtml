@@ -5,24 +5,41 @@
     ViewData["ActivePage"] = ManageNavPages.Interests;
 }
 
-<h4>Choose your interests, to be notified when opportunities are posted!</h4>
+
 
 <form>
-
+    <h4>Choose your interests, to be notified when opportunities are posted!</h4>
     @foreach (var interest in Model.Interests)
     {
+        if (interest.Selected == false)
+        {
 
-        <label for="@interest.Id" class="btn btn-outline-primary">
+            <label for="@interest.Id" class="btn btn-outline-primary">
 
-            <input type="checkbox" class="btn-check" id="@interest.Id" checked="@interest.Selected" autocomplete="off" />
+                <input type="checkbox" class="btn-check" id="@interest.Id" checked="@interest.Selected" autocomplete="off" />
 
-            @interest.Name
+                @interest.Name
 
-        </label>
-
+            </label>
+        }
     }
+    <h4>Your selected interests!</h4>
+    @foreach (var interest in Model.Interests)
+    {
+        if (interest.Selected == true)
+        {
+            <label for="@interest.Id" class="btn btn-outline-primary">
+
+                <input type="checkbox" class="btn-check" id="@interest.Id" checked="@interest.Selected" autocomplete="off" />
+
+                @interest.Name
+
+            </label>
+        }
+    }
+
     <br />
-    <input type="submit" id="saveChanges" value="Save Changes" />
+    <input type="submit" class="btn btn-success" id="saveChanges" value="Save Changes" />
 </form>
 
 @section Scripts {
