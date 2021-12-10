@@ -1,10 +1,14 @@
 ﻿@page
-@model VMS.Pages.Notifications.IndexModel
+@model VMS.Areas.Identity.Pages.Account.Manage.Notifications.IndexModel
 @{
+    ViewData["Title"] = "Interests";
+    ViewData["ActivePage"] = ManageNavPages.Interests;
 }
 
+<h4>Choose your interests, to be notified when opportunities are posted!</h4>
+
 <form>
-    <h3>Choose your interests, to be notified when opportunities are posted!</h3>
+
     @foreach (var interest in Model.Interests)
     {
 
@@ -20,3 +24,7 @@
     <br />
     <input type="submit" id="saveChanges" value="Save Changes" />
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using VMS.Domain;
 using VMS.Services;
 
-namespace VMS.Pages.Notifications
+namespace VMS.Areas.Identity.Pages.Account.Manage.Notifications
 {
 
     public class IndexModel : PageModel
