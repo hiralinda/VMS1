@@ -6,6 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using VMS.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace VMS
 {
@@ -18,9 +22,28 @@ namespace VMS
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+.ConfigureAppConfiguration((context, config) =>
+{
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+config.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+    }
+
+    public static class HostExtention
+    {
+        public static IHost MigrateDatabase(this IHost host, string environment)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+            }
+
+            return host;
+        }
+
     }
 }
