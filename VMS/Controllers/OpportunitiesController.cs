@@ -27,6 +27,27 @@ namespace VMS.Controllers
             return View(await _context.Opportunity.ToListAsync());
         }
 
+        // GET: Opportunities
+        /*[Authorize]*/
+        public async Task<IActionResult> Browse()
+        {
+            return View(await _context.Opportunity.ToListAsync());
+        }
+
+        // GET: detailsfake
+        /*[Authorize]*/
+        public async Task<IActionResult> Detailsfake()
+        {
+            return View(await _context.Opportunity.ToListAsync());
+        }
+
+        // GET: Application
+        /*[Authorize]*/
+        public async Task<IActionResult> Apply()
+        {
+            return View(await _context.Opportunity.ToListAsync());
+        }
+
         // GET: Opportunities/ShowSearchForm
         /*[Authorize]*/
         public async Task<IActionResult> ShowSearchForm()
