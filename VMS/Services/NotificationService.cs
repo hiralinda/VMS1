@@ -33,13 +33,25 @@ namespace VMS.Services
             {
                 Id = 2,
                 Name = "Music",
-                Selected = true
+                Selected = false
             },
             new Interest
             {
                 Id = 3,
                 Name = "Animals",
+                Selected = true
+            },
+            new Interest
+            {
+                Id = 4,
+                Name = "Foreign",
                 Selected = false
+            },
+            new Interest
+            {
+                Id = 5,
+                Name = "STEM",
+                Selected = true
             },
 
         };
