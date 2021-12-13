@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityUser>
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h1>User List</h1>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <tr>
+            <th>User ID</th>
+            <td>Username</td>
+        </tr>
+        @foreach (var user in Model)
+        {
+
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+            </tr>
+
+        }
+    </table>
+}
+else
+    {
+
+    }
