@@ -24,7 +24,9 @@
             </div>
             <div class="card-footer">
                 <a class="btn btn-primary" asp-action="EditRole" asp-controller="admin" asp-route-id="@role.Id">Edit</a>
-                <a class="btn btn-danger" asp-action="DeleteRole" asp-controller="admin">Delete</a>
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post" class="mt-1">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete role: @role.Name')">Delete</button>
+                </form>
             </div>
         </div>
     }
