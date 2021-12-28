@@ -94,7 +94,7 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,opportunityName,center,datePosted")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,opportunityName,location,description")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +129,7 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,opportunityName,center,datePosted")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,opportunityName,location,description")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {

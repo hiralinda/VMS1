@@ -9,8 +9,8 @@ namespace VMS.Models
     {
         public int Id { get; set; }
         public string opportunityName { get; set; }
-        public string center { get; set; } // volunteers assigned centers
-        public string datePosted { get; set; }
+        public string location { get; set; } // volunteers assigned centers
+        public string description { get; set; }
 
         public Opportunity()
         {
