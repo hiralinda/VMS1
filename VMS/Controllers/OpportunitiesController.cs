@@ -28,14 +28,14 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Browse()
         {
             return View(await _context.Opportunity.ToListAsync());
         }
 
         // GET: detailsfake
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Detailsfake()
         {
             return View(await _context.Opportunity.ToListAsync());
