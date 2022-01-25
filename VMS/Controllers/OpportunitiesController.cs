@@ -15,6 +15,12 @@ namespace VMS.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        // GET: Opportunities
+        public async Task<IActionResult> Browse()
+        {
+            return View(await _context.Opportunity.ToListAsync());
+        }
+
         public OpportunitiesController(ApplicationDbContext context)
         {
             _context = context;
@@ -27,12 +33,6 @@ namespace VMS.Controllers
             return View(await _context.Opportunity.ToListAsync());
         }
 
-        // GET: Opportunities
-        /*[Authorize]*/
-        public async Task<IActionResult> Browse()
-        {
-            return View(await _context.Opportunity.ToListAsync());
-        }
 
         // GET: detailsfake
         /*[Authorize]*/
@@ -63,7 +63,6 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities/Details/5
-        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
