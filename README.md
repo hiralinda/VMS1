@@ -1,6 +1,8 @@
 # VMS1
 CIS4327
 - our current repo
+
+View it:
 https://volunteenprototype.azurewebsites.net/
 
 Different looks (bootswatch):
