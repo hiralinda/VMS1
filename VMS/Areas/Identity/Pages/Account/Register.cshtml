@@ -12,6 +12,15 @@
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="radio" id="Volunteer" asp-for="Input.ChosenRole" value="Volunteer" />
+                <label asp-for="Input.ChosenRole">Volunteer</label>
+                <br />
+                <input type="radio" id="Organization" asp-for="Input.ChosenRole" value="Organization" />
+                <label asp-for="Input.ChosenRole">Organization</label>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
