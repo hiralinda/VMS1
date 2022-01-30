@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VMS.Models;
 using VMS.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace VMS.Controllers
 {
@@ -75,7 +76,7 @@ namespace VMS.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListUsers");
+                    return RedirectToAction("UserList");
                 }
 
                 foreach (var error in result.Errors)
@@ -84,7 +85,7 @@ namespace VMS.Controllers
                 }
 
             }
-            return View("ListUsers");
+            return View("UserList");
 
         }
 
@@ -95,12 +96,6 @@ namespace VMS.Controllers
             return View(roles);
         }
 
-        [HttpGet]
-        public IActionResult ListUsers()
-        {
-            var users = userManager.Users;
-            return View(users);
-        }
 
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
@@ -175,7 +170,7 @@ namespace VMS.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListUsers");
+                    return RedirectToAction("UserList");
                 }
 
                 foreach(var error in result.Errors)
@@ -307,6 +302,25 @@ namespace VMS.Controllers
             }
 
             return RedirectToAction("EditUser", new { Id = userId });
+        }
+
+        public async Task<IActionResult> UserList()
+        {
+            var users = await userManager.Users.ToListAsync();
+            var UserListViewModel = new List<UserListViewModel>();
+            foreach (IdentityUser user in users)
+            {
+                var thisViewModel = new UserListViewModel();
+                thisViewModel.Email = user.Email;
+                thisViewModel.Id = user.Id;
+                thisViewModel.Roles = await GetUserRoles(user);
+                UserListViewModel.Add(thisViewModel);
+            }
+            return View(UserListViewModel);
+        }
+        private async Task<List<string>> GetUserRoles(IdentityUser user)
+        {
+            return new List<string>(await userManager.GetRolesAsync(user));
         }
     }
 }
