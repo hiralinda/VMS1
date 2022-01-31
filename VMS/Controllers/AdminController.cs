@@ -252,7 +252,7 @@ namespace VMS.Controllers
 
             var model = new List<UserRolesViewModel>();
 
-            foreach(var role in roleManager.Roles)
+            foreach(var role in roleManager.Roles.ToList())
             {
                 var userRolesViewModel = new UserRolesViewModel
                 {
@@ -289,7 +289,7 @@ namespace VMS.Controllers
 
             if(!result.Succeeded)
             {
-                ModelState.AddModelError("", "Cannout remove user existing roles");
+                ModelState.AddModelError("", "Cannot remove user existing roles");
                 return View(model);
             }
 
