@@ -34,13 +34,6 @@ namespace VMS.Controllers
         }
 
 
-        // GET: detailsfake
-        /*[Authorize]*/
-        public async Task<IActionResult> Detailsfake()
-        {
-            return View(await _context.Opportunity.ToListAsync());
-        }
-
         // GET: Application
         [Authorize]
         public async Task<IActionResult> Apply()
@@ -49,17 +42,15 @@ namespace VMS.Controllers
         }
 
         // GET: Opportunities/ShowSearchForm
-        [Authorize]
         public async Task<IActionResult> ShowSearchForm()
         {
             return View();
         }
 
         // POST: Opportunities/ShowSearchResults
-        [Authorize]
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            return View("Index", await _context.Opportunity.Where( j => j.opportunityName.Contains(SearchPhrase)).ToListAsync());
+            return View("Browse", await _context.Opportunity.Where( j => j.opportunityName.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Opportunities/Details/5
