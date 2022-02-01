@@ -311,6 +311,11 @@ namespace VMS.Controllers
             foreach (ApplicationUser user in users)
             {
                 var thisViewModel = new UserListViewModel();
+                thisViewModel.firstName = user.FirstName;
+                thisViewModel.lastName = user.LastName;
+                thisViewModel.phone = user.PhoneNumber;
+                thisViewModel.address = user.address;
+                thisViewModel.zip = user.zip;
                 thisViewModel.Email = user.Email;
                 thisViewModel.Id = user.Id;
                 thisViewModel.Roles = await GetUserRoles(user);
