@@ -2,20 +2,25 @@
 @{
     ViewData["Title"] = "Browse Opportunities";
 }
-<div class="container align-content-center">
-
-    <div class="col-md-12">
-
-        <button type="button" class="btn btn-outline-primary ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<h2>View Posts</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a  asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">Browse</li>
+</ol>
+<div class="row">
+    <!--left-->
+    <div class="col col-md-3">
+        <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Filter
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" asp-action="">Most Recent</a>
+            <a class="dropdown-item">Most Recent</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" asp-action="Browse">All</a>
         </div>
 
 
+        <!--right-->
         <form class="form-group mb-5" asp-action="ShowSearchResults">
             <div class="form-row">
                 <label class="sr-only" for="SearchPhrase"></label>
@@ -23,19 +28,59 @@
             </div>
         </form>
     </div>
-    
 
-    @foreach (var item in Model)
-    {
-        <div class="card rounded m-5">
-            <div class="card-body">
-                <h5>@Html.DisplayFor(modelItem => item.opportunityName)</h5><hr />
-                <p class="font-weight-light">@Html.DisplayFor(modelItem => item.location)</p>
-                <p>@Html.DisplayFor(modelItem => item.description)</p>
-                <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
-                <a class="btn btn-outline-info btn-rounded" asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+    <div class="col col-md-9">
+        @foreach (var item in Model)
+        {
+            <div class="card rounded mb-5 p-2">
+                <div class="card-body">
+                    <h5>@Html.DisplayFor(modelItem => item.opportunityName)</h5><hr />
+                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.location)</p>
+                    <p>@Html.DisplayFor(modelItem => item.description)</p>
+                    <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
+                    <a class="btn btn-outline-info btn-rounded" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </div>
             </div>
-        </div>
-    }
-    <a class="btn btn-lg btn-secondary btn-rounded justify-content-lg-center" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        }
+    </div>
 </div>
+
+
+@*<div class="container">
+
+        <div class="row-cols-md-6">
+
+            <button type="button" class="btn btn-outline-primary ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" asp-action="">Most Recent</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-action="Browse">All</a>
+            </div>
+
+
+            <form class="form-group mb-5" asp-action="ShowSearchResults">
+                <div class="form-row">
+                    <label class="sr-only" for="SearchPhrase"></label>
+                    <input name="SearchPhrase" class="rounded form-control" id="inlineFormInputName" placeholder="Search">
+                </div>
+            </form>
+        </div>
+
+
+        @foreach (var item in Model)
+        {
+            <div class="card rounded m-5">
+                <div class="card-body">
+                    <h5>@Html.DisplayFor(modelItem => item.opportunityName)</h5><hr />
+                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.location)</p>
+                    <p>@Html.DisplayFor(modelItem => item.description)</p>
+                    <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
+                    <a class="btn btn-outline-info btn-rounded" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </div>
+            </div>
+        }
+        <a class="btn btn-lg btn-secondary btn-rounded justify-content-lg-center" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </div>*@

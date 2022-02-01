@@ -12,7 +12,7 @@
                     Manage
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @if (User.IsInRole("Organization"))
+                    @if (User.IsInRole("Organization") || User.IsInRole("Admin"))
                     {
                         <a type="button" class="dropdown-item" asp-area="" asp-controller="Opportunities" asp-action="Index">Opportunities</a>
                     }
