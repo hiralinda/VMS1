@@ -6,6 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20220201054310_Renamed Identity Table Names.cs" />
+    <Compile Remove="Data\Migrations\20220201054310_Renamed Identity Table Names.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220201062420_Added custom properties.cs" />
+    <Compile Remove="Data\Migrations\20220201062420_Added custom properties.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220201064152_Added custom properties.cs" />
+    <Compile Remove="Data\Migrations\20220201064152_Added custom properties.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220201064409_Added custom properties.cs" />
+    <Compile Remove="Data\Migrations\20220201064409_Added custom properties.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220201064815_added custom properties.cs" />
+    <Compile Remove="Data\Migrations\20220201064815_added custom properties.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220201065140_added custom properties.cs" />
+    <Compile Remove="Data\Migrations\20220201065140_added custom properties.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
     <PackageReference Include="Azure.Identity" Version="1.2.2" />
     <PackageReference Include="bootstrap" Version="5.1.3" />

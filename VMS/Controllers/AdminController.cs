@@ -14,14 +14,14 @@ namespace VMS.Controllers
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -308,7 +308,7 @@ namespace VMS.Controllers
         {
             var users = await userManager.Users.ToListAsync();
             var UserListViewModel = new List<UserListViewModel>();
-            foreach (IdentityUser user in users)
+            foreach (ApplicationUser user in users)
             {
                 var thisViewModel = new UserListViewModel();
                 thisViewModel.Email = user.Email;
@@ -318,7 +318,7 @@ namespace VMS.Controllers
             }
             return View(UserListViewModel);
         }
-        private async Task<List<string>> GetUserRoles(IdentityUser user)
+        private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
             return new List<string>(await userManager.GetRolesAsync(user));
         }
