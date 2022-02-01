@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -110,6 +112,17 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var address = user.address;
             var zip = user.zip;
 
+            if (Request.Form.Files.Count > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.ProfilePicture = dataStream.ToArray();
+                }
+                await _userManager.UpdateAsync(user);
+            }
+
             if (Input.FirstName != firstName)
             {
                 user.FirstName = Input.FirstName;
@@ -119,12 +132,6 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             if (Input.LastName != lastName)
             {
                 user.LastName = Input.LastName;
-                await _userManager.UpdateAsync(user);
-            }
-
-            if (Input.ProfilePicture != profilePicture)
-            {
-                user.ProfilePicture = Input.ProfilePicture;
                 await _userManager.UpdateAsync(user);
             }
 
