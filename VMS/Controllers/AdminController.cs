@@ -200,7 +200,7 @@ namespace VMS.Controllers
 
             };
 
-            foreach (var user in userManager.Users)
+            foreach (var user in userManager.Users.ToList())
             {
                 if(await userManager.IsInRoleAsync(user, role.Name))
                 {
