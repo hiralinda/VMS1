@@ -52,7 +52,7 @@ namespace VMS.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "Nonprofit Name")]
-            public string nonprofitName { get; set; }
+            public string NonprofitName { get; set; }
 
             [Required]
             [Display(Name = "Address")]
@@ -104,7 +104,7 @@ namespace VMS.Areas.Identity.Pages.Account
                     address = Input.Address,
                     zip = Input.Zip,
                     PhoneNumber = Input.PhoneNumber,
-                    // = Input.nonprofitName
+                    FirstName = Input.NonprofitName
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
