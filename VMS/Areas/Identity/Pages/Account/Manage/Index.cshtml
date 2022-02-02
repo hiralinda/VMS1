@@ -5,6 +5,9 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
+@using VMS.Models; 
+@inject SignInManager<ApplicationUser> signInManager;
+
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
@@ -35,19 +38,26 @@
                 <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <label asp-for="Input.FirstName"></label>
-                    <input asp-for="Input.FirstName" class="form-control" />
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Volunteer")))
+            {
+                <div class="row">
+                    <div class="col">
+                        <label asp-for="Input.FirstName"></label>
+                        <input asp-for="Input.FirstName" class="form-control" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Input.LastName"></label>
+                        <input asp-for="Input.LastName" class="form-control" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="col">
-                    <label asp-for="Input.LastName"></label>
-                    <input asp-for="Input.LastName" class="form-control" />
-                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                </div>
-            </div>
+            }
 
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)")))
+            {
+
+            }
             <div class="row">
                 <div class="col">
                     <label asp-for="Input.Address"></label>
