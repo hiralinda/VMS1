@@ -19,19 +19,19 @@ using VMS.Models;
 namespace VMS.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class VolunteerRegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<VolunteerRegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public VolunteerRegisterModel(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<VolunteerRegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -51,8 +51,12 @@ namespace VMS.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "Select User Type")]
-            public string ChosenRole { get; set; }
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Required]
+            [Display(Name = "Zip")]
+            public string Zip { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
@@ -63,7 +67,7 @@ namespace VMS.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [DataType(DataType.PhoneNumber)]
+            [Phone]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
@@ -71,14 +75,6 @@ namespace VMS.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-
-            [Required]
-            [Display(Name = "Address")]
-            public string Address { get; set; }
-
-            [Required]
-            [Display(Name = "Zip")]
-            public string Zip { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -110,21 +106,17 @@ namespace VMS.Areas.Identity.Pages.Account
                 {
                     UserName = UserName,
                     Email = Input.Email,
+                    address = Input.Address,
+                    zip = Input.Zip,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    PhoneNumber = Input.PhoneNumber,
-                    address = Input.Address,
-                    zip = Input.Zip
+                    PhoneNumber = Input.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    var roleSelected = _roleManager.FindByNameAsync(Input.ChosenRole).Result;
 
-                    if(roleSelected != null)
-                    {
-                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, roleSelected.Name);
-                    }
+                    IdentityResult roleresult = await _userManager.AddToRoleAsync(user, "Volunteer");
 
                     _logger.LogInformation("User created a new account with password.");
 
