@@ -21,6 +21,12 @@ namespace VMS.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Analytics()
+        {
+            return View();
+        }
+
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
@@ -327,5 +333,6 @@ namespace VMS.Controllers
         {
             return new List<string>(await userManager.GetRolesAsync(user));
         }
+
     }
 }
