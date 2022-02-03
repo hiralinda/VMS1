@@ -35,9 +35,9 @@
         {
             <div class="card rounded mb-5 p-2">
                 <div class="card-body">
-                    <h5>@Html.DisplayFor(modelItem => item.opportunityName)</h5><hr />
-                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.location)</p>
-                    <p>@Html.DisplayFor(modelItem => item.description)</p>
+                    <h5>@Html.DisplayFor(modelItem => item.OpportunityName)</h5><hr />
+                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.Location)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
                     <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
                     <a class="btn btn-outline-info btn-rounded" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </div>

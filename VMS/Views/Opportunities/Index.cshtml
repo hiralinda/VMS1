@@ -44,7 +44,13 @@
                             Location
                         </th>
                         <th>
-                             Description
+                            Description
+                        </th>
+                        <th>
+                            Create Date (UTC)
+                        </th>
+                        <th>
+                            Create User
                         </th>
                         <th>Actions</th>
                     </tr>
@@ -54,13 +60,19 @@
                     {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.opportunityName)
+                            @Html.DisplayFor(modelItem => item.OpportunityName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.location)
+                            @Html.DisplayFor(modelItem => item.Location)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.description)
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateUser.FirstName)
                         </td>
                         <td class="text-center">
                             <div class="btn-group">

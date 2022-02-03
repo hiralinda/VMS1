@@ -8,13 +8,11 @@ namespace VMS.Models
     public class Opportunity
     {
         public int Id { get; set; }
-        public string opportunityName { get; set; }
-        public string location { get; set; } // volunteers assigned centers
-        public string description { get; set; }
+        public string OpportunityName { get; set; }
+        public string Location { get; set; } // volunteers assigned centers
+        public string Description { get; set; }        
+        public ApplicationUser CreateUser { get; set; }
+        public DateTime CreateDate { get; set; }
 
-        public Opportunity()
-        {
-
-        }
     }
 }

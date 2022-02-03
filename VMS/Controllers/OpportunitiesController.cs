@@ -10,7 +10,7 @@ using VMS.Data;
 using VMS.Models;
 
 namespace VMS.Controllers
-{
+{    
     public class OpportunitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,7 +30,7 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Opportunity.ToListAsync());
+            return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
         }
 
 
@@ -50,7 +50,7 @@ namespace VMS.Controllers
         // POST: Opportunities/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
         {
-            return View("Browse", await _context.Opportunity.Where( j => j.opportunityName.Contains(SearchPhrase)).ToListAsync());
+            return View("Browse", await _context.Opportunity.Where( j => j.OpportunityName.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Opportunities/Details/5
@@ -84,13 +84,21 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,opportunityName,location,description")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Location,Description")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Id();
+                
+                opportunity.CreateDate = DateTime.UtcNow;
+                opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+
                 _context.Add(opportunity);
+                
                 await _context.SaveChangesAsync();
+                
                 TempData["message"] = $"Created!";
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(opportunity);
