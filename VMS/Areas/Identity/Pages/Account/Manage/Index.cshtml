@@ -54,9 +54,13 @@
                 </div>
             }
 
-            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)")))
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization")))
             {
-
+                <div class="col">
+                    <label asp-for="Input.FirstName"></label>
+                    <input asp-for="Input.FirstName" class="form-control" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
             }
             <div class="row">
                 <div class="col">
