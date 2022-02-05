@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VMS.Models;
 using VMS.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace VMS.Controllers
 {
@@ -21,16 +22,25 @@ namespace VMS.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Analytics()
-        {
-            return View();
-        }
-
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+    }
+
+        [HttpGet]
+        public IActionResult Analytics()
+        {
+            int userTotal = userManager.Users.Count();
+            ViewBag.userTotal = userTotal;
+
+            int volTotal = userManager.GetUsersInRoleAsync("Volunteer").Result.Count;
+            ViewBag.volTotal = volTotal;
+
+            int orgTotal = userManager.GetUsersInRoleAsync("Organization (Verified)").Result.Count;
+            ViewBag.orgTotal = orgTotal;
+
+            return View();
         }
 
         [HttpGet]
