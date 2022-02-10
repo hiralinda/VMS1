@@ -34,7 +34,7 @@
             <div class="h-100 p-5 text-white bg-dark rounded-3">
                 <h2>Location</h2>
                 <p>@Html.DisplayFor(model => model.Location)</p>
-                <button class="btn btn-outline-light" type="button">Example button</button>
+                <a class="btn btn-outline-light" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.Location">Map</a>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                     <li>@Html.DisplayFor(model => model.CreateUser.Email)</li>
                     <li>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                 </ul>
-                <a class="badge rounded-pill bg-info" style="text-decoration-line:none;" asp-area="" asp-controller="" asp-action="">Contact</a>
+                <a class="btn btn-secondary" href="mailto: @Model.CreateUser.Email">Contact</a>
             </div>
         </div>
     </div>
