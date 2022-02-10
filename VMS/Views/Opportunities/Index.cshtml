@@ -4,14 +4,12 @@
     ViewData["Title"] = "Your Posted Opportunities";
 }
 
-
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
-
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">Manage</li>
+</ol>
 <div class="card">
-    <div class="card-header">
-        <h4>Manage your posts here</h4>
-    </div>
+    <h2 class="card-title p-3">Manage your posts here</h2>
     <div class="card-body">
             <div class="col-md-12">
                 <a type="button" class="btn btn-outline-success" asp-action="Create">Add New+</a>
@@ -19,12 +17,13 @@
                     Filter
                 </button>
                 <div class="dropdown-menu">
-                    <a type="button" class="dropdown-item" asp-action="">Most Recent</a>
+                    @*<a type="button" class="dropdown-item" asp-action="">A-Z</a>*@
+                    <a type="button" class="dropdown-item" asp-action="ReverseAlphabetical">Z-A</a>
+                    @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
+                    <a type="button" class="dropdown-item" asp-action="Recent">Most Recent</a>
                     <div class="dropdown-divider"></div>
                     <a type="button" class="dropdown-item" asp-action="Index">All</a>
                 </div>
-
-                
                 @*<form class="form-group mb-5" asp-action="ShowSearchResults">
                     <div class="form-row">
                         <label class="sr-only" for="SearchPhrase"></label>
@@ -33,9 +32,9 @@
                 </form>*@
             </div>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-condensed">
-                <thead>
+        <div class="table-responsive pt-2">
+            <table class="rounded table table-bordered table-hover table-condensed">
+                <thead class="bg-light">
                     <tr>
                         <th>
                             Name
@@ -52,10 +51,10 @@
                         <th>
                             Create User
                         </th>
-                        <th>Actions</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="table table-striped">
+                <tbody class="">
                     @foreach (var item in Model)
                     {
                     <tr>
@@ -69,7 +68,7 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate)
+                            @Html.DisplayFor(modelItem => item.CreateDate.Date)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateUser.FirstName)

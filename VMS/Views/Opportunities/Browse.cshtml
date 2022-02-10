@@ -14,14 +14,15 @@
             Filter
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item">Most Recent</a>
+            @*<a type="button" class="dropdown-item" asp-action="">A-Z</a>*@
+            <a type="button" class="dropdown-item" asp-action="BrowseReverseAlphabetical">Z-A</a>
+            @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
+            <a type="button" class="dropdown-item" asp-action="BrowseRecent">Most Recent</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" asp-action="Browse">All</a>
+            <a type="button" class="dropdown-item" asp-action="Browse">All</a>
         </div>
 
-
-        <!--right-->
-        <form class="form-group mb-5" asp-action="ShowSearchResults">
+        <form class="form-group" asp-action="ShowSearchResults">
             <div class="form-row">
                 <label class="sr-only" for="SearchPhrase"></label>
                 <input name="SearchPhrase" class="rounded form-control" id="inlineFormInputName" placeholder="Search">
@@ -29,7 +30,7 @@
         </form>
     </div>
 
-
+    <!--right-->
     <div class="col col-md-9">
         @foreach (var item in Model)
         {
@@ -39,7 +40,7 @@
                     <p class="font-weight-light">@Html.DisplayFor(modelItem => item.Location)</p>
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                     <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
-                    <a class="btn btn-outline-info btn-rounded" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@item.Id">See Details</a>
                 </div>
             </div>
         }

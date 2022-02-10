@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,23 +15,61 @@ namespace VMS.Controllers
     public class OpportunitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        // GET: Opportunities
-        public async Task<IActionResult> Browse()
-        {
-            return View(await _context.Opportunity.ToListAsync());
-        }
-
         public OpportunitiesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Opportunities
+        // GET: Opportunities // mgmt
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
             return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
+
+        }
+
+
+        // GET: Opportunities // browse
+        public async Task<IActionResult> Browse()
+        {
+            return View(await _context.Opportunity.ToListAsync());
+        }
+
+        // GET: Opportunities/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var opportunity = await _context.Opportunity
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (opportunity == null)
+            {
+                return NotFound();
+            }
+
+            return View(opportunity);
+        }
+        
+        // GET: Opportunities/PublicDetails/5
+        public async Task<IActionResult> PublicDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var opportunity = await _context.Opportunity.Include(t => t.CreateUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (opportunity == null)
+            {
+                return NotFound();
+            }
+
+            return View(opportunity);
         }
 
 
@@ -53,23 +92,28 @@ namespace VMS.Controllers
             return View("Browse", await _context.Opportunity.Where( j => j.OpportunityName.Contains(SearchPhrase)).ToListAsync());
         }
 
-        // GET: Opportunities/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // POST: Opportunities/MostRecent
+        public async Task<IActionResult> Recent()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var opportunity = await _context.Opportunity
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (opportunity == null)
-            {
-                return NotFound();
-            }
-
-            return View(opportunity);
+            return View("Index", await _context.Opportunity.OrderByDescending(s => s.CreateDate).Include(t => t.CreateUser).ToListAsync());
         }
+
+        // POST: Opportunities/MostRecent
+        public async Task<IActionResult> BrowseRecent()
+        {
+            return View("Browse", await _context.Opportunity.OrderByDescending(s => s.CreateDate).ToListAsync());
+        }
+
+        public async Task<IActionResult> ReverseAlphabetical()
+        {
+            return View("Index", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
+        }
+
+        public async Task<IActionResult> BrowseReverseAlphabetical()
+        {
+            return View("Browse", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
+        }
+
 
         // GET: Opportunities/Create
         [Authorize]
@@ -78,7 +122,7 @@ namespace VMS.Controllers
             return View();
         }
 
-        // POST: Opportunities/Create
+        /*// POST: Opportunities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
@@ -102,10 +146,47 @@ namespace VMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(opportunity);
+        }*/
+
+
+        // POST: Opportunities1/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Location,Description,CreateDate")] Opportunity opportunity)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Id();
+                opportunity.CreateDate = DateTime.UtcNow;
+                opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                _context.Add(opportunity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(opportunity);
         }
 
-        // GET: Opportunities/Edit/5
+
+        /*// GET: Opportunities/Edit/5
         [Authorize]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var opportunity = await _context.Opportunity.FindAsync(id);
+            if (opportunity == null)
+            {
+                return NotFound();
+            }
+            return View(opportunity);
+        }*/
+
+        // GET: Opportunities1/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -121,7 +202,8 @@ namespace VMS.Controllers
             return View(opportunity);
         }
 
-        // POST: Opportunities/Edit/5
+
+        /*// POST: Opportunities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
@@ -138,6 +220,7 @@ namespace VMS.Controllers
             {
                 try
                 {
+                    
                     _context.Update(opportunity);
                     TempData["message"] = $"Changes Saved!";
                     await _context.SaveChangesAsync();
@@ -156,7 +239,45 @@ namespace VMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(opportunity);
+        }*/
+
+
+        // POST: Opportunities1/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Location,Description,CreateDate")] Opportunity opportunity)
+        {
+            if (id != opportunity.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    opportunity.CreateDate = DateTime.UtcNow;
+                    _context.Update(opportunity);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OpportunityExists(opportunity.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(opportunity);
         }
+
 
         // GET: Opportunities/Delete/5
         [Authorize]
