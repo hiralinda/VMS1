@@ -3,47 +3,110 @@
 @{
     ViewData["Title"] = "User List";
 }
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 5%;
+    }
+</style>
+<partial name="_AdminPartial" />
+<head>
+    @*Datatables*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            //volunteer table
+            $('#volunteerTable').DataTable({
+                "aoColumnDefs": [
+                    {
+                        'bSortable':false, 'aTargets': [6, 7]
+                    }
+                ]
+            });
 
-    <partial name="_AdminPartial" />
+            //unverified organizations table
+            $('#unverifiedTable').DataTable({
+                "aoColumnDefs": [
+                    {
+                        'bSortable': false, 'aTargets': [5, 6]
+                    }
+                ]
+            });
 
-    <h1>Volunteers</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Zip</th>
-            </tr>
-        </thead>
-        <tbody>
+            //verified organizations table
+            $('#verifiedTable').DataTable({
+                "aoColumnDefs": [
+                    {
+                        'bSortable': false, 'aTargets': [5, 6]
+                    }
+                ]
+            });
 
-            @foreach (var user in Model)
+            //admins table
+            $('#adminTable').DataTable({
+                "aoColumnDefs": [
+                    {
+                        'bSortable': false, 'aTargets': [1, 2]
+                    }
+                ]
+            });
+        });
+    </script>
+</head>
+
+@*
+    Slow to load
+    Delete user not ideal implementation because it is using GET instead of POST
+    Might add sorting back if I can figure out how to remove it from the button columns
+
+    Previous Solution Below (Doesn't work because a form cant go in a Datatable)
+    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete user: @user.Email')">Delete User</button>
+    </form>
+*@
+
+<h1>Volunteers</h1>
+<table id="volunteerTable" class="table table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Zip</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model)
             @if (user.Roles.Contains("Volunteer"))
             {
-            <tr>
-                <td>@user.firstName</td>
-                <td>@user.lastName</td>
-                <td>@user.phone</td>
-                <td>@user.Email</td>
-                <td>@user.address</td>
-                <td>@user.zip</td>
-                <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit User</a></td>
-                <td style="width:10%">
-                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete user: @user.Email')">Delete User</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>@user.firstName</td>
+                    <td>@user.lastName</td>
+                    <td>@user.phone</td>
+                    <td>@user.Email</td>
+                    <td>@user.address</td>
+                    <td>@user.zip</td>
+
+                    <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Manage</a></td>
+                    <td style="width:10%">
+                        <a class="btn btn-danger" asp-action="DeleteUser" asp-controller="admin" asp-route-id="@user.Id" onclick="return confirm('Are you sure you want to delete user: @user.Email')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
             }
 
         </tbody>
     </table>
 
     <h1>Unverified Nonprofits</h1>
-    <table class="table table-hover">
+    <table id="unverifiedTable" class="table table-hover">
         <thead>
             <tr>
                 <th>Nonprofit Name</th>
@@ -51,87 +114,96 @@
                 <th>Email</th>
                 <th>Address</th>
                 <th>Zip</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
 
             @foreach (var user in Model)
-            @if (user.Roles.Contains("Organization"))
+                @if (user.Roles.Contains("Organization"))
                 {
-            <tr>
-                <td>@user.firstName</td>
-                <td>@user.phone</td>
-                <td>@user.Email</td>
-                <td>@user.address</td>
-                <td>@user.zip</td>
-                <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit User</a></td>
-                <td style="width:10%">
-                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete user: @user.Email')">Delete User</button>
-                    </form>
-                </td>
-            </tr>
+                    <tr>
+                        <td>@user.firstName</td>
+                        <td>@user.phone</td>
+                        <td>@user.Email</td>
+                        <td>@user.address</td>
+                        <td>@user.zip</td>
+
+                        <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit</a></td>
+                        <td style="width:10%">
+                            <a class="btn btn-danger" asp-action="DeleteUser" asp-controller="admin" asp-route-id="@user.Id" onclick="return confirm('Are you sure you want to delete user: @user.Email')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
                 }
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <h1>Verified Nonprofits</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Nonprofit Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Zip</th>
-            </tr>
-        </thead>
-        <tbody>
+        <h1>Verified Nonprofits</h1>
+        <table id="verifiedTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nonprofit Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Zip</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
 
-            @foreach (var user in Model)
-            @if (user.Roles.Contains("Organization (Verified)"))
+                @foreach (var user in Model)
+                    @if (user.Roles.Contains("Organization (Verified)"))
                     {
-            <tr>
-                <td>@user.firstName</td>
-                <td>@user.phone</td>
-                <td>@user.Email</td>
-                <td>@user.address</td>
-                <td>@user.zip</td>
-                <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit User</a></td>
-                <td style="width:10%">
-                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete user: @user.Email')">Delete User</button>
-                    </form>
-                </td>
-            </tr>
+                        <tr>
+                            <td>@user.firstName</td>
+                            <td>@user.phone</td>
+                            <td>@user.Email</td>
+                            <td>@user.address</td>
+                            <td>@user.zip</td>
+
+                            <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit</a></td>
+                            <td style="width:10%">
+                                <a class="btn btn-danger" asp-action="DeleteUser" asp-controller="admin" asp-route-id="@user.Id" onclick="return confirm('Are you sure you want to delete user: @user.Email')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
                     }
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
 
-    <h1>Admins</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
+            <h1>Admins</h1>
+            <table id="adminTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            @foreach (var user in Model)
-            @if (user.Roles.Contains("Admin"))
+                    @foreach (var user in Model)
+                        @if (user.Roles.Contains("Admin"))
                         {
-            <tr>
-                <td>@user.Email</td>
-                <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit User</a></td>
-                <td style="width:10%">
-                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete user: @user.Email')">Delete User</button>
-                    </form>
-                </td>
-            </tr>
+                            <tr>
+                                <td>@user.Email</td>
+
+                                <td style="width:10%"><a class="btn btn-primary" asp-action="EditUser" asp-controller="admin" asp-route-id="@user.Id">Edit</a></td>
+                                <td style="width:10%">
+                                    <a class="btn btn-danger" asp-action="DeleteUser" asp-controller="admin" asp-route-id="@user.Id" onclick="return confirm('Are you sure you want to delete user: @user.Email')">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
                         }
 
-        </tbody>
-    </table>
+                    </tbody>
+                </table>

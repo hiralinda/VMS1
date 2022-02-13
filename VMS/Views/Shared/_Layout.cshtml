@@ -6,10 +6,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VolunTEEN</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-yeti.css" />
+    @*Bootswatch Theme*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.min.css" />
+    @*Custom Site CSS*@
     <link rel="stylesheet" href="~/css/site.css" />
+    @*Font Awesome*@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
+    @*JQuery*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -58,7 +63,6 @@
             &copy; 2021 - VMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
