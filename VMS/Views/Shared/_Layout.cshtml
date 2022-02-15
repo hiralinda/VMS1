@@ -37,12 +37,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">About</a>
                         </li>
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="UserList">Admin Dashboard</a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown" style="align-self: center;">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Admin Dashboard
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="UserList">Manage Users</a>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="Analytics">View Analytics</a>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="ListRoles">Manage Roles</a>
+                                    </div>
+                                </li>
+                            }
+                            @if (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
+                            {
+                                <li class="nav-item dropdown" style="align-self: center;">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Admin Dashboard
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-controller="Opportunities" asp-action="Index">Manage Opportunities</a>
+                                    </div>
+                                </li>
+                            }
+                            @if (User.IsInRole("Volunteer"))
+                            {
+
+                            }
                         }
+
                     </ul>
                 </div>
             </div>
