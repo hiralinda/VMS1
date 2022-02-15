@@ -22,7 +22,7 @@
             <a type="button" class="dropdown-item" asp-action="Browse">All</a>
         </div>
 
-        <form class="form-group" asp-action="ShowSearchResults">
+        <form class="form-group pt-3" asp-action="ShowSearchResults">
             <div class="form-row">
                 <label class="sr-only" for="SearchPhrase"></label>
                 <input name="SearchPhrase" class="rounded form-control" id="inlineFormInputName" placeholder="Search">
@@ -37,7 +37,7 @@
             <div class="card rounded mb-5 p-2">
                 <div class="card-body">
                     <h5>@Html.DisplayFor(modelItem => item.OpportunityName)</h5><hr />
-                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.Location)</p>
+                    <p class="font-weight-light">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)</p>
                     <p>@Html.DisplayFor(modelItem => item.Description)</p>
                     <a class="btn btn-outline-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
                     <a class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@item.Id">See Details</a>
