@@ -4,12 +4,12 @@
     ViewData["Title"] = "User List";
 }
 <style>
-    h1 {
+    h2 {
         text-align: center;
         margin-top: 5%;
     }
 </style>
-<partial name="_AdminPartial" />
+
 <head>
     @*Datatables*@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
@@ -66,7 +66,7 @@
     </form>
 *@
 
-<h1>Volunteers</h1>
+<h2>Volunteers</h2>
 <table id="volunteerTable" class="table table-hover">
     <thead>
         <tr>
@@ -104,8 +104,10 @@
 
         </tbody>
     </table>
+    
+<br />
 
-    <h1>Unverified Nonprofits</h1>
+    <h2>Unverified Nonprofits</h2>
     <table id="unverifiedTable" class="table table-hover">
         <thead>
             <tr>
@@ -142,7 +144,9 @@
             </tbody>
         </table>
 
-        <h1>Verified Nonprofits</h1>
+    <br />
+
+        <h2>Verified Nonprofits</h2>
         <table id="verifiedTable" class="table table-hover">
             <thead>
                 <tr>
@@ -179,7 +183,9 @@
                 </tbody>
             </table>
 
-            <h1>Admins</h1>
+        <br />
+
+            <h2>Admins</h2>
             <table id="adminTable" class="table table-hover">
                 <thead>
                     <tr>

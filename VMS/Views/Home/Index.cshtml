@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager;
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -22,9 +24,10 @@
         </div>
     *@
 
-
     <!-- Content Row-->
-    <div class="row gx-4 gx-lg-5">
+<div class="row gx-4 gx-lg-5">
+    @if (signInManager.IsSignedIn(User) == false)
+    {
         <div class="col-md-4 mb-5">
             <div class="card h-100 rounded">
                 <div class="card-body">
@@ -43,17 +46,26 @@
                 <div class="card-footer"><a class="btn btn-outline-success btn-sm rounded-1" asp-area="Identity" asp-page="/Account/NonprofitRegister">Register</a></div>
             </div>
         </div>
-        <div class="col-md-4 mb-5">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">About Us</h2><hr />
-                    <p class="card-text">Learn more about VolunTEEN and why volunteering can positivley impact the world.</p>
-                </div>
-                <div class="card-footer"><a class="btn btn-outline-info btn-sm" asp-area="" asp-controller="Home" asp-action="AboutUs">More Info</a></div>
+
+    <div class="col-md-4 mb-5">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="card-title">About Us</h2><hr />
+                <p class="card-text">Learn more about VolunTEEN and why volunteering can positivley impact the world.</p>
             </div>
+            <div class="card-footer"><a class="btn btn-outline-info btn-sm" asp-area="" asp-controller="Home" asp-action="AboutUs">More Info</a></div>
+        </div>
+    </div>
+    }
+    <div>
+        <h2 style="text-align:center;">Connect With Us!</h2>
+        <div style="font-size: 2vw; text-align:center;">
+            <a style="text-decoration: none;" href="#" class="fa fa-facebook"></a>
+            <a style="text-decoration: none;" href="#" class="fa fa-instagram"></a>
+            <a style="text-decoration: none;" href="#" class="fa fa-twitter"></a>
         </div>
     </div>
 
-
+</div>
 
 </div>
