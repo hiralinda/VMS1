@@ -8,6 +8,7 @@ using VMS.Models;
 using VMS.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using VMS.Data;
 
 namespace VMS.Controllers
 {
@@ -16,16 +17,19 @@ namespace VMS.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext _context;
+
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            _context = context;
     }
 
         [HttpGet]
@@ -39,6 +43,8 @@ namespace VMS.Controllers
 
             int orgTotal = userManager.GetUsersInRoleAsync("Organization (Verified)").Result.Count;
             ViewBag.orgTotal = orgTotal;
+
+            ViewBag.oppTotal = _context.Opportunity.Count();
 
             return View();
         }
