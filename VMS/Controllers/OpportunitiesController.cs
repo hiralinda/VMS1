@@ -122,69 +122,26 @@ namespace VMS.Controllers
             return View();
         }
 
-        /*// POST: Opportunities/Create
+        // POST: Opportunities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Location,Description")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,CreateDate")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
-                
                 opportunity.CreateDate = DateTime.UtcNow;
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-
                 _context.Add(opportunity);
-                
                 await _context.SaveChangesAsync();
-                
                 TempData["message"] = $"Created!";
-                
-                return RedirectToAction(nameof(Index));
-            }
-            return View(opportunity);
-        }*/
-
-
-        // POST: Opportunities1/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Location,Description,CreateDate")] Opportunity opportunity)
-        {
-            if (ModelState.IsValid)
-            {
-                var userId = User.Id();
-                opportunity.CreateDate = DateTime.UtcNow;
-                opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                _context.Add(opportunity);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(opportunity);
         }
 
-
-        /*// GET: Opportunities/Edit/5
-        [Authorize]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var opportunity = await _context.Opportunity.FindAsync(id);
-            if (opportunity == null)
-            {
-                return NotFound();
-            }
-            return View(opportunity);
-        }*/
 
         // GET: Opportunities1/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -202,52 +159,13 @@ namespace VMS.Controllers
             return View(opportunity);
         }
 
-
-        /*// POST: Opportunities/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,opportunityName,location,description")] Opportunity opportunity)
-        {
-            if (id != opportunity.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    
-                    _context.Update(opportunity);
-                    TempData["message"] = $"Changes Saved!";
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OpportunityExists(opportunity.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(opportunity);
-        }*/
-
-
-        // POST: Opportunities1/Edit/5
+        
+        // POST: Opportunities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Location,Description,CreateDate")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,CreateDate")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {
@@ -261,6 +179,7 @@ namespace VMS.Controllers
                     opportunity.CreateDate = DateTime.UtcNow;
                     _context.Update(opportunity);
                     await _context.SaveChangesAsync();
+                    TempData["message"] = $"Changes saved!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -277,6 +196,7 @@ namespace VMS.Controllers
             }
             return View(opportunity);
         }
+
 
 
         // GET: Opportunities/Delete/5

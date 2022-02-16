@@ -12,7 +12,7 @@
     <div class="p-5 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">@Html.DisplayFor(model => model.OpportunityName)</h1>
-            <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.Location)</p>
+             <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
             <a class="btn btn-lg btn-primary btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
         </div>
     </div>
@@ -32,19 +32,24 @@
     <div class="row align-items-md-stretch">
         <div class="col-md-6">
             <div class="h-100 p-5 text-white bg-dark rounded-3">
-                <h2>Location</h2>
-                <p>@Html.DisplayFor(model => model.Location)</p>
-                <a class="btn btn-outline-light" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.Location">Map</a>
+                <h2><i class="fa fa-map-pin"></i> Location</h2>
+                <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
+                @if (Model.Address2 != null)
+                {
+                    <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
+                }
+                <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
+                <a class="btn btn-outline-light" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City">Map</a>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="h-100 p-5 bg-light border rounded-3">
                 <h2>Contact Information</h2>
-                <ul>
-                    <li>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
-                    <li>@Html.DisplayFor(model => model.CreateUser.Email)</li>
-                    <li>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
+                <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
+                    <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
+                    <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                 </ul>
                 <a class="btn btn-secondary" href="mailto: @Model.CreateUser.Email">Contact</a>
             </div>
@@ -57,28 +62,3 @@
 
 
 </div>
-
-<!--<div class="card-header">
-    <h4>@Html.DisplayFor(model => model.OpportunityName)</h4>
-</div>
-<div class="card-body">
-    <dl class="row">
-        <dt class="col-sm-2">
-            Location
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-        <dt class="col-sm-2">
-            Description
-        </dt>
-        <dd class="col-sm-5">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div class="mt-3">
-    <div class="col-md-12">
-        <a class="btn btn-primary" asp-action="Browse">Back</a>
-    </div>
-</div>-->
