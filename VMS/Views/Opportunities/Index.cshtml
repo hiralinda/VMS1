@@ -3,87 +3,27 @@
 @{
     ViewData["Title"] = "Your Posted Opportunities";
 }
-
+<!--Eventually will fix responsiveness-->
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
     <li class="breadcrumb-item active">Manage</li>
 </ol>
-<div class="card">
-    <h2 class="card-title p-3">Manage your posts here</h2>
-    <div class="card-body">
-            <div class="col-md-12">
-                <a type="button" class="btn btn-outline-success" asp-action="Create">Add New+</a>
-                <button type="button" class="btn btn-outline-primary ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filter
-                </button>
-                <div class="dropdown-menu">
-                    @*<a type="button" class="dropdown-item" asp-action="">A-Z</a>*@
-                    <a type="button" class="dropdown-item" asp-action="ReverseAlphabetical">Z-A</a>
-                    @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
-                    <a type="button" class="dropdown-item" asp-action="Recent">Most Recent</a>
-                    <div class="dropdown-divider"></div>
-                    <a type="button" class="dropdown-item" asp-action="Index">All</a>
+<h2 class="">Manage your posts here</h2>
+<a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
+<div class="row align-items-sm-stretch">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 pb-3">
+            <div class="h-100 p-5 text-white bg-light rounded-3 shadow">
+                <p class="fs-4 fw-bold text-dark">@Html.DisplayFor(modelItem => item.OpportunityName)</p>
+                <p class="text-muted">Posted: @Html.DisplayFor(modelItem => item.CreateDate)</p>
+                <div class="w-sm-25">
+                    <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a style="text-decoration: none" class="btn-sm btn-danger m-sm-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </div>
-                @*<form class="form-group mb-5" asp-action="ShowSearchResults">
-                    <div class="form-row">
-                        <label class="sr-only" for="SearchPhrase"></label>
-                        <input name="SearchPhrase" class="form-control" id="inlineFormInputName" placeholder="Search">
-                    </div>
-                </form>*@
             </div>
-
-        <div class="table-responsive pt-2">
-            <table class="rounded table table-bordered table-hover table-condensed">
-                <thead class="bg-light">
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Location
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                        <th>
-                            Create Date (UTC)
-                        </th>
-                        <th>
-                            Create User
-                        </th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="">
-                    @foreach (var item in Model)
-                    {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OpportunityName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Country)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateUser.FirstName)
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                <a style="text-decoration: none" class="btn-sm btn-danger m-sm-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
         </div>
-    </div>
+        
+    }
 </div>
