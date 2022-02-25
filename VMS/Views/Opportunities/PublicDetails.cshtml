@@ -20,8 +20,10 @@
     <!--Description & Date posted-->
     <div class="p-2 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid py-5">
-            <p class="fs-5">About this event</p>
+            <p class="fs-4 fw-bold">About this event</p>
             <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
+            <p class="fs-5">General Requirements</p>
+            <ul class="col-md-8 fs-6"><li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li></ul>
         </div>
         <div class="container-fluid text-sm-right text-right">
             <p class="text-muted">Posted: @Html.DisplayFor(model => model.CreateDate)</p>
@@ -31,7 +33,7 @@
     <!--Location & Contact details-->
     <div class="row align-items-md-stretch">
         <div class="col-md-6">
-            <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <div class="h-100 p-5 text-white bg-dark rounded-3 shadow">
                 <h2><i class="fa fa-map-pin"></i> Location</h2>
                 <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
                 @if (Model.Address2 != null)
@@ -44,7 +46,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
+            <div class="h-100 p-5 bg-light border rounded-3 shadow">
                 <h2>Contact Information</h2>
                 <ul class="fa-ul">
                     <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>

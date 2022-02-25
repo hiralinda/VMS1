@@ -9,7 +9,6 @@ namespace VMS.Models
     {
         public int Id { get; set; }
         public string OpportunityName { get; set; }
-        /*public string Location { get; set; } */
         /*Location*/
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -17,9 +16,11 @@ namespace VMS.Models
         public string State { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
-        public string Description { get; set; }        
+        public string Description { get; set; }
+        public string Requirements { get; set; }
         public ApplicationUser CreateUser { get; set; }
         public DateTime CreateDate { get; set; }
+
 
     }
 }
