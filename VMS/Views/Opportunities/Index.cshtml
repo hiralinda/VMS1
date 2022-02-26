@@ -8,20 +8,27 @@
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
     <li class="breadcrumb-item active">Manage</li>
 </ol>
-<h2 class="">Manage your posts here</h2>
+<h2 class="">Manage your posts here</h2><hr />
 <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
-<div class="row align-items-sm-stretch">
+<div class="row align-items-sm-stretch d-flex justify-content-center pt-3">
     @foreach (var item in Model)
     {
         <div class="col-sm-4 pb-3">
-            <div class="h-100 p-5 text-white bg-light rounded-3 shadow">
-                <p class="fs-4 fw-bold text-dark">@Html.DisplayFor(modelItem => item.OpportunityName)</p>
-                <p class="text-muted">Posted: @Html.DisplayFor(modelItem => item.CreateDate)</p>
-                <div class="w-sm-25">
-                    <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a style="text-decoration: none" class="btn-sm btn-danger m-sm-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <div class="h-100 p-5 bg-light rounded-3 shadow">
+                <div class="row align-items-center">
+                    <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => item.OpportunityName)</p>
                 </div>
+                <div class="row align-items-center">
+                    <p class="text-muted">Posted: @Html.DisplayFor(modelItem => item.CreateDate)</p>
+                </div>
+                <div class="row align-items-center">
+                    <div class="w-sm-25">
+                        <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a style="text-decoration: none" class="btn-sm btn-info m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a style="text-decoration: none" class="btn-sm btn-danger m-sm-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                </div>
+                
             </div>
         </div>
         
