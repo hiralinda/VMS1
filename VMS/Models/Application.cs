@@ -10,7 +10,6 @@ namespace VMS.Models
         public int id { get; set; }
         public ApplicationUser nonprofit { get; set; }
         public ApplicationUser volunteer { get; set; }
-        public string questionResponse { get; set; }
         public bool status { get; set; }
     }
 }

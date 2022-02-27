@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace VMS.Controllers
     public class OpportunitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
+
         public OpportunitiesController(ApplicationDbContext context)
         {
             _context = context;
@@ -72,14 +74,6 @@ namespace VMS.Controllers
             return View(opportunity);
         }
 
-
-        // GET: Application
-        [Authorize]
-        public async Task<IActionResult> Apply()
-        {
-            return View(await _context.Opportunity.ToListAsync());
-        }
-
         // GET: Opportunities/ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
         {
@@ -114,6 +108,23 @@ namespace VMS.Controllers
             return View("Browse", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
         }
 
+        // GET: Application
+        [Authorize]
+        public async Task<IActionResult> Apply(Application application)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Id();
+                application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                //application.nonprofit = ;
+
+                _context.Add(application);
+                await _context.SaveChangesAsync();
+                TempData["message"] = $"Application successful!";
+                return RedirectToAction(nameof(Index));
+            }
+            return View(application);
+        }
 
         // GET: Opportunities/Create
         [Authorize]
