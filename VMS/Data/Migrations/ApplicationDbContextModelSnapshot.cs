@@ -154,6 +154,31 @@ namespace VMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VMS.Models.Application", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("opportunityId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("volunteerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("opportunityId");
+
+                    b.HasIndex("volunteerId");
+
+                    b.ToTable("Application");
+                });
+
             modelBuilder.Entity("VMS.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -417,6 +442,17 @@ namespace VMS.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VMS.Models.Application", b =>
+                {
+                    b.HasOne("VMS.Models.Opportunity", "opportunity")
+                        .WithMany()
+                        .HasForeignKey("opportunityId");
+
+                    b.HasOne("VMS.Models.ApplicationUser", "volunteer")
+                        .WithMany()
+                        .HasForeignKey("volunteerId");
                 });
 
             modelBuilder.Entity("VMS.Models.Opportunity", b =>

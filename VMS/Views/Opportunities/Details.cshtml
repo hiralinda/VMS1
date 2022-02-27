@@ -69,21 +69,44 @@
                     Requirements
                 </dt>
                 <dd class="col-sm-8">
-                    <ul>
-                        <li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li>
-                    </ul>
+                    @if (Model.Requirements != null)
+                    {
+                        <ul>
+                            <li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>None</p>
+                    }
+
                 </dd>
                 <dt class="col-sm-3">
                     StartDate
                 </dt>
                 <dd class="col-sm-8">
-                    @Model.StartDate.Date.ToString("d")
+                    @if (Model.StartDate != null)
+                    {
+                        @Model.StartDate.Date.ToString("d")
+                    }
+                    else
+                    {
+                        <p>None chosen</p>
+                    }
+
                 </dd>
                 <dt class="col-sm-3">
                     End Date
                 </dt>
                 <dd class="col-sm-8">
-                    @Model.EndDate.Date.ToString("d")
+                    @if (Model.EndDate != null)
+                    {
+                        @Model.EndDate.Date.ToString("d")
+                    }
+                    else
+                    {
+                        <p>None chosen</p>
+                    }
                 </dd>
                 <dt class="col-sm-3">
                     Create Date

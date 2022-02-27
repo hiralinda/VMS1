@@ -7,7 +7,7 @@ namespace VMS.Models.ViewModels
 {
     public class UserListViewModel
     {
-        public String Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public IEnumerable<string> Roles { get; set; }
         public string zip { get; set; }
