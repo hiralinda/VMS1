@@ -24,7 +24,7 @@
                     <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => item.OpportunityName)</p>
                 </div>
                 <div class="row align-items-center">
-                    <p class="text-muted">Posted: @Html.DisplayFor(modelItem => item.CreateDate)</p>
+                    <p class="text-muted">Posted: @item.CreateDate.ToString("d")</p>
                 </div>
                 <span class="input-group-btn">
                     <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
