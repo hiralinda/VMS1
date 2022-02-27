@@ -6,10 +6,8 @@
 
 
 <div class="card">
-    <div class="card-header">
+    <div class="card-body bg-light">
         <h4>Edit Opportunity, <span class="text-primary">@Html.DisplayFor(model => model.OpportunityName)</h4>
-    </div>
-    <div class="card-body">
         <div class="container-fluid">
             <div class="row">
                 <form asp-action="Edit">
@@ -50,11 +48,6 @@
                     </div>
                     <!--Row-->
                     <div class="row">
-                        @*<div class="col-md-6">
-                <label asp-for="Country" class="control-label">Country</label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>*@
                         <div class="form-group col-md-6">
                             <label asp-for="Country" class="control-label">Country</label>
                             <select class="form-select" asp-for="Country" id="country" name="country">
@@ -321,6 +314,21 @@
                     <div class="form-group">
                         <label asp-for="Requirements" class="control-label">Add some general requirements (press enter after each item)</label>
                         <textarea style="resize: none;" asp-for="Requirements" class="form-control" rows="4" cols="100"></textarea>
+                    </div>
+
+                    <!--Event start and end dates-->
+                    <div class="form-group">
+                        <p>Date of event details</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label asp-for="StartDate" class="control-label">Event start date:</label>
+                                <input type="date" name="StartDate" value="2022-12-31" min="2022-02-26" max="2040-12-31" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                <input type="date" name="EndDate" value="2022-12-31" min="2022-02-26" max="2040-12-31" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group pt-3">

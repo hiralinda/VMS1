@@ -6,22 +6,21 @@
 
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body bg-light">
+        <h4>Create an Opportunity Event</h4>
         <div class="container-fluid">
             <div class="row">
-
-                <h4>Create Opportunity</h4><hr />
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group col-md-5">
                         <label asp-for="OpportunityName" class="control-label">Name</label>
-                        <input asp-for="OpportunityName" class="form-control" />
+                        <input asp-for="OpportunityName" class="form-control" required />
                         <span asp-validation-for="OpportunityName" class="text-danger"></span>
                     </div>
                     <!--Location-->
                     <div class="form-group col-md-5">
                         <label asp-for="Address1" class="control-label">Address1</label>
-                        <input asp-for="Address1" class="form-control" />
+                        <input asp-for="Address1" class="form-control" required />
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-5">
@@ -33,30 +32,25 @@
                     <div class="row">
                         <div class="col-md-5">
                             <label asp-for="City" class="control-label">City</label>
-                            <input asp-for="City" class="form-control" />
+                            <input asp-for="City" class="form-control" required />
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
                             <label asp-for="State" class="control-label">State</label>
-                            <input asp-for="State" class="form-control" />
+                            <input asp-for="State" class="form-control" required />
                             <span asp-validation-for="State" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="Zip" class="control-label">Zip</label>
-                            <input asp-for="Zip" class="form-control" />
+                            <input asp-for="Zip" class="form-control" required />
                             <span asp-validation-for="Zip" class="text-danger"></span>
                         </div>
                     </div>
                     <!--Row-->
                     <div class="row">
-                        @*<div class="col-md-6">
-                            <label asp-for="Country" class="control-label">Country</label>
-                            <input asp-for="Country" class="form-control" />
-                            <span asp-validation-for="Country" class="text-danger"></span>
-                        </div>*@
                         <div class="form-group col-md-6">
                             <label asp-for="Country" class="control-label">Country</label>
-                            <select class="form-select" asp-for="Country" id="country" name="country">
+                            <select class="form-select" asp-for="Country" id="country" name="country" required>
                                 <option value="United States of America" selected>United States of America</option>
                                 <option disabled>──────────</option>
                                 <option value="Afganistan">Afghanistan</option>
@@ -308,11 +302,11 @@
                             <span asp-validation-for="Country" class="text-danger"></span>
                         </div>
                     </div>
-                    
+
                     <!--Description-->
                     <div class="form-group">
                         <label asp-for="Description" class="control-label">Add a description</label>
-                        <textarea style="resize: none;" asp-for="Description" class="form-control" rows="4" cols="100"></textarea>
+                        <textarea style="resize: none;" asp-for="Description" class="form-control" rows="4" cols="100" required></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div><hr />
 
@@ -320,6 +314,21 @@
                     <div class="form-group">
                         <label asp-for="Requirements" class="control-label">Add some general requirements (press enter after each item)</label>
                         <textarea style="resize: none;" asp-for="Requirements" class="form-control" rows="4" cols="100"></textarea>
+                    </div>
+
+                    <!--Event start and end dates-->
+                    <div class="form-group">
+                        <p>Date of event details</p>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label asp-for="StartDate" class="control-label">Event start date:</label>
+                                <input type="date" name="StartDate" value="2022-12-31" min="2022-02-26" max="2040-12-31" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                <input type="date" name="EndDate" value="2022-12-31" min="2022-02-26" max="2040-12-31" />
+                            </div>
+                        </div>
                     </div>
 
 

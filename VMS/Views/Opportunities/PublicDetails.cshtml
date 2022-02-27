@@ -23,10 +23,20 @@
             <p class="fs-4 fw-bold">About this event</p>
             <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
             <p class="fs-5">General Requirements</p>
-            <ul class="col-md-8 fs-6"><li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li></ul>
+            @if (Model.Requirements != null)
+            {
+                <ul class="col-md-8 fs-6"><li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li></ul>
+            }
+            else
+            {
+                <p class="col-md-8 fs-6">None</p>
+            }
+            <p class="fs-5">Event start and end dates</p>
+            <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - @Model.EndDate.Date.ToString("d")</p>
         </div>
+
         <div class="container-fluid text-sm-right text-right">
-            <p class="text-muted">Posted: @Html.DisplayFor(model => model.CreateDate)</p>
+            <p class="text-muted">Posted: @Model.CreateDate.Date.ToString("d")</p>
         </div>
     </div>
 

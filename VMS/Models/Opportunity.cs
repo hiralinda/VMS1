@@ -18,6 +18,8 @@ namespace VMS.Models
         public string Country { get; set; }
         public string Description { get; set; }
         public string Requirements { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public ApplicationUser CreateUser { get; set; }
         public DateTime CreateDate { get; set; }
 
