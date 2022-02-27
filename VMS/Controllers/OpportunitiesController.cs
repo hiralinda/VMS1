@@ -121,7 +121,7 @@ namespace VMS.Controllers
             {
                 var userId = User.Id();
                 application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                //application.nonprofit = ;
+                //application.opportunity = ;
 
                 _context.Add(application);
                 await _context.SaveChangesAsync();
