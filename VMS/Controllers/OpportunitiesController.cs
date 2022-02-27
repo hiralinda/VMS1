@@ -127,7 +127,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,CreateDate")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,StartDate,EndDate,CreateDate")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +165,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,CreateDate")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,StartDate,EndDate,CreateDate")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {
