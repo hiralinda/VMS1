@@ -22,13 +22,18 @@ namespace VMS.Controllers
             _context = context;
         }
 
-        // GET: Opportunities // mgmt
+        // GET: Opportunities // Managing Opportunities
         [Authorize]
         public async Task<IActionResult> Index()
         {
             /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
-            return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
 
+            /*
+            return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
+            */
+            return View(await _context.Opportunity.Where(t => t.CreateUser.FirstName == User.Identity.Name).ToListAsync());
+
+            
         }
 
 
