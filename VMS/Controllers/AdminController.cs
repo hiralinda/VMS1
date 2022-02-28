@@ -44,7 +44,12 @@ namespace VMS.Controllers
             int orgTotal = userManager.GetUsersInRoleAsync("Organization (Verified)").Result.Count;
             ViewBag.orgTotal = orgTotal;
 
+            int unvOrgTotal = userManager.GetUsersInRoleAsync("Organization").Result.Count;
+            ViewBag.unvOrgTotal = unvOrgTotal;
+
             ViewBag.oppTotal = _context.Opportunity.Count();
+
+            ViewBag.appTotal = _context.Application.Count();
 
             return View();
         }
