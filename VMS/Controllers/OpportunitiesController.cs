@@ -27,14 +27,14 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
+            return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
 
-            /*
-            return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
-            */
-            return View(await _context.Opportunity.Where(t => t.CreateUser.FirstName == User.Identity.Name).ToListAsync());
 
-            
+            /*return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
+
+            return View(await _context.Opportunity.Where(t => t.CreateUser.FirstName == User.Identity.Name).ToListAsync());*/
+
+
         }
 
 
@@ -272,5 +272,6 @@ namespace VMS.Controllers
             return View(await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
 
         }
+
     }
 }
