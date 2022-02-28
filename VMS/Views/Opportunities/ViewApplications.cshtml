@@ -1,5 +1,4 @@
-﻿@using VMS.Models.ViewModels
-@model List<ApplicationListViewModel>
+﻿@model IEnumerable<VMS.Models.Application>
 @{
     ViewData["Title"] = "Your Opportunities";
 }
@@ -10,12 +9,20 @@
 {
     <div class="card">
         <div class="card-header">
-            Opportunity Name:
+            Opportunity Name: @application.oppName
         </div>
         <div class="card-body">
-            <p>Location: </p>
-            <p>Date: </p>
-            <p>Approved: @application.status</p>
+            <p>Location: @application.oppLocation</p>
+            <p>Date: @application.oppDate</p>
+            @if (!application.status)
+            {
+                <p>Not Yet Approved</p>
+            }
+            else
+            {
+                <p>Approved</p>
+            }
+
         </div>
     </div>
 

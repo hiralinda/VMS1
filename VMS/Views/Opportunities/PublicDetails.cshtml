@@ -36,7 +36,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" asp-area="" asp-controller="Opportunities" asp-action="Apply">Apply</a>
+                            <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
                         </div>
                     </div>
                 </div>

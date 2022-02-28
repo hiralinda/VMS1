@@ -116,13 +116,19 @@ namespace VMS.Controllers
 
         // GET: Application
         [Authorize]
-        public async Task<IActionResult> Apply(Application application)
+        public async Task<IActionResult> Apply(Application application, int? oppID)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
                 application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                //application.opportunity = ;
+                application.opportunity = await _context.Opportunity.FindAsync(oppID);
+
+                application.oppName = application.opportunity.OpportunityName;
+                application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
+                application.oppDate = application.opportunity.StartDate.ToString() + " - " + application.opportunity.EndDate.ToString();
+                application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
+                    application.opportunity.Address1 + " " + application.opportunity.Address2;
 
                 _context.Add(application);
                 await _context.SaveChangesAsync();
@@ -255,22 +261,16 @@ namespace VMS.Controllers
 
         public async Task<IActionResult> ViewApplications()
         {
-            var applicationsList = await _context.Application.ToListAsync();
-            var ApplicationListViewModel = new List<ApplicationListViewModel>();
-            foreach (Application application in applicationsList)
-            {
-                var thisViewModel = new ApplicationListViewModel();
-                //thisViewModel.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                //thisViewModel.opportunityName = application.opportunity.OpportunityName;
-                thisViewModel.status = application.status;
-                /*
-                thisViewModel.date = application.opportunity.StartDate;
-                thisViewModel.address = application.opportunity.Address1;
-                */
 
-                ApplicationListViewModel.Add(thisViewModel);
-            }
-            return View(ApplicationListViewModel);
+            return View(await _context.Application.Where(t => t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+
+        }
+
+        public async Task<IActionResult> ManageApplicants()
+        {
+
+            return View(await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+
         }
     }
 }

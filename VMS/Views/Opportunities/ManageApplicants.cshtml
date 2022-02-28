@@ -1,0 +1,22 @@
+﻿@model IEnumerable<VMS.Models.Application>
+@{
+    ViewData["Title"] = "Manage Applicants";
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Manage Applicants for your Posted Opportunities</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>
+                    @application.volunteerName - @application.oppName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
