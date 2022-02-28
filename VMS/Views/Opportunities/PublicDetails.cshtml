@@ -70,7 +70,7 @@
     <!--Location & Contact details-->
     <div class="row align-items-md-stretch">
         <div class="col-md-6">
-            <div class="h-100 p-5 text-white bg-dark rounded-3 shadow">
+            <div class="h-100 p-5 bg-light border rounded-3 shadow">
                 <h2><i class="fa fa-map-pin"></i> Location</h2>
                 <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
                 @if (Model.Address2 != null)
@@ -78,7 +78,7 @@
                     <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
                 }
                 <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                <a class="btn btn-outline-light" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City.ToString()">Map</a>
+                <a class="btn btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City.ToString()">Map</a>
             </div>
         </div>
 

@@ -78,7 +78,9 @@
                             }
                             @if (User.IsInRole("Volunteer"))
                             {
-
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Opportunities" asp-action="ViewApplications">Your Opportunities</a>
+                                </li>
                             }
                         }
 

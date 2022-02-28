@@ -1,0 +1,23 @@
+﻿@using VMS.Models.ViewModels
+@model List<ApplicationListViewModel>
+@{
+    ViewData["Title"] = "Your Opportunities";
+}
+
+<h2>Opportunities You've Signed Up For</h2>
+
+@foreach (var application in Model)
+{
+    <div class="card">
+        <div class="card-header">
+            Opportunity Name:
+        </div>
+        <div class="card-body">
+            <p>Location: </p>
+            <p>Date: </p>
+            <p>Approved: @application.status</p>
+        </div>
+    </div>
+
+}
+

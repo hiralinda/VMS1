@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VMS.Data;
 using VMS.Models;
+using VMS.Models.ViewModels;
 
 namespace VMS.Controllers
 {    
@@ -126,7 +127,7 @@ namespace VMS.Controllers
                 _context.Add(application);
                 await _context.SaveChangesAsync();
                 TempData["message"] = $"Application successful!";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Browse));
             }
             return View(application);
         }
@@ -250,6 +251,26 @@ namespace VMS.Controllers
         private bool OpportunityExists(int id)
         {
             return _context.Opportunity.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> ViewApplications()
+        {
+            var applicationsList = await _context.Application.ToListAsync();
+            var ApplicationListViewModel = new List<ApplicationListViewModel>();
+            foreach (Application application in applicationsList)
+            {
+                var thisViewModel = new ApplicationListViewModel();
+                //thisViewModel.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                //thisViewModel.opportunityName = application.opportunity.OpportunityName;
+                thisViewModel.status = application.status;
+                /*
+                thisViewModel.date = application.opportunity.StartDate;
+                thisViewModel.address = application.opportunity.Address1;
+                */
+
+                ApplicationListViewModel.Add(thisViewModel);
+            }
+            return View(ApplicationListViewModel);
         }
     }
 }
