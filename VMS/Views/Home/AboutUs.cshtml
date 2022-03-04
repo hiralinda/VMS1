@@ -2,24 +2,294 @@
 @{
     ViewData["Title"] = "About Us";
 }
-<div style="text-align:center">
-    <h1>About Us</h1>
+<style>
+ @* body {
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #818181;
+  }*@
+  h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    color: #303030;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+  .jumbotron {
+    background-color: #f4511e;
+    color: #fff;
+    padding: 100px 25px;
+    font-family: Montserrat, sans-serif;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .logo-small {
+    color: #f4511e;
+    font-size: 50px;
+  }
+  .logo {
+    color: #f4511e;
+    font-size: 200px;
+  }
+  .thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
 
-    <p>
-        Hi, my name is Lexi Magnano and I am a high school student in Florida.
-        For as long as I can remember, I have always tried to make a difference in the world.
-        I started off donating my birthday gifts to a charity that I would personally select each year.
-    </p>
-    <p>
-        Over the years, I have supported cat adoption centers, refugee support organizations, a charity helping after the 2015 earthquake in Nepal and an organization that rescues and rehabilitates elephants in northern Thailand.
-        In middle school, my brother and I started a program called SmartART that brings art and art history projects to the elderly in nursing homes and to homeless children in temporary housing.
-        We would invite our friends to join us for our workshops so they could experience this unique way to volunteer while having fun!
-    </p>
-    <p>
-        I am also a founding member of JaxTHRIVE, a teen-led tutoring organization helping to provide refugee students with the support and resources they need to succeed in our community.
-        In thinking about the challenges I faced recruiting volunteers for my JaxTHRIVE and SmartART programs, I wondered whether other nonprofits might have similar difficulties with recruitment.
-        I reached out to several organizations and discovered that they also needed volunteers, but they had no way to publicize their needs. On the other hand, I knew friends who were looking to get involved with their community in personally meaningful ways, but weren’t sure how to do so.
-        I saw this as an opportunity and realized that I had the ability to bridge this gap! I started an Instagram account where I would share volunteer opportunities that would interest students that they could perform either virtually or in person.
-        I set up partnerships with community-based organizations asking them to share their unmet needs and I would find them interested and motivated students. This is how VolunTEEN started!
-    </p>
+  .item h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    font-style: italic;
+    margin: 70px 0;
+  }
+  .item span {
+    font-style: normal;
+  }
+  .panel {
+    border: 1px solid #f4511e;
+    border-radius:0 !important;
+    transition: box-shadow 0.5s;
+  }
+  .panel:hover {
+    box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+    border: 1px solid #f4511e;
+    background-color: #fff !important;
+    color: #f4511e;
+  }
+  .panel-heading {
+    color: #fff !important;
+    background-color: #f4511e !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+    .portfolio-menu {
+        text-align: center;
+    }
+
+        .portfolio-menu ul li {
+            display: inline-block;
+            margin: 0;
+            list-style: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            -webkit-transition: all 05s ease;
+            -moz-transition: all 05s ease;
+            -ms-transition: all 05s ease;
+            -o-transition: all 05s ease;
+            transition: all .5s ease;
+        }
+
+    .portfolio-item {
+        /*width:100%;*/
+    }
+
+        .portfolio-item .item {
+            /*width:303px;*/
+            float: left;
+            margin-bottom: 10px;
+        }
+
+  .slideanim {visibility:hidden;}
+  .slide {
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+  }
+</style>
+
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>A little about VolunTEEN</h2><br>
+            <h4> Hi, my name is Lexi Magnano and I am a high school student in Florida.
+            For as long as I can remember, I have always tried to make a difference in the world.
+            I started off donating my birthday gifts to a charity that I would personally select each year.</h4><br>
+
+
+            <p>Over the years, I have supported cat adoption centers, refugee support organizations, a charity helping after the 2015 earthquake in Nepal and an organization that rescues and rehabilitates elephants in northern Thailand.
+            In middle school, my brother and I started a program called SmartART that brings art and art history projects to the elderly in nursing homes and to homeless children in temporary housing.
+            We would invite our friends to join us for our workshops so they could experience this unique way to volunteer while having fun!</p>
+        </div>
+        <div class="col-sm-4" id="hidden-mobile">
+            <!--Image-->
+            <img src="~/Images/volunteenLogo.png" alt="..." class="rounded float-end right">
+        </div>
+    </div>
 </div>
+
+<div class="container-fluid bg-grey">
+    <div class="row">
+        <div class="col-sm-4">
+            <!--Image-->
+            <img src="~/Images/top.png" alt="#" class="rounded img-thumbnail img-fluid" width="400" height="300">
+        </div>
+        <div class="col-sm-8">
+            <h2>More</h2>
+            <h6>
+                <strong>Founders:</strong>  I am also a founding member of JaxTHRIVE, a teen-led tutoring organization helping to provide refugee students with the support and resources they need to succeed in our community.
+                In thinking about the challenges I faced recruiting volunteers for my JaxTHRIVE and SmartART programs, I wondered whether other nonprofits might have similar difficulties with recruitment.
+                I reached out to several organizations and discovered that they also needed volunteers, but they had no way to publicize their needs.
+            </h6>
+            
+            <h6>
+                On the other hand, I knew friends who were looking to get involved with their community in personally meaningful ways, but weren’t sure how to do so.
+                I saw this as an opportunity and realized that I had the ability to bridge this gap! I started an Instagram account where I would share volunteer opportunities that would interest students that they could perform either virtually or in person.
+                I set up partnerships with community-based organizations asking them to share their unmet needs and I would find them interested and motivated students. This is how VolunTEEN started!
+            </h6><br> 
+        </div>
+    </div>
+</div>
+
+
+<!-- Container (Picture Section) -->
+<div class="container-fluid text-center">
+    <div class="row">
+        <br /><h2>Pictures</h2>
+        <h4>Experiences we've had</h4>
+    </div>
+    <div class="portfolio-item row">
+        <!--6 pictures-->
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/1.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/1.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/10.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/10.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/11.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/11.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/2.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/2.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/3.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/3.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/4.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/4.png" alt="">
+            </a>
+        </div>
+        <!--6 pictures-->
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/5.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/5.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/6.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/6.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/7.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/7.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/8.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/8.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/9.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/9.png" alt="">
+            </a>
+        </div>
+        <div class="item col-lg-3 col-md-4 col-6 col-sm">
+            <a href="~/Images/Cell-3.png" class="fancylight popup-btn" data-fancybox-group="light">
+                <img class="img-fluid rounded" src="~/Images/Cell-3.png" alt="">
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<!--Form does not have function yet-->
+<div id="contact" class="container-fluid bg-grey">
+    <h2 class="text-center">CONTACT US!</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <p>If you have any questions about us feel free to reach out!</p>
+            <p><i class="fa fa-map-pin"></i> Jacksonville,Fl, US</p>
+            <p><i class="fa fa-phone"></i> +00 1515151515</p>
+            <p><i class="fa fa-envelope"></i> VolunTEEN@email.com</p>
+        </div>
+        <!--Contact form-->
+        <div class="col-sm-7 slideanim">
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                </div>
+            </div>
+            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.portfolio-menu ul li').click(function () {
+        $('.portfolio-menu ul li').removeClass('active');
+        $(this).addClass('active');
+
+        var selector = $(this).attr('data-filter');
+        $('.portfolio-item').isotope({
+            filter: selector
+        });
+        return false;
+    });
+    $(document).ready(function () {
+        var popup_btn = $('.popup-btn');
+        popup_btn.magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled: true
+            }
+        });
+    });
+</script>
