@@ -17,11 +17,21 @@ namespace VMS.Controllers
     public class OpportunitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public int PageSize = 3;
 
         public OpportunitiesController(ApplicationDbContext context)
         {
             _context = context;
         }
+
+        /*GET: Opportunities browse method*/
+        public ViewResult List(int page = 1) => View(new OpportunitiesListViewModel {
+                Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize), PagingInfo = new PagingInfo{
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _context.Opportunity.Count()
+                }
+            });
 
         // GET: Opportunities // Managing Opportunities
         [Authorize]
@@ -38,11 +48,11 @@ namespace VMS.Controllers
         }
 
 
-        // GET: Opportunities // browse
-        public async Task<IActionResult> Browse()
+        // GET: Opportunities //Browse
+        /*public async Task<IActionResult> Browse()
         {
             return View(await _context.Opportunity.ToListAsync());
-        }
+        }*/
 
         // GET: Opportunities/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -101,7 +111,7 @@ namespace VMS.Controllers
         // POST: Opportunities/MostRecent
         public async Task<IActionResult> BrowseRecent()
         {
-            return View("Browse", await _context.Opportunity.OrderByDescending(s => s.CreateDate).ToListAsync());
+            return View("List", await _context.Opportunity.OrderByDescending(s => s.CreateDate).ToListAsync());
         }
 
         public async Task<IActionResult> ReverseAlphabetical()
@@ -111,7 +121,7 @@ namespace VMS.Controllers
 
         public async Task<IActionResult> BrowseReverseAlphabetical()
         {
-            return View("Browse", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
+            return View("List", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
         }
 
         // GET: Application
@@ -133,7 +143,7 @@ namespace VMS.Controllers
                 _context.Add(application);
                 await _context.SaveChangesAsync();
                 TempData["message"] = $"Application successful!";
-                return RedirectToAction(nameof(Browse));
+                return RedirectToAction(nameof(List));
             }
             return View(application);
         }
