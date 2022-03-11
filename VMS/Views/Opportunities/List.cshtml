@@ -34,7 +34,7 @@
         {
             <div class="card rounded mb-5 p-2">
                 <div class="card-body">
-                    <h5>@Html.DisplayFor(modelItem => p.OpportunityName)</h5><hr />
+                    <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => p.OpportunityName)</p><hr />
                     <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p>
                     <p>@Html.DisplayFor(modelItem => p.Description)</p>
                     <!-- Button trigger modal -->
@@ -69,8 +69,8 @@
             </div>
         }
         <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
-             page-class="btn" page-class-normal="btn-outline-secondary"
-             page-class-selected="btn-primary" class="btn-group float-right">
+             page-class="btn" page-class-normal="btn-outline-primary"
+             page-class-selected="btn-secondary" class="btn-group float-right">
         </div>
 
     </div>
