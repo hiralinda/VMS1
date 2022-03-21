@@ -26,11 +26,20 @@
                 <td>
                     @if(application.status)
                         {
-                            <a class="btn btn-danger" asp-route-appID="@application.id" asp-action="changeStatus" asp-controller="Opportunities">Deny</a>
+                            <form asp-action="ApproveApplicant">
+
+                                <input type="submit" class="btn btn-danger" value="Deny" />
+                                <input type="hidden" name="applicationID" value="@application.id" />
+                            </form>
                         }
+
                      else
                         {
-                            <a class="btn btn-primary" asp-route-appID="@application.id" asp-action="changeStatus" asp-controller="Opportunities">Approve</a>
+                            <form asp-action="ApproveApplicant">
+
+                                <input type="submit" class="btn btn-primary" value="Approve" />
+                                <input type="hidden" name="applicationID" value="@application.id" />
+                            </form>
                         }
                 </td>
             </tr>

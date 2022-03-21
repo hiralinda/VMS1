@@ -283,5 +283,28 @@ namespace VMS.Controllers
 
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> ApproveApplicant(int ApplicationID, Application application)
+        {
+            if(ModelState.IsValid)
+            {
+                application = await _context.Application.FindAsync(ApplicationID);
+                if(application.status == true)
+                {
+                    application.status = false;
+                }
+                else
+                {
+                    application.status = true;
+                }
+                _context.Update(application);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(ManageApplicants));
+            }
+
+            return View(application);
+        }
     }
 }
