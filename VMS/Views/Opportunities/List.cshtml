@@ -12,21 +12,33 @@
             Filter
         </button>
         <div class="dropdown-menu">
-            @*<a type="button" class="dropdown-item" asp-action="">A-Z</a>*@
-            <a type="button" class="dropdown-item" asp-action="BrowseReverseAlphabetical">Z-A</a>
+            <button style="text-decoration:none;" class="btn dropdown-item">@Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm })</button>
             @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
-            <a type="button" class="dropdown-item" asp-action="BrowseRecent">Most Recent</a>
+        <button type="button" style="text-decoration:none;" class="btn dropdown-item">@Html.ActionLink("Name Desc.", "List", new     { sortOrder = ViewBag.NameSortParm })</button>
             <div class="dropdown-divider"></div>
             <a type="button" class="dropdown-item" asp-action="List">All</a>
         </div>
 
-        <form class="form-group pt-3" asp-action="ShowSearchResults">
+        @using (Html.BeginForm())
+            {
+                <p>
+                    Find by name: @Html.TextBox("SearchString")
+                    <input type="submit" value="Search" />
+                </p>
+            }
+
+        @*<form class="form-group pt-3" asp-action="ShowSearchResults">
             <div class="form-row">
                 <label class="sr-only" for="SearchPhrase"></label>
                 <input name="SearchPhrase" class="rounded form-control" id="inlineFormInputName" placeholder="Search">
             </div>
-        </form>
+        </form>*@
     </div>
+
+    @*<div class="col col-md-3">
+        <p>@Html.ActionLink("Creation Date", "List", new { sortOrder = ViewBag.DateSortParm })</p>
+        <p>@Html.ActionLink("Name Desc", "List", new { sortOrder = ViewBag.NameSortParm})</p>
+    </div>*@
 
     <!--right-->
     <div class="col col-md-9">
@@ -67,7 +79,7 @@
                     <a class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">See Details</a>
                 </div>
             </div>
-        }
+            }
         <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
              page-class="btn" page-class-normal="btn-outline-primary"
              page-class-selected="btn-secondary" class="btn-group float-right">
