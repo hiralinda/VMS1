@@ -25,26 +25,76 @@ namespace VMS.Controllers
         }
 
         /*GET: Opportunities browse method*/
-        public ViewResult List(int page = 1) => View(new OpportunitiesListViewModel {
-                Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize), PagingInfo = new PagingInfo{
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = _context.Opportunity.Count()
-                }
-            });
+        public ActionResult List(string searchString, string sortOrder, int page = 1)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                return View(new OpportunitiesListViewModel
+                {
+                    Opportunities = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString))
+                    .Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString)).Count()
+                    }
+                });
+                
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    return View(new OpportunitiesListViewModel
+                    {
+
+                        Opportunities = _context.Opportunity.OrderByDescending(s => s.OpportunityName).Skip((page - 1) * PageSize).Take(PageSize),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = PageSize,
+                            TotalItems = _context.Opportunity.Count()
+                        }
+                    });
+                case "date_desc":
+                    return View(new OpportunitiesListViewModel
+                    {
+
+                        Opportunities = _context.Opportunity.OrderByDescending(s => s.CreateDate).Skip((page - 1) * PageSize).Take(PageSize),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = PageSize,
+                            TotalItems = _context.Opportunity.Count()
+                        }
+                    });
+                default:
+                    return View(new OpportunitiesListViewModel
+                    {
+
+                        Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = PageSize,
+                            TotalItems = _context.Opportunity.Count()
+                        }
+                    });
+            }
+        }
 
         // GET: Opportunities // Managing Opportunities
         [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
-
-
             /*return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
-
             return View(await _context.Opportunity.Where(t => t.CreateUser.FirstName == User.Identity.Name).ToListAsync());*/
-
-
         }
 
 
