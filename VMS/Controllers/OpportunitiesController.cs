@@ -47,45 +47,42 @@ namespace VMS.Controllers
                 
             }
 
-            switch (sortOrder)
+            return sortOrder switch
             {
-                case "name_desc":
-                    return View(new OpportunitiesListViewModel
-                    {
+                "name_desc" => View(new OpportunitiesListViewModel
+                {
 
-                        Opportunities = _context.Opportunity.OrderByDescending(s => s.OpportunityName).Skip((page - 1) * PageSize).Take(PageSize),
-                        PagingInfo = new PagingInfo
-                        {
-                            CurrentPage = page,
-                            ItemsPerPage = PageSize,
-                            TotalItems = _context.Opportunity.Count()
-                        }
-                    });
-                case "date_desc":
-                    return View(new OpportunitiesListViewModel
+                    Opportunities = _context.Opportunity.OrderByDescending(s => s.OpportunityName).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
                     {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Count()
+                    }
+                }),
+                "date_desc" => View(new OpportunitiesListViewModel
+                {
 
-                        Opportunities = _context.Opportunity.OrderByDescending(s => s.CreateDate).Skip((page - 1) * PageSize).Take(PageSize),
-                        PagingInfo = new PagingInfo
-                        {
-                            CurrentPage = page,
-                            ItemsPerPage = PageSize,
-                            TotalItems = _context.Opportunity.Count()
-                        }
-                    });
-                default:
-                    return View(new OpportunitiesListViewModel
+                    Opportunities = _context.Opportunity.OrderByDescending(s => s.CreateDate).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
                     {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Count()
+                    }
+                }),
+                _ => View(new OpportunitiesListViewModel
+                {
 
-                        Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
-                        PagingInfo = new PagingInfo
-                        {
-                            CurrentPage = page,
-                            ItemsPerPage = PageSize,
-                            TotalItems = _context.Opportunity.Count()
-                        }
-                    });
-            }
+                    Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Count()
+                    }
+                }),
+            };
         }
 
         // GET: Opportunities // Managing Opportunities
@@ -210,7 +207,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,StartDate,EndDate,CreateDate")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -248,7 +245,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,StartDate,EndDate,CreateDate")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {

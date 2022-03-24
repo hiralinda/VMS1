@@ -310,6 +310,81 @@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div><hr />
 
+                    <!--Age Bracket-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="control-label">Select an age group for this event</label>
+                                <select class="form-select col-md-3" aria-label=" select example" asp-for="AgeBracket" name="AgeBracket">
+                                    <option selected></option>
+                                    <option value="All">All ages</option>
+                                    <option value="3-5">5-10</option>
+                                    <option value="6-13">11-13</option>
+                                    <option value="14-19">14-18</option>
+                                </select>
+                            </div>
+
+                            <!--Grade Bracket-->
+                            <div class="col-md-3">
+                                <label class="control-label">Select a grade level group for this event</label>
+                                <select class="form-select col-md-3" aria-label="Default select example" asp-for="GradeLevel" name="AgeGradeLevelBracket">
+                                    <option selected></option>
+                                    <option value="All">All levels</option>
+                                    <option value="3-5">k-5</option>
+                                    <option value="6-13">6-8</option>
+                                    <option value="14-19">9-12</option>
+                                    <option value="College&Higher">College & Higher</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div><!--end age and grade bracket-->
+                    <!--Interest select : needs to be multiselect-->
+                    <div class="form-group">
+                        <label>Relevant Interest areas</label>
+                        <div class="p-5 bg-white">
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+                                <label class="btn btn-outline-info" for="btn-check-outlined">Animals</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined2" autocomplete="off">
+                                <label class="btn btn-outline-info" for="btn-check-outlined2">Eldery</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined3" autocomplete="off">
+                                <label class="btn btn-outline-info" for="btn-check-outlined3">Academic</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined4" autocomplete="off">
+                                <label class="btn btn-outline-info" for="btn-check-outlined4">Donation</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined5" autocomplete="off">
+                                <label class="btn btn-outline-info" for="btn-check-outlined5">Youth</label>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+
+                    <!--Volunteers needed-->
+                    <div class="form-group">
+                        <label>Volunteers Needed: </label>
+                        <input class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />
+                    </div>
+
+                    <!--Company Logo-->
+                    <div class="form-group">
+                        <label>Add a company logo to the post</label>
+                        <input type="file"
+                               accept=".png,.jpg,.jpeg,.gif,.tif"
+                               asp-for="CompanyLogo"
+                               class="form-control"
+                               style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                               onchange="document.getElementById('CompanyLogo').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
+
                     <!--Requirements-->
                     <div class="form-group">
                         <label asp-for="Requirements" class="control-label">Add some general requirements (press enter after each item)</label>
@@ -322,11 +397,11 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
-                                <input type="date" name="StartDate" min="2022-02-26" max="2040-12-31" required/>
+                                <input type="date" name="StartDate" min="2022-02-26" max="2040-12-31" required />
                             </div>
                             <div class="col-sm-4">
                                 <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                <input type="date" name="EndDate" min="2022-02-26" max="2040-12-31" required/>
+                                <input type="date" name="EndDate" min="2022-02-26" max="2040-12-31" required />
                             </div>
                         </div>
                     </div>
@@ -341,6 +416,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
