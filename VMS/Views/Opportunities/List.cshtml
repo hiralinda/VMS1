@@ -8,38 +8,30 @@
 <div class="row">
     <!--left-->
     <div class="col col-md-3">
+        <h4>Filters</h4>
+        @using (Html.BeginForm())
+        {
+            <p>
+                Search: @Html.TextBox("SearchString", null, new { @class="form-control"})
+            </p>
+        }
         <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Filter
+            Sort By
         </button>
         <div class="dropdown-menu">
-            <button style="text-decoration:none;" class="btn dropdown-item">@Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm })</button>
+            @Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
             @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
-        <button type="button" style="text-decoration:none;" class="btn dropdown-item">@Html.ActionLink("Name Desc.", "List", new     { sortOrder = ViewBag.NameSortParm })</button>
+            @Html.ActionLink("Name Desc.", "List", new { sortOrder = ViewBag.NameSortParm }, new { @class="dropdown-item" })
             <div class="dropdown-divider"></div>
             <a type="button" class="dropdown-item" asp-action="List">All</a>
         </div>
-
-        @using (Html.BeginForm())
-            {
-                <p>
-                    Find by name: @Html.TextBox("SearchString")
-                    <input type="submit" value="Search" />
-                </p>
-            }
-
-        @*<form class="form-group pt-3" asp-action="ShowSearchResults">
-            <div class="form-row">
-                <label class="sr-only" for="SearchPhrase"></label>
-                <input name="SearchPhrase" class="rounded form-control" id="inlineFormInputName" placeholder="Search">
-            </div>
-        </form>*@
     </div>
 
     @*<div class="col col-md-3">
         <p>@Html.ActionLink("Creation Date", "List", new { sortOrder = ViewBag.DateSortParm })</p>
         <p>@Html.ActionLink("Name Desc", "List", new { sortOrder = ViewBag.NameSortParm})</p>
     </div>*@
-
+    
     <!--right-->
     <div class="col col-md-9">
         @foreach (var p in Model.Opportunities)
