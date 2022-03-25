@@ -53,6 +53,15 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Zip")]
             public string Zip { get; set; }
 
+            [Display(Name = "School")]
+            public string school { get; set; }
+
+            public bool isStudent { get; set; }
+
+            public DateTime dob { get; set; }
+
+            public int Age {get; set;}
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -65,6 +74,11 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var profilePicture = user.ProfilePicture;
             var address = user.address;
             var zip = user.zip;
+            var school = user.school;
+            var isStudent = user.isStudent;
+            var DoB = user.birthdate;
+            var today = DateTime.Today;
+            var age = today.Year - DoB.Year;
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
@@ -73,12 +87,14 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
+                school = school,
                 FirstName = firstName,
                 LastName = lastName,
                 ProfilePicture = profilePicture,
                 Address = address,
-                Zip = zip
-
+                Zip = zip,
+                dob = DoB,
+                Age = age
             };
         }
 
@@ -109,6 +125,8 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            var school = user.school;
+            var isStudent = user.isStudent;
             var firstName = user.FirstName;
             var lastName = user.LastName;
             var profilePicture = user.ProfilePicture;
@@ -141,6 +159,18 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             if (Input.Address != address)
             {
                 user.address = Input.Address;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.school != school)
+            {
+                user.school = Input.school;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.isStudent != isStudent)
+            {
+                user.isStudent = Input.isStudent;
                 await _userManager.UpdateAsync(user);
             }
 

@@ -55,6 +55,14 @@ namespace VMS.Areas.Identity.Pages.Account
             public string Address { get; set; }
 
             [Required]
+            [Display(Name = "Check this box if you are currently a student")]
+            public bool isStudent { get; set; }
+
+            [Required]
+            [Display(Name = "Date of Birth")]
+            public DateTime birthdate { get; set; }
+
+            [Required]
             [Display(Name = "Zip")]
             public string Zip { get; set; }
 
@@ -105,6 +113,8 @@ namespace VMS.Areas.Identity.Pages.Account
                 var user = new ApplicationUser
                 {
                     UserName = UserName,
+                    isStudent = Input.isStudent,
+                    birthdate = Input.birthdate,
                     Email = Input.Email,
                     address = Input.Address,
                     zip = Input.Zip,

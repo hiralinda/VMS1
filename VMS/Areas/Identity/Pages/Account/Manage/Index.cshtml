@@ -49,6 +49,12 @@
             {
                 <div class="row">
                     <div class="col">
+                        <p>Age: @Model.Input.Age</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
                         <label asp-for="Input.FirstName"></label>
                         <input asp-for="Input.FirstName" class="form-control" />
                         <span asp-validation-for="Input.FirstName" class="text-danger"></span>
@@ -59,6 +65,15 @@
                         <span asp-validation-for="Input.LastName" class="text-danger"></span>
                     </div>
                 </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label asp-for="Input.school"></label>
+                            <input asp-for="Input.school" class="form-control" />
+                            <span asp-validation-for="Input.school" class="text-danger"></span>
+                        </div>
+                    </div>
+
             }
 
             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization")))

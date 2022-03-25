@@ -13,5 +13,9 @@ namespace VMS.Models
         public byte[] ProfilePicture { get; set; }
         public string zip { get; set; }
         public string address { get; set; }
+        public string school { get; set; }
+        public bool isStudent { get; set; }
+        public DateTime birthdate { get; set; }
+
     }
 }
