@@ -114,6 +114,66 @@
                 <dd class="col-sm-8">
                     @Model.CreateDate
                 </dd>
+                <dt class="col-sm-3">
+                    Company Logo
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.CompanyLogo != null)
+                    {
+                        <p>@Model.CompanyLogo.Length</p>
+                        <p>True</p>
+                    }
+                    else
+                    {
+                        <p>False</p>
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    Interest Areas
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.InterestAreas != null)
+                    {
+                        <p>@Model.InterestAreas</p>
+                        <p>True</p>
+                    }
+                    else
+                    {
+                        <p>False</p>
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    AgeBracket
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.AgeBracket != null)
+                    {
+                        <p>@Model.AgeBracket</p>
+                    }
+                    else
+                    {
+                        <p>None Selected</p>
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    GradeLevel
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.GradeLevel != null)
+                    {
+                        <p>@Model.GradeLevel</p>
+                    }
+                    else
+                    {
+                        <p>None Selected</p>
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    VolunteersNeeded
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.VolunteersNeeded
+                </dd>
             </dl>
         </div>
     </div>

@@ -22,6 +22,9 @@ namespace VMS.Models
         public string AgeBracket { get; set; }
         public string GradeLevel { get; set; }
         public string InterestAreas { get; set; }
+        public string TypeOfOpportunity { get; set; }
+        public bool Virtual { get; set; }
+        public bool GroupActivity { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ApplicationUser CreateUser { get; set; }
