@@ -10,13 +10,13 @@
     <div class="card-body bg-light">
         <h4>All details for <strong>@Model.OpportunityName</strong></h4><hr />
         <div class="container-fluid">
-            <dl class="row">
+            <dl class="row">@*
                 <dt class="col-sm-3">
                     Item Id
                 </dt>
                 <dd class="col-sm-8">
                     @Model.Id
-                </dd>
+                </dd>*@
                 <dt class="col-sm-3">
                     Name
                 </dt>
@@ -115,21 +115,7 @@
                     @Model.CreateDate
                 </dd>
                 <dt class="col-sm-3">
-                    Company Logo
-                </dt>
-                <dd class="col-sm-8">
-                    @if (Model.CompanyLogo != null)
-                    {
-                        <p>@Model.CompanyLogo.Length</p>
-                        <p>True</p>
-                    }
-                    else
-                    {
-                        <p>False</p>
-                    }
-                </dd>
-                <dt class="col-sm-3">
-                    Interest Areas
+                    Cause Areas
                 </dt>
                 <dd class="col-sm-8">
                     @if (Model.InterestAreas != null)
@@ -143,7 +129,7 @@
                     }
                 </dd>
                 <dt class="col-sm-3">
-                    AgeBracket
+                    Age Bracket
                 </dt>
                 <dd class="col-sm-8">
                     @if (Model.AgeBracket != null)
@@ -156,7 +142,7 @@
                     }
                 </dd>
                 <dt class="col-sm-3">
-                    GradeLevel
+                    Grade Levels
                 </dt>
                 <dd class="col-sm-8">
                     @if (Model.GradeLevel != null)
@@ -173,6 +159,45 @@
                 </dt>
                 <dd class="col-sm-8">
                     @Model.VolunteersNeeded
+                </dd>
+                <dt class="col-sm-3">
+                    Virtual
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.Virtual)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </dd>
+                <dt class="col-sm-3">
+                    Group Activity
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.GroupActivity)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </dd>
+            <dt class="col-sm-3">
+                    Logo?
+                </dt>
+                <dd class="col-sm-8">
+                    @if (Model.CompanyLogo != null)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
                 </dd>
             </dl>
         </div>

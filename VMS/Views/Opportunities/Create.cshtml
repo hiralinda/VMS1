@@ -4,16 +4,20 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    
+</style>
 
 <div class="card">
     <div class="card-body bg-light">
-        <h4>Create an Opportunity Event</h4>
         <div class="container-fluid">
+            <h4>Create an Opportunity Event</h4>
+            <p>Please fill in details of this event</p><hr />
             <div class="row">
                 <form enctype="multipart/form-data" method="post" asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group col-md-5">
-                        <label asp-for="OpportunityName" class="control-label">Name</label>
+                        <label asp-for="OpportunityName" class="control-label">Event Name</label>
                         <input asp-for="OpportunityName" class="form-control" required />
                         <span asp-validation-for="OpportunityName" class="text-danger"></span>
                     </div>
@@ -303,104 +307,113 @@
                         </div>
                     </div>
 
-                    <!--Description-->
+                    
+                    <div class="row mt-3">
+                        <!--Type of opportunity-->
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">What is this post for?</label>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity">
+                                <option selected>Select</option>
+                                <option value="SummerInternship">Summer Internship</option>
+                                <option value="OneDay">One Day Event</option>
+                                <option value="LongTerm">Long Term Assignment</option>
+                            </select>
+                        </div>
+                        <!--Virtual-->
+                        <div class="col-md-3 form-group">
+                            <input type="checkbox" value="True" name="Virtual" asp-for="Virtual" />
+                            <Label>Is this a Virtual activity? </Label>
+                        </div>
+
+
+                        <!--Single or Group activity-->
+                        <div class="col-md-3 form-group">
+                            <input type="checkbox" value="True" name="GroupActivity" asp-for="GroupActivity" />
+                            <Label>Is this a group activity? </Label>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row mt-3">
+                        <!--Age Bracket-->
+                        <div class="col-md-5 form-group">
+                            <label class="control-label">Select an age group for this event</label>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket">
+                                <option selected>Select</option>
+                                <option value="All Ages">All ages</option>
+                                <option value="3-5">5-10</option>
+                                <option value="6-13">11-13</option>
+                                <option value="14-19">14-18</option>
+                            </select>
+                        </div>
+                        <!--Grade Bracket-->
+                        <div class="col-md-4 form-group">
+                            <label class="control-label">Select a targeted grade level group</label>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel">
+                                <option selected>Select</option>
+                                <option value="All Levels">All levels</option>
+                                <option value="K-5">K-5</option>
+                                <option value="6-8">6-8</option>
+                                <option value="9-12">9-12</option>
+                                <option value="College&Higher">College & Higher</option>
+                            </select>
+                        </div>
+
+                        <!--Volunteers needed-->
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">Volunteers Needed: </label>
+                            <input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />
+                        </div>
+                    </div>
+
+
+
+                    <!--Interest-->
                     <div class="form-group">
+                        <div class="col-md-6 form-group">
+                            <label class="control-label">Select a cause area</label>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas">
+                                <option selected>Select</option>
+                                <option value="Advocacy & HumanRights">Advocacy & Human Rights</option>
+                                <option value="Animals">Animals</option>
+                                <option value="Comfort the Sick">Comfort the sick</option>
+                                <option value="Community Support">Community Support</option>
+                                <option value="Computers & Technology">Computers & Technology</option>
+                                <option value="Donations">Donations</option>
+                                <option value="Education & Literacy">Education & Literacy</option>
+                                <option value="Elderly">Elderly</option>
+                                <option value="Help kids">Help other kids</option>
+                                <option value="Help Refugees">Help Refugees</option>
+                                <option value="Homeless">Homeless</option>
+                                <option value="Save the Planet">Save the Planet</option>
+                                <option value="Support Our troops">Support our troops</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+                    
+
+                    <!--Description-->
+                    <div class="form-group mt-3">
                         <label asp-for="Description" class="control-label">Add a description</label>
                         <textarea style="resize: none;" asp-for="Description" class="form-control" rows="4" cols="100" required></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
-                    </div><hr />
-
-                    <!--Age Bracket-->
-                    <div class="">
-                        <div class="row">
-                            <div class="col-md-3 form-group">
-                                <label class="control-label">Select an age group for this event</label>
-                                <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket">
-                                    <option selected></option>
-                                    <option value="All Ages">All ages</option>
-                                    <option value="3-5">5-10</option>
-                                    <option value="6-13">11-13</option>
-                                    <option value="14-19">14-18</option>
-                                </select>
-                            </div>
-                            <!--Grade Bracket-->
-                            <div class="col-md-3 form-group">
-                                <label class="control-label">Select a grade level group for this event</label>
-                                <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel">
-                                    <option selected></option>
-                                    <option value="All Levels">All levels</option>
-                                    <option value="k-5">k-5</option>
-                                    <option value="6-8">6-8</option>
-                                    <option value="9-12">9-12</option>
-                                    <option value="College&Higher">College & Higher</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </div><!--end age and grade bracket-->
-                    
-
-                    <!--Interest select : needs to be multiselect-->
-                    <div class="form-group">
-                        <label>Relevant Interest areas</label> 
-                        <ul>
-                            <li>
-                                <input type="checkbox" value="Animals" id="Animals" name="InterestAreas" asp-for="InterestAreas" />
-                                <label>Animals</label>
-                                <input type="checkbox" value="Eldery" id="Eldery" name="InterestAreas" asp-for="InterestAreas" />
-                                <label>Eldery</label>
-                            </li>
-                        </ul>
-                        <!--<div class="p-5 bg-white">
-                            <div class="form-group form-check form-check-inline">
-                                <input type="checkbox" name="Animals" class="btn-check" id="btn-check-outlined" asp-for="InterestAreas" autocomplete="off">
-                                <label class="btn btn-outline-info" for="btn-check-outlined">Animals</label>
-                            </div>
-                            <div class="form-group form-check form-check-inline">
-                                <input type="checkbox" name="Eldery" class="btn-check" id="btn-check-outlined2" asp-for="InterestAreas" autocomplete="off">
-                                <label class="btn btn-outline-info" for="btn-check-outlined2">Eldery</label>
-                            </div>
-                            <div class="form-group form-check form-check-inline">
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined3" asp-for="InterestAreas" autocomplete="off">
-                                <label class="btn btn-outline-info" for="btn-check-outlined3">Academic</label>
-                            </div>
-                            <div class="form-group form-check form-check-inline">
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined4" asp-for="InterestAreas" autocomplete="off">
-                                <label class="btn btn-outline-info" for="btn-check-outlined4">Donation</label>
-                            </div>
-                            <div class="form-group form-check form-check-inline">
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined5" asp-for="InterestAreas" autocomplete="off">
-                                <label class="btn btn-outline-info" for="btn-check-outlined5">Youth</label>
-                            </div>
-                        </div>-->
-                    </div>
-
-
-
-                    <!--Volunteers needed-->
-                    <div class="form-group">
-                        <label>Volunteers Needed: </label>
-                        <input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />
-                    </div>
-
-                    <!--Company Logo-->
-                    <div class="form-group">
-                        <label>Add a company logo to the post</label>
-                        <input type="file"
-                               accept=".png,.jpg,.jpeg,.gif,.tif"
-                               asp-for="CompanyLogo"
-                               class="form-control" />
                     </div>
 
                     <!--Requirements-->
-                    <div class="form-group">
-                        <label asp-for="Requirements" class="control-label">Add some general requirements (press enter after each item)</label>
+                    <div class="form-group mt-3">
+                        <label asp-for="Requirements" class="control-label">Add some general requirements or skills(press enter after each item)</label>
                         <textarea style="resize: none;" asp-for="Requirements" class="form-control" rows="4" cols="100"></textarea>
                     </div>
 
                     <!--Event start and end dates-->
                     <div class="form-group">
-                        <p>Date of event details</p>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
