@@ -13,7 +13,11 @@
         <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">@Html.DisplayFor(model => model.OpportunityName)</h1>
             <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
-
+            <p class="lead col-md-8 fs-4">Looking for <strong>@Html.DisplayFor(model => model.VolunteersNeeded)</strong> volunteers</p>
+            @if (Model.Virtual)
+            {
+                <p class="lead col-md-8 fs-4">This is a virtual opportunity</p>
+            }
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
                 Apply
@@ -47,8 +51,22 @@
     <!--Description & Date posted-->
     <div class="p-2 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid py-5">
+
+            <p class="fs-4 fw-bold">The Cause</p>
+            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
+
+            <p class="fs-4 fw-bold">Opportunity Type</p>
+            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.TypeOfOpportunity)</p>
+
             <p class="fs-4 fw-bold">About this event</p>
             <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
+
+            <p class="fs-4 fw-bold">Grade Level</p>
+            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>
+
+            <p class="fs-4 fw-bold">Age</p>
+            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.AgeBracket)</p>
+
             <p class="fs-5">General Requirements</p>
             @if (Model.Requirements != null)
             {

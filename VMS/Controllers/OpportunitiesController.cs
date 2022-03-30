@@ -183,7 +183,7 @@ namespace VMS.Controllers
 
                 application.oppName = application.opportunity.OpportunityName;
                 application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
-                application.oppDate = application.opportunity.StartDate.ToString() + " - " + application.opportunity.EndDate.ToString();
+                application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
                 application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
                     application.opportunity.Address1 + " " + application.opportunity.Address2;
 
