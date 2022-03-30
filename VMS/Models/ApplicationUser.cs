@@ -13,5 +13,6 @@ namespace VMS.Models
         public byte[] ProfilePicture { get; set; }
         public string zip { get; set; }
         public string address { get; set; }
+        public string Student { get; internal set; }
     }
 }
