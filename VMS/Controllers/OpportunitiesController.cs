@@ -215,7 +215,6 @@ namespace VMS.Controllers
                 var userId = User.Id();
                 opportunity.CreateDate = DateTime.UtcNow;
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                 
                 _context.Add(opportunity);
                 await _context.SaveChangesAsync();
                 TempData["message"] = $"Created!";
