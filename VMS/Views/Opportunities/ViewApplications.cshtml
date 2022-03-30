@@ -25,6 +25,7 @@
             <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
                 <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
             </form>
+            <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
         </div>
     </div>
 

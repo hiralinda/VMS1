@@ -8,6 +8,7 @@ namespace VMS.Models
     public class Application
     {
             public int id { get; set; }
+            public int oppID { get; set; }
             public Opportunity opportunity { get; set; }
             public string oppName { get; set; }
             public string oppDate { get; set; }

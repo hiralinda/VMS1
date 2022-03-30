@@ -182,6 +182,7 @@ namespace VMS.Controllers
                 application.opportunity = await _context.Opportunity.FindAsync(oppID);
 
                 application.oppName = application.opportunity.OpportunityName;
+                application.oppID = application.opportunity.Id;
                 application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
                 application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
                 application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
@@ -327,8 +328,8 @@ namespace VMS.Controllers
         public async Task<IActionResult> ManageApplicants()
         {
 
-            return View(await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
-
+            List<Application> applications = await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync();
+            return View(applications);
         }
 
 
