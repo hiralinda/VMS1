@@ -56,7 +56,16 @@
                     <span asp-validation-for="Input.Zip" class="text-danger"></span>
                 </div>
             </div>
+             <div class="form-group">
+                <label asp-for="Input.Student"> Are you a Student?</label><br>
 
+                @Html.RadioButtonFor(m => m.Input.Student,"Yes")
+                <label>Yes</label>
+                <br>
+                @Html.RadioButtonFor(m => m.Input.Student,"No") 
+                <label>No</label> 
+                <span asp-validation-for="Input.Student" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
