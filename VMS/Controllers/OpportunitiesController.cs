@@ -353,5 +353,17 @@ namespace VMS.Controllers
 
             return View(application);
         }
+
+        [Authorize]
+        [HttpPost, ActionName("withdrawApplication")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> withdrawApplication(int id)
+        {
+            var application = await _context.Application.FindAsync(id);
+            _context.Application.Remove(application);
+            await _context.SaveChangesAsync();
+            TempData["message"] = $"Application withdrawn";
+            return RedirectToAction(nameof(ViewApplications));
+        }
     }
 }

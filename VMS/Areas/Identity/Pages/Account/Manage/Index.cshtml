@@ -79,7 +79,7 @@
             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization")))
             {
                 <div class="col">
-                    <label asp-for="Input.FirstName"></label>
+                    Organization Name
                     <input asp-for="Input.FirstName" class="form-control" />
                     <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                 </div>
