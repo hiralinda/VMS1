@@ -207,13 +207,14 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
                 opportunity.CreateDate = DateTime.UtcNow;
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                 
                 _context.Add(opportunity);
                 await _context.SaveChangesAsync();
                 TempData["message"] = $"Created!";
@@ -245,7 +246,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {
