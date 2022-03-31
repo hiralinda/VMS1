@@ -3,7 +3,7 @@
 @inject SignInManager<ApplicationUser> signInManager;
 
 @{
-    ViewData["Title"] = "PublicDetails";
+    ViewData["Title"] = "Public Details";
 }
 
 <div class="container py-4">
@@ -18,7 +18,7 @@
                         @Html.DisplayFor(model => model.OpportunityName)
                         @if (Model.CreateUser.ProfilePicture != null)
                         {
-                            <img id="profilePicture" style="height: 50px; width: 50px; border-radius: 50%" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.CreateUser.ProfilePicture))">
+                            <img id="profilePicture" style="height: 50px; width: 50px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.CreateUser.ProfilePicture))">
                         }
 
                     </h1>
@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
-                                    <h6>Start: @Model.StartDate</h6>
-                                    <h6>End: @Model.EndDate</h6>
+                                    <h6>Start: @Model.StartDate.Date.ToString("d")</h6>
+                                    <h6>End: @Model.EndDate.Date.ToString("d")</h6>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,7 +113,7 @@
                     <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
                 }
                 <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                <a class="btn btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City.ToString()">Map</a>
+                <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City.ToString()">Map</a>
             </div>
         </div>
 
@@ -125,7 +125,7 @@
                     <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
                     <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                 </ul>
-                <a class="btn btn-secondary" href="mailto: @Model.CreateUser.Email">Contact</a>
+                <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
             </div>
         </div>
     </div>
