@@ -16,7 +16,11 @@
                 <div class="col-lg-10">
                     <h1 class="display-5 fw-bold">
                         @Html.DisplayFor(model => model.OpportunityName)
-                        <img id="profilePicture" style="height: 50px; width: 50px; border-radius: 50%" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.CreateUser.ProfilePicture))">
+                        @if (Model.CreateUser.ProfilePicture != null)
+                        {
+                            <img id="profilePicture" style="height: 50px; width: 50px; border-radius: 50%" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.CreateUser.ProfilePicture))">
+                        }
+
                     </h1>
                     <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
                     <p class="lead col-md-8 fs-4">
