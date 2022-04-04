@@ -1,0 +1,26 @@
+﻿@page
+@model AboutYouModel
+@{
+    ViewData["Title"] = "Write about your organization.";
+    ViewData["ActivePage"] = ManageNavPages.AboutYou;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" for="StatusMessage" />
+<p>Write & edit information about your company here! This information will be presented on your public posts.</p>
+<div class="row">
+    <div class="col-md-9">
+        <form id="about-you-form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                    <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="20">
+                    </textarea>
+            </div>
+            <button id="update-about-you-button" type="submit" class="btn btn-primary mt-3">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

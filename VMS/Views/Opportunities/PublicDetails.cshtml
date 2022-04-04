@@ -68,6 +68,12 @@
     <!--Description & Date posted-->
     <div class="p-2 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid py-5">
+            @if (Model.CreateUser.AboutYou != null)
+            {
+                <p>About this organization:</p>
+                <p>@Model.CreateUser.AboutYou</p>
+            }
+
             <p class="fs-3 fw-bold">About this event</p><hr />
             <p class="fs-4 fw-bold">The Cause</p>
             <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>

@@ -16,6 +16,6 @@ namespace VMS.Models
         public string school { get; set; }
         public bool isStudent { get; set; }
         public DateTime birthdate { get; set; }
-
+        public string AboutYou { get; set; }
     }
 }
