@@ -360,10 +360,21 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost, ActionName("withdrawApplication")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> withdrawApplication(int id)
+        public async Task<IActionResult> withdrawApplication(int id, Opportunity opportunity)
         {
+
             var application = await _context.Application.FindAsync(id);
+            opportunity = await _context.Opportunity.FindAsync(application.oppID);
+            int availableSpots = opportunity.VolunteersNeeded;
+            if (application.status == true)
+            {
+                availableSpots++;
+                opportunity.VolunteersNeeded = availableSpots;
+            }
+
+            _context.Update(opportunity);
             _context.Application.Remove(application);
+            
             await _context.SaveChangesAsync();
             TempData["message"] = $"Application withdrawn";
             return RedirectToAction(nameof(ViewApplications));
