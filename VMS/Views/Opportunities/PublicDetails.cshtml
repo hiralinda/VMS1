@@ -119,7 +119,7 @@
                     <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
                 }
                 <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1/@Model.City.ToString()">Map</a>
+                <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
             </div>
         </div>
 
