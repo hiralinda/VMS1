@@ -5,26 +5,28 @@
 
 <h2>Manage Applicants for your Posted Opportunities</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Volunteer Name</th>
-            <th>Opportunity</th>
-            <th>Approve</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var application in Model)
-        {
+@if (Model.Any())
+{
+    <table>
+        <thead>
             <tr>
-                <td width="50%">
-                    @application.volunteerName
-                </td>
-                <td width="50%">
-                    @application.oppName
-                </td>
-                <td>
-                    @if(application.status)
+                <th>Volunteer Name</th>
+                <th>Opportunity</th>
+                <th>Approve</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @application.volunteerName
+                    </td>
+                    <td width="50%">
+                        @application.oppName
+                    </td>
+                    <td>
+                        @if (application.status)
                         {
                             <form asp-action="ApproveApplicant">
 
@@ -33,7 +35,7 @@
                             </form>
                         }
 
-                     else
+                        else
                         {
                             <form asp-action="ApproveApplicant">
 
@@ -41,8 +43,16 @@
                                 <input type="hidden" name="applicationID" value="@application.id" />
                             </form>
                         }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>
+        <p>If you've posted an opportunity no volunteers have signed up yet, if you haven't or would like to edit an already posted opportunity click below to manage your opportunities.</p>
+        <a class="btn btn-primary" asp-controller="Opportunities" asp-action="Index">Manage Opportunities</a>
+    </div>
+}

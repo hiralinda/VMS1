@@ -4,30 +4,40 @@
 }
 
 <h2>Opportunities You've Signed Up For</h2>
-
-@foreach (var application in Model)
+@if (Model.Any())
 {
-    <div class="card">
-        <div class="card-header">
-            Opportunity Name: @application.oppName
+    @foreach (var application in Model)
+    {
+        <div class="card">
+            <div class="card-header">
+                Opportunity Name: @application.oppName
+            </div>
+            <div class="card-body">
+                <p>Location: @application.oppLocation</p>
+                <p>Date: @application.oppDate</p>
+                @if (!application.status)
+                {
+                    <p class="text-danger">Not Yet Approved</p>
+                }
+                else
+                {
+                    <p class="text-success">Approved</p>
+                }
+                <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
+                    <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
+                </form>
+                <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
+            </div>
         </div>
-        <div class="card-body">
-            <p>Location: @application.oppLocation</p>
-            <p>Date: @application.oppDate</p>
-            @if (!application.status)
-            {
-                <p class="text-danger">Not Yet Approved</p>
-            }
-            else
-            {
-                <p class="text-success">Approved</p>
-            }
-            <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
-                <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
-            </form>
-            <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
-        </div>
-    </div>
 
+    }
 }
+else
+{
+    <div>
+        <p>You have not applied to any opportunities yet. Click the button below to browse available opportunities.</p>
+        <a class="btn btn-primary" asp-controller="Opportunities" asp-action="List">Volunteer Now</a>
+    </div>
+}
+
 
