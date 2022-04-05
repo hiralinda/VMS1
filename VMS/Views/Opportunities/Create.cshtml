@@ -420,8 +420,13 @@
                                 <input type="date" name="StartDate" min="2022-02-26" max="2040-12-31" required />
                             </div>
                             <div class="col-sm-4">
-                                <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                <input type="date" name="EndDate" min="2022-02-26" max="2040-12-31" required />
+                                <label>Ongoing Event</label>
+                                <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
+                                <div id="EndDatePicker">
+                                    <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                    <input type="date" id="EndDateInput" name="EndDate" min="2022-02-26" max="2040-12-31" required />
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -436,7 +441,17 @@
         </div>
     </div>
 </div>
-
+<script>
+    // Disable end date picker if ongoing is checked
+    $('#isOnGoingSelected').change(function () {
+        if ($('#isOnGoingSelected').is(':checked') == true) {
+            $('#EndDateInput').prop('disabled', true);
+            $('#EndDateInput').prop('required', false);
+        } else {
+            $('#EndDateInput').val('').prop('disabled', false);
+        }
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -95,12 +95,6 @@ namespace VMS.Controllers
         }
 
 
-        // GET: Opportunities //Browse
-        /*public async Task<IActionResult> Browse()
-        {
-            return View(await _context.Opportunity.ToListAsync());
-        }*/
-
         // GET: Opportunities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -208,7 +202,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -246,7 +240,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {
