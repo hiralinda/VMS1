@@ -405,16 +405,19 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
-                                <input type="date" name="StartDate" min="2022-02-26" max="2040-12-31" required />
+                                <input type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" min="2022-02-26" max="2040-12-31" required />
                             </div>
                             <div class="col-sm-4">
-                                <label>Ongoing Event</label>
-                                <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
-                                <div id="EndDatePicker">
-                                    <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                    <input type="date" id="EndDateInput" name="EndDate" min="2022-02-26" max="2040-12-31" required />
-                                </div>
+                                @if (Model.OnGoing)
+                                {
+                                    <label>Ongoing Event</label>
+                                    <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
 
+                                    <div id="EndDatePicker">
+                                        <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                        <input type="date" id="EndDateInput" value="@Model.EndDate.ToString("yyyy-MM-dd")" name="EndDate" min="2022-02-26" max="2040-12-31" disabled />
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -431,12 +434,13 @@
 <script>
     // Disable end date picker if ongoing is checked
     $('#isOnGoingSelected').change(function () {
-        if ($('#isOnGoingSelected').is(':checked') == true) {
+                                    if ($('#isOnGoingSelected').is(':checked') == true) {
             $('#EndDateInput').prop('disabled', true);
-        } else {
-            $('#EndDateInput').val('').prop('disabled', false);
-        }
-    });
+                                    } else {
+                                        $('#EndDateInput').val('').prop('disabled', false);
+                                        $('#EndDateInput').val('').prop('required', true);
+                                    }
+                                });
 </script>
 
 @section Scripts {

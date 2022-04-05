@@ -25,7 +25,7 @@ namespace VMS.Models
         public string TypeOfOpportunity { get; set; }
         public bool Virtual { get; set; }
         public bool GroupActivity { get; set; }
-        public bool OnGoing { get; set; } // Event is ongoing, no set start or end date
+        public bool OnGoing { get; set; } // Event is ongoing, no set end date
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ApplicationUser CreateUser { get; set; }

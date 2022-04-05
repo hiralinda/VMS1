@@ -38,6 +38,10 @@
 
     <!--right-->
     <div class="col col-md-9">
+        @if(Model.PagingInfo.TotalItems.Equals(0))
+            {
+                <p class="fs-4 fw-bold">No Results Found</p>
+            }
         @foreach (var p in Model.Opportunities)
         {
             <div class="card rounded mb-5 p-2">
