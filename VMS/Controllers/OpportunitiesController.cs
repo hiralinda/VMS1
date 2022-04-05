@@ -177,6 +177,7 @@ namespace VMS.Controllers
 
                 application.oppName = application.opportunity.OpportunityName;
                 application.oppID = application.opportunity.Id;
+                application.volsNeeded = application.opportunity.VolunteersNeeded;
                 application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
                 application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
                 application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
@@ -327,20 +328,27 @@ namespace VMS.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> ApproveApplicant(int ApplicationID, Application application)
+        public async Task<IActionResult> ApproveApplicant(int ApplicationID, Application application, Opportunity opportunity)
         {
             if(ModelState.IsValid)
             {
                 application = await _context.Application.FindAsync(ApplicationID);
-                if(application.status == true)
+                opportunity = await _context.Opportunity.FindAsync(application.oppID);
+                int availableSpots = opportunity.VolunteersNeeded;
+                if (application.status == true)
                 {
                     application.status = false;
+                    availableSpots++;
+                    opportunity.VolunteersNeeded = availableSpots;
                 }
                 else
                 {
                     application.status = true;
+                    availableSpots--;
+                    opportunity.VolunteersNeeded = availableSpots;
                 }
                 _context.Update(application);
+                _context.Update(opportunity);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(ManageApplicants));
