@@ -89,9 +89,8 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            /*return View(await _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
             return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
-            /*return View(await _context.Opportunity.Include(t => t.CreateUser).ToListAsync());
-            return View(await _context.Opportunity.Where(t => t.CreateUser.FirstName == User.Identity.Name).ToListAsync());*/
         }
 
 
@@ -378,6 +377,50 @@ namespace VMS.Controllers
             await _context.SaveChangesAsync();
             TempData["message"] = $"Application withdrawn";
             return RedirectToAction(nameof(ViewApplications));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArchiveOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    opportunity.ArchivedStatus = true;
+                    _context.Update(opportunity);
+                    await _context.SaveChangesAsync();
+                    TempData["message"] = $"Event Archived!";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OpportunityExists(opportunity.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction();
+        }
+
+        public ActionResult ViewArchived(int page = 1)
+        {
+            
+            return View(new OpportunitiesListViewModel
+            {
+                Opportunities = _context.Opportunity.Where(t => t.ArchivedStatus).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _context.Opportunity.Count()
+                }
+            });
         }
     }
 }

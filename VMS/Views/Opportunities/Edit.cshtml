@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <h4>Edit Opportunity, <span class="text-primary">@Html.DisplayFor(model => model.OpportunityName)</h4>
             <div class="row">
-                <form asp-action="Edit">
+                <form asp-action="Edit" class="form-inline">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group col-md-5">
                         <label asp-for="OpportunityName" class="control-label">Event Name</label>
@@ -424,9 +424,13 @@
 
                     <div class="form-group pt-3">
                         <input type="submit" value="Save" class="btn btn-success mr-3" />
+                        <input asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to Archive this?')" />
                         <a class="btn btn-info" asp-action="Index">Back to List</a>
                     </div>
                 </form>
+               @* <form asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" method="post" class="form-inline">
+                    <input type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to Archive this?')" />
+                </form>*@
             </div>
         </div>
     </div>

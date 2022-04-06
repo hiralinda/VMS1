@@ -26,6 +26,7 @@ namespace VMS.Models
         public bool Virtual { get; set; }
         public bool GroupActivity { get; set; }
         public bool OnGoing { get; set; } // Event is ongoing, no set end date
+        public bool ArchivedStatus { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ApplicationUser CreateUser { get; set; }
