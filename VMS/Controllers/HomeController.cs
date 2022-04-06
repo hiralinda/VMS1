@@ -23,6 +23,16 @@ namespace VMS.Controllers
             return View();
         }
 
+        public IActionResult ExploreCauses()
+        {
+            return View();
+        }
+
+        public IActionResult VolunTEENBlog()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
