@@ -1,7 +1,7 @@
 ﻿@model OpportunitiesListViewModel
 
 @{
-    ViewData["Title"] = "Your Archived Opportunities";
+    ViewData["Title"] = "Your Archived Posts";
 }
 
 <style>
@@ -10,5 +10,33 @@
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
     <li class="breadcrumb-item active">Manage Archived</li>
 </ol>
-<h2 class="">@ViewData["Title"]</h2>
+
 <!--Table-->
+<div class="card">
+    <div class="card-header">
+        <h2 class="">@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Opportunity Name</th>
+                    <th>Archived Date</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var p in Model.Opportunities)
+                { 
+                <tr>
+                    <td>@p.OpportunityName</td>
+                    <td>@p.ArchivedDate</td>
+                    <td>@p.City, @p.State</td>
+                    <td><!--view details--></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

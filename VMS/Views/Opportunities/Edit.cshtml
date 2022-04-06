@@ -424,13 +424,21 @@
 
                     <div class="form-group pt-3">
                         <input type="submit" value="Save" class="btn btn-success mr-3" />
-                        <input asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to Archive this?')" />
+
+                        @if (!Model.ArchivedStatus)
+                        {
+                            <input asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to move this to your archives?')" />
+                        }
+                        else if(Model.ArchivedStatus)
+                        { 
+                            <input asp-action="RestoreOpportunity" asp-route-id="@Model.Id" type="submit" value="Restore" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to retrieve this?')" />
+                        }
+
+
+
                         <a class="btn btn-info" asp-action="Index">Back to List</a>
                     </div>
                 </form>
-               @* <form asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" method="post" class="form-inline">
-                    <input type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to Archive this?')" />
-                </form>*@
             </div>
         </div>
     </div>

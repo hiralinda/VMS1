@@ -74,7 +74,7 @@ namespace VMS.Controllers
                 _ => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus)).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
@@ -381,16 +381,48 @@ namespace VMS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArchiveOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> ArchiveOpportunity(int id, DateTime CreateDate, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    opportunity.CreateDate = opportunity.CreateDate;
+                    opportunity.ArchivedDate = DateTime.UtcNow;
                     opportunity.ArchivedStatus = true;
                     _context.Update(opportunity);
                     await _context.SaveChangesAsync();
-                    TempData["message"] = $"Event Archived!";
+                    TempData["message"] = $"Event moved to archives.";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OpportunityExists(opportunity.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    opportunity.CreateDate = DateTime.UtcNow;
+                    opportunity.ArchivedStatus = false;
+                    _context.Update(opportunity);
+                    await _context.SaveChangesAsync();
+                    TempData["message"] = $"Event no longer archived.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -413,7 +445,7 @@ namespace VMS.Controllers
             
             return View(new OpportunitiesListViewModel
             {
-                Opportunities = _context.Opportunity.Where(t => t.ArchivedStatus).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                Opportunities =  _context.Opportunity.Where(t => (t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,

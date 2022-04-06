@@ -20,11 +20,22 @@
         <div class="col-sm-4 pb-3">
             <div class="h-100 p-5 bg-light rounded-3 shadow">
                 <div class="row align-items-center">
-                    <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => item.OpportunityName)</p>
+                    <p class="fs-4 fw-bold">
+                        @Html.DisplayFor(modelItem => item.OpportunityName)
+                        @if (item.ArchivedStatus)
+                        {
+                                <i style="color:orange" class="fa fa-archive"></i>
+                        }
+                    </p>
                 </div>
                 <div class="row align-items-center">
-                    <p class="text-muted">Posted: @item.CreateDate.ToString("d")</p>
-                </div>
+                    <p class="text-muted">
+                        @if(!item.ArchivedStatus)
+                        {
+                        Posted: @item.CreateDate.ToString("d");
+                        }
+                    </p>
+                    </div>
                 <span class="input-group-btn">
                     <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
