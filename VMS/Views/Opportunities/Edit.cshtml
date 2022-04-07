@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-body bg-light">
         <div class="container-fluid">
-            <h4>Edit Opportunity, <span class="text-primary">@Html.DisplayFor(model => model.OpportunityName)</h4>
+            <h4>Edit Opportunity, <span class="text-primary">@Html.DisplayFor(model => model.OpportunityName)</span></h4>
             <div class="row">
                 <form asp-action="Edit" class="form-inline">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -401,23 +401,35 @@
                     </div>
 
                     <!--Event start and end dates-->
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
-                                <input type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" min="2022-02-26" max="2040-12-31" required />
+                                @*<input type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" min="2022-02-26" max="2040-12-31" required />*@
+                                <input id="DatePicker" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" type="text" required>
                             </div>
                             <div class="col-sm-4">
+
+                                <label>Ongoing Event</label>
                                 @if (Model.OnGoing)
                                 {
-                                    <label>Ongoing Event</label>
                                     <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
-
                                     <div id="EndDatePicker">
                                         <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                        <input type="date" id="EndDateInput" value="@Model.EndDate.ToString("yyyy-MM-dd")" name="EndDate" min="2022-02-26" max="2040-12-31" disabled />
+                                        <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
                                     </div>
                                 }
+                                else @if (!Model.OnGoing)
+                                {
+                            <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
+                            <div id="EndDatePicker">
+                                <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
+                            </div>
+                                }
+
+
+
                             </div>
                         </div>
                     </div>
@@ -429,8 +441,8 @@
                         {
                             <input asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to move this to your archives?')" />
                         }
-                        else if(Model.ArchivedStatus)
-                        { 
+                        else if (Model.ArchivedStatus)
+                        {
                             <input asp-action="RestoreOpportunity" asp-route-id="@Model.Id" type="submit" value="Restore" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to retrieve this?')" />
                         }
 
@@ -443,16 +455,30 @@
         </div>
     </div>
 </div>
+<script language="javascript">
+    $(document).ready(function () {
+        $("#DatePicker").datepicker({
+            minDate: 0
+        });
+    });
+    $(document).ready(function () {
+        $("#DatePicker2").datepicker({
+            minDate: 0
+        });
+    });
+</script>
 <script>
     // Disable end date picker if ongoing is checked
     $('#isOnGoingSelected').change(function () {
-                                    if ($('#isOnGoingSelected').is(':checked') == true) {
-            $('#EndDateInput').prop('disabled', true);
-                                    } else {
-                                        $('#EndDateInput').val('').prop('disabled', false);
-                                        $('#EndDateInput').val('').prop('required', true);
-                                    }
-                                });
+        if ($('#isOnGoingSelected').is(':checked') == true) {
+            $('.EndDateInput').prop('disabled', true);
+            console.log("True");
+        } else {
+            $('.EndDateInput').val('').prop('disabled', false);
+            $('.EndDateInput').val('').prop('required', true);
+            console.log("False");
+        }
+    });
 </script>
 
 @section Scripts {
