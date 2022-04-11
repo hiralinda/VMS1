@@ -168,26 +168,35 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Apply(Application application, int? oppID)
         {
-            if (ModelState.IsValid)
+            if (_context.Application.Where(t => (t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.opportunity.Id == oppID)).ToList().Any())
             {
-                var userId = User.Id();
-                application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                application.opportunity = await _context.Opportunity.FindAsync(oppID);
-
-                application.oppName = application.opportunity.OpportunityName;
-                application.oppID = application.opportunity.Id;
-                application.volsNeeded = application.opportunity.VolunteersNeeded;
-                application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
-                application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
-                application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
-                    application.opportunity.Address1 + " " + application.opportunity.Address2;
-
-                _context.Add(application);
-                await _context.SaveChangesAsync();
-                TempData["message"] = $"Application successful!";
+                TempData["message"] = $"You have already applied to this opportunity!";
                 return RedirectToAction(nameof(List));
             }
-            return View(application);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var userId = User.Id();
+                    application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                    application.opportunity = await _context.Opportunity.FindAsync(oppID);
+
+                    application.oppName = application.opportunity.OpportunityName;
+                    application.oppID = application.opportunity.Id;
+                    application.volsNeeded = application.opportunity.VolunteersNeeded;
+                    application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
+                    application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
+                    application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
+                        application.opportunity.Address1 + " " + application.opportunity.Address2;
+
+                    _context.Add(application);
+                    await _context.SaveChangesAsync();
+                    TempData["message"] = $"Application successful!";
+                    return RedirectToAction(nameof(List));
+                }
+            }
+
+            return RedirectToAction(nameof(List));
         }
 
         // GET: Opportunities/Create
@@ -335,18 +344,36 @@ namespace VMS.Controllers
                 application = await _context.Application.FindAsync(ApplicationID);
                 opportunity = await _context.Opportunity.FindAsync(application.oppID);
                 int volunteersSignedUp = opportunity.VolunteersApplied;
-                if (application.status == true)
+
+                if(volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
-                    application.status = false;
-                    volunteersSignedUp--;
-                    opportunity.VolunteersApplied = volunteersSignedUp;
+                    if (application.status == true)
+                    {
+                        application.status = false;
+                        volunteersSignedUp--;
+                        opportunity.VolunteersApplied = volunteersSignedUp;
+                    }
+                    else
+                    {
+                        application.status = true;
+                        volunteersSignedUp++;
+                        opportunity.VolunteersApplied = volunteersSignedUp;
+                    }
                 }
                 else
                 {
-                    application.status = true;
-                    volunteersSignedUp++;
-                    opportunity.VolunteersApplied = volunteersSignedUp;
+                    if (application.status == true)
+                    {
+                        application.status = false;
+                        volunteersSignedUp--;
+                        opportunity.VolunteersApplied = volunteersSignedUp;
+                    }
+                    else
+                    {
+                        TempData["message"] = $"This opportunity is full!";
+                    }
                 }
+
                 _context.Update(application);
                 _context.Update(opportunity);
                 await _context.SaveChangesAsync();
