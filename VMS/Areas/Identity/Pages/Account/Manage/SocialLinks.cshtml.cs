@@ -1,25 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using VMS.Models;
 
 namespace VMS.Areas.Identity.Pages.Account.Manage
 {
-    public class AboutYouModel : PageModel
+    public class SocialLinksModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        
-
-        public AboutYouModel(
+        public SocialLinksModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
@@ -32,20 +27,29 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
         [TempData]
         public string StatusMessage { get; set; }
-
         public class InputModel
         {
-            [Display(Name = "About You")]
-            public string AboutYou { get; set; }
+            [Display(Name = "Instagram")]
+            public string Instagram { get; set; }
+
+            [Display(Name = "Facebook")]
+            public string Facebook { get; set; }
+
+            [Display(Name = "Twitter")]
+            public string Twitter { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var AboutYou = user.AboutYou;
+            var instagram = user.InstagramLink;
+            var facebook = user.FacebookLink;
+            var twitter = user.TwitterLink;
 
             Input = new InputModel
             {
-                AboutYou = AboutYou
+                Instagram = instagram,
+                Facebook = facebook,
+                Twitter = twitter
             };
 
         }
@@ -76,33 +80,31 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var AboutYou = user.AboutYou;
+            var instagram = user.InstagramLink;
+            var facebook = user.FacebookLink;
+            var twitter = user.TwitterLink;
 
-            if (Request.Form.Files.Count > 0)
+            if(Input.Instagram != instagram)
             {
-                IFormFile file = Request.Form.Files.FirstOrDefault();
-                using (var dataStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(dataStream);
-                    user.ProfilePicture = dataStream.ToArray();
-                }
+                user.InstagramLink = Input.Instagram;
                 await _userManager.UpdateAsync(user);
             }
 
-            if(Input.AboutYou != AboutYou)
+            if (Input.Facebook != facebook)
             {
-                user.AboutYou = Input.AboutYou;
+                user.FacebookLink = Input.Facebook;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.Twitter != twitter)
+            {
+                user.TwitterLink = Input.Twitter;
                 await _userManager.UpdateAsync(user);
             }
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
-
             return RedirectToPage();
         }
-        
-        /*public void OnGet()
-        {
-        }*/
     }
 }

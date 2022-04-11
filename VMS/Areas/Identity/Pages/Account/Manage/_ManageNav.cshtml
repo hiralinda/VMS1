@@ -7,11 +7,16 @@
     <li class="nav-item">
         <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a>
     </li>
-    @if(User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
+    @if (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
     {
+        <li class="nav-item">
         <a class="nav-link @ManageNavPages.AboutYouNavClass(ViewContext)" id="AboutYou" asp-page="./AboutYou">About You</a>
+        </li>
     }
     @*<li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>*@
+    <li class="nav-item">
+        <a class="nav-link @ManageNavPages.SocialLinksNavClass(ViewContext)" id="SocialLinks" asp-page="./SocialLinks">Your Social Media Links</a>
+    </li>
     <li class="nav-item">
         <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a>
     </li>

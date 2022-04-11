@@ -12,6 +12,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
         public static string Email => "Email";
         public static string AboutYou => "AboutYou";
+        public static string SocialLinks => "SocialLinks";
         public static string ChangePassword => "ChangePassword";
 
         public static string DownloadPersonalData => "DownloadPersonalData";
@@ -30,6 +31,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
         public static string AboutYouNavClass(ViewContext viewContext) => PageNavClass(viewContext, AboutYou);
+        public static string SocialLinksNavClass(ViewContext viewContext) => PageNavClass(viewContext, SocialLinks);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 

@@ -1,0 +1,44 @@
+﻿@page
+@model SocialLinksModel
+@{
+    ViewData["Title"] = "Share your social media profiles";
+    ViewData["ActivePage"] = ManageNavPages.SocialLinks;
+}
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" for="StatusMessage" />
+<p>Provide links to your social media platforms here</p>
+<div class="row">
+    <div class="col-md-9">
+        <form id="social-links-form" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mb-1"><i class="fa fa-lg fa-instagram"></i> Instagram</label>
+                    <input type="text" asp-for="Input.Instagram" class="form-control mb-3" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mb-1"><i class="fa fa-lg fa-facebook-square"></i> Facebook</label>
+                    <input type="text" asp-for="Input.Facebook" class="form-control mb-3" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mb-1"><i class="fa fa-lg fa-twitter-square"></i> Twitter</label>
+                    <input type="text" asp-for="Input.Twitter" class="form-control mb-3" />
+                </div>
+            </div>
+
+            <button id="update-social-links-button" type="submit" class="btn btn-primary mt-3">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

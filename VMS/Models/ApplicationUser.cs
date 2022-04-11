@@ -17,5 +17,8 @@ namespace VMS.Models
         public bool isStudent { get; set; }
         public DateTime birthdate { get; set; }
         public string AboutYou { get; set; }
+        public string InstagramLink { get; set; }
+        public string FacebookLink { get; set; }
+        public string TwitterLink { get; set; }
     }
 }
