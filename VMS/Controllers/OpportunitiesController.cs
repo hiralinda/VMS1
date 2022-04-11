@@ -186,6 +186,7 @@ namespace VMS.Controllers
                     application.volsNeeded = application.opportunity.VolunteersNeeded;
                     application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
                     application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
+                    application.oppTime = application.opportunity.StartTime.ToShortTimeString() + " - " + application.opportunity.EndTime.ToShortTimeString();
                     application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
                         application.opportunity.Address1 + " " + application.opportunity.Address2;
 
@@ -211,7 +212,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -250,7 +251,7 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (id != opportunity.Id)
             {
@@ -409,7 +410,7 @@ namespace VMS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArchiveOpportunity(int id, DateTime CreateDate, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> ArchiveOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {
@@ -440,7 +441,7 @@ namespace VMS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RestoreOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,EndDate,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> RestoreOpportunity(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
         {
             if (ModelState.IsValid)
             {

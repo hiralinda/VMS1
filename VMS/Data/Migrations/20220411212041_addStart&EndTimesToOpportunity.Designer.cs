@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Data;
 
 namespace VMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220411212041_addStart&EndTimesToOpportunity")]
+    partial class addStartEndTimesToOpportunity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,9 +173,6 @@ namespace VMS.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("oppName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("oppTime")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("opportunityId")

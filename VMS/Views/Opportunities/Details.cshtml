@@ -109,11 +109,23 @@
                     }
                 </dd>
                 <dt class="col-sm-3">
+                    start time
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.StartTime.ToShortTimeString();
+                </dd>
+                <dt class="col-sm-3">
+                    end time
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.EndTime.ToShortTimeString();
+                </dd>@*
+                <dt class="col-sm-3">
                     Create Date
                 </dt>
                 <dd class="col-sm-8">
                     @Model.CreateDate
-                </dd>
+                </dd>*@
                 <dt class="col-sm-3">
                     Cause Areas
                 </dt>

@@ -30,7 +30,9 @@ namespace VMS.Models
         public bool ArchivedStatus { get; set; }
         public DateTime ArchivedDate { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime StartTime { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime EndTime { get; set; }
         public ApplicationUser CreateUser { get; set; }
         public DateTime CreateDate { get; set; }
 

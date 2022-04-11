@@ -405,8 +405,10 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
-                                @*<input type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" min="2022-02-26" max="2040-12-31" required />*@
                                 <input id="DatePicker" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" type="text" required>
+                                <label for="appt">Start time for event:</label>
+                                <input type="time" value="@Model.StartTime.TimeOfDay" name="StartTime"
+                                       min="09:00" max="18:00" required>
                             </div>
                             <div class="col-sm-4">
 
@@ -417,6 +419,9 @@
                                     <div id="EndDatePicker">
                                         <label asp-for="EndDate" class="control-label">Event end date:</label>
                                         <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
+                                        <label for="appt">Ending time for event:</label>
+                                        <input class="EndDateInput" type="time" name="EndTime"
+                                               min="09:00" max="18:00" required>
                                     </div>
                                 }
                                 else @if (!Model.OnGoing)
@@ -425,6 +430,9 @@
                             <div id="EndDatePicker">
                                 <label asp-for="EndDate" class="control-label">Event end date:</label>
                                 <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
+                                <label for="appt">Ending time for event:</label>
+                                <input class="EndDateInput" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
+                                       min="09:00" max="18:00" required>
                             </div>
                                 }
 

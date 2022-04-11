@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
-                                    <h6>Start: @Model.StartDate.Date.ToString("d")</h6>
-                                    <h6>End: @Model.EndDate.Date.ToString("d")</h6>
+                                    <h6>Start: @Model.StartDate.Date.ToString("d") @Model.StartTime.ToShortTimeString()</h6>
+                                    <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -411,12 +411,18 @@
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
                                 <input id="DatePicker" name="StartDate" type="text" required>
+                                <label for="appt">Start time for event:</label>
+                                <input type="time" name="StartTime"
+                                       min="09:00" max="18:00" required>
                             </div>
 
                             <div class="col-sm-4">
                                 <div id="EndDatePicker">
                                     <label asp-for="EndDate" class="control-label">Event end date:</label>
                                     <input id="DatePicker2" class="EndDateInput" name="EndDate" type="text" required>
+                                    <label for="appt">Ending time for event:</label>
+                                    <input class="EndDateInput" type="time" name="EndTime"
+                                           min="09:00" max="18:00" required>
                                 </div>
                             </div>
 
