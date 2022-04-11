@@ -9,6 +9,7 @@ namespace VMS.Models
     {
         public int Id { get; set; }
         public int VolunteersNeeded { get; set; }
+        public int VolunteersApplied { get; set; }
         public string OpportunityName { get; set; }
         /*Location*/
         public string Address1 { get; set; }

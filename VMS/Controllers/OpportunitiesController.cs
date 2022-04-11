@@ -207,6 +207,7 @@ namespace VMS.Controllers
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
+                opportunity.VolunteersApplied = 0;
                 opportunity.CreateDate = DateTime.UtcNow;
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
                 _context.Add(opportunity);
@@ -333,18 +334,18 @@ namespace VMS.Controllers
             {
                 application = await _context.Application.FindAsync(ApplicationID);
                 opportunity = await _context.Opportunity.FindAsync(application.oppID);
-                int availableSpots = opportunity.VolunteersNeeded;
+                int volunteersSignedUp = opportunity.VolunteersApplied;
                 if (application.status == true)
                 {
                     application.status = false;
-                    availableSpots++;
-                    opportunity.VolunteersNeeded = availableSpots;
+                    volunteersSignedUp--;
+                    opportunity.VolunteersApplied = volunteersSignedUp;
                 }
                 else
                 {
                     application.status = true;
-                    availableSpots--;
-                    opportunity.VolunteersNeeded = availableSpots;
+                    volunteersSignedUp++;
+                    opportunity.VolunteersApplied = volunteersSignedUp;
                 }
                 _context.Update(application);
                 _context.Update(opportunity);
@@ -364,11 +365,11 @@ namespace VMS.Controllers
 
             var application = await _context.Application.FindAsync(id);
             opportunity = await _context.Opportunity.FindAsync(application.oppID);
-            int availableSpots = opportunity.VolunteersNeeded;
+            int volunteersSignedUp = opportunity.VolunteersApplied;
             if (application.status == true)
             {
-                availableSpots++;
-                opportunity.VolunteersNeeded = availableSpots;
+                volunteersSignedUp--;
+                opportunity.VolunteersApplied = volunteersSignedUp;
             }
 
             _context.Update(opportunity);

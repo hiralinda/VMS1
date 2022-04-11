@@ -24,7 +24,7 @@
                     </h1>
                     <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
                     <p class="lead col-md-8 fs-4">
-                        Looking for <strong>@Html.DisplayFor(model => model.VolunteersNeeded)</strong> volunteers
+                        Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers
                         @if (Model.GroupActivity)
                         {
                             <i class="fa fa-users fa-lg" aria-hidden="true"></i>
