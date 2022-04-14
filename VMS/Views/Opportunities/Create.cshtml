@@ -413,7 +413,7 @@
                                 <input id="DatePicker" name="StartDate" type="text" required>
                                 <label for="appt">Start time for event:</label>
                                 <input type="time" name="StartTime"
-                                       min="09:00" max="18:00" required>
+                                       min="09:00" max="18:00">
                             </div>
 
                             <div class="col-sm-4">
@@ -422,7 +422,7 @@
                                     <input id="DatePicker2" class="EndDateInput" name="EndDate" type="text" required>
                                     <label for="appt">Ending time for event:</label>
                                     <input class="EndDateInput" type="time" name="EndTime"
-                                           min="09:00" max="18:00" required>
+                                           min="09:00" max="18:00">
                                 </div>
                             </div>
 
@@ -461,9 +461,9 @@
     $('#isOnGoingSelected').change(function () {
         if ($('#isOnGoingSelected').is(':checked') == true) {
             $('.EndDateInput').prop('disabled', true);
-            $('.EndDateInput').prop('required', false);
+            $('.EndDateInput').prop('disabled', false);
         } else {
-            $('.EndDateInput').val('').prop('disabled', false);
+            $('.EndDateInput').val('').prop('required', false);
         }
     });
 </script>

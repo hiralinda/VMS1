@@ -421,7 +421,7 @@
                                         <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
                                         <label for="appt">Ending time for event:</label>
                                         <input class="EndDateInput" type="time" name="EndTime"
-                                               min="09:00" max="18:00" required>
+                                               min="09:00" max="18:00">
                                     </div>
                                 }
                                 else @if (!Model.OnGoing)
@@ -432,7 +432,7 @@
                                 <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
                                 <label for="appt">Ending time for event:</label>
                                 <input class="EndDateInput" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                       min="09:00" max="18:00" required>
+                                       min="09:00" max="18:00">
                             </div>
                                 }
 
