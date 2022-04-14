@@ -26,18 +26,22 @@
                     <p class="lead col-md-8 fs-4">
                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
                         {
-                        <p>This opportunity is currently full.</p>
-                    }
-                    else
-                    {
-                        <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
-                    }
+                            <p>This opportunity is currently full.</p>
+                        }
+                        else
+                        {
+                            <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
+                        }
 
                         @if (Model.GroupActivity)
                         {
-                            <i class="fa fa-users fa-lg" aria-hidden="true"></i>
+                            <p class="lead col-md-8 fs-4">
+                                Group Activity
+                                <i class="fa fa-users fa-lg" aria-hidden="true"></i>
+                            </p>
                         }
-                        </p>
+<p/>
+
                         @if (Model.Virtual)
                         {
                             <p class="lead col-md-8 fs-4">This is a virtual opportunity   <i class="fa fa-laptop fa-lg" aria-hidden="true"></i></p>
