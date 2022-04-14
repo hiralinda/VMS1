@@ -483,5 +483,23 @@ namespace VMS.Controllers
                 }
             });
         }
+
+        // GET: Opportunities/ViewOrg/5
+        public async Task<IActionResult> ViewOrg(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var opportunity = await _context.Opportunity.Include(t => t.CreateUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (opportunity == null)
+            {
+                return NotFound();
+            }
+
+            return View(opportunity);
+        }
     }
 }

@@ -71,6 +71,7 @@
             @if (Model.CreateUser.AboutYou != null)
             {
                 <p class="fs-3 fw-bold">About this organization:</p>
+                <p class="text-sm text-muted"><a asp-controller="Opportunities" asp-action="ViewOrg">@Model.CreateUser.UserName</a></p>
                 <p>@Model.CreateUser.AboutYou</p>
                 @if (Model.CreateUser.InstagramLink != null)
                 {
