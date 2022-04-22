@@ -17,5 +17,6 @@ namespace VMS.Data
         public DbSet<VMS.Models.Opportunity> Opportunity { get; set; }
         public DbSet<VMS.Models.Organization> Organization { get; set; }
         public DbSet<VMS.Models.Application> Application { get; set; }
+        public DbSet<VMS.Models.Post> Post { get; set; }
     }
 }

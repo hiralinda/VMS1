@@ -20,6 +20,8 @@
     <Compile Remove="Data\Migrations\20220201065140_added custom properties.Designer.cs" />
     <Compile Remove="Data\Migrations\20220202235307_AddingUserToOpportunity.cs" />
     <Compile Remove="Data\Migrations\20220202235307_AddingUserToOpportunity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220421052007_blogpost.cs" />
+    <Compile Remove="Data\Migrations\20220421052007_blogpost.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

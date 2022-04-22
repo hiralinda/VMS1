@@ -26,21 +26,20 @@
                     <p class="lead col-md-8 fs-4">
                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
                         {
-                            <p>This opportunity is currently full.</p>
-                        }
-                        else
-                        {
-                            <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
-                        }
+                        <p>This opportunity is currently full.</p>
+                    }
+                    else
+                    {
+                        <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
+                    }
 
                         @if (Model.GroupActivity)
                         {
                             <p class="lead col-md-8 fs-4">
-                                Group Activity
                                 <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                             </p>
                         }
-<p/>
+                        <p />
 
                         @if (Model.Virtual)
                         {
@@ -66,9 +65,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
-                                         {
+                                        {
                                             <h5 class="modal-title" id="exampleModalLabel">Opportunity is full, join waitlist instead...</h5>
-                                         }
+                                        }
                                         else
                                         {
                                             <h5 class="modal-title" id="exampleModalLabel">Would you like to apply for...</h5>
@@ -86,110 +85,110 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
-                                         {
+                                        {
                                             <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Join Waitlist</a>
-                                         }
+                                        }
                                         else
-                                         {
+                                        {
                                             <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
-                                         }
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Description & Date posted-->
-    <div class="p-2 mb-4 bg-light rounded-3 shadow">
-        <div class="container-fluid py-5">
-            @if (Model.CreateUser.AboutYou != null)
-            {
-                <p class="fs-3 fw-bold">About this organization:</p>
-                <p class="text-sm text-muted"><a asp-controller="Opportunities" asp-action="ViewOrg">@Model.CreateUser.UserName</a></p>
-                <p>@Model.CreateUser.AboutYou</p>
-                @if (Model.CreateUser.InstagramLink != null)
-                {
-                    <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #8a3ab9;" class="fa fa-lg fa-instagram fa-2x"></i></a>
-                }
-                @if (Model.CreateUser.FacebookLink != null)
-                {
-                    <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i  style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>   
-                }
-                @if (Model.CreateUser.TwitterLink != null)
-                {
-                    <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
-                }
-
-            }
-
-            <p class="fs-3 fw-bold">About this event</p><hr />
-            <p class="fs-4 fw-bold">The Cause</p>
-            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
-
-            <p class="fs-4 fw-bold">Opportunity Type</p>
-            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.TypeOfOpportunity)</p>
-
-            <p class="fs-4 fw-bold">Event Description</p>
-            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
-
-            <p class="fs-4 fw-bold">Grade Level</p>
-            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>
-
-            <p class="fs-4 fw-bold">Age</p>
-            <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.AgeBracket)</p>
-
-            <p class="fs-5 fw-bold">General Requirements</p>
-            @if (Model.Requirements != null)
-            {
-                <ul class="col-md-8 fs-6"><li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li></ul>
-            }
-            else
-            {
-                <p class="col-md-8 fs-6">None</p>
-            }
-            <p class="fs-5 fw-bold">Event start and end dates</p>
-            <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - @Model.EndDate.Date.ToString("d")</p>
-        </div>
-        
-        <div class="container-fluid text-sm-right text-right">
-            <p class="text-muted">Posted: @Model.CreateDate.Date.ToString("d")</p>
-        </div>
-    </div>
-
-    <!--Location & Contact details-->
-    <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3 shadow">
-                <h2><i class="fa fa-map-pin"></i> Location</h2>
-                <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
-                @if (Model.Address2 != null)
-                {
-                    <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
-                }
-                <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3 shadow">
-                <h2>Contact Information</h2>
-                <ul class="fa-ul">
-                    <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
-                    <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
-                    <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
-                </ul>
-                <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
+        <!--Description & Date posted-->
+        <div class="p-2 mb-4 bg-light rounded-3 shadow">
+            <div class="container-fluid py-5">
+                @if (Model.CreateUser.AboutYou != null)
+                {
+                    <p class="fs-3 fw-bold">About this organization:</p>
+                    <p class="text-sm text-muted"><a asp-controller="Opportunities" asp-action="ViewOrg">@Model.CreateUser.UserName</a></p>
+                    <p>@Model.CreateUser.AboutYou</p>
+                    @if (Model.CreateUser.InstagramLink != null)
+                    {
+                        <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #8a3ab9;" class="fa fa-lg fa-instagram fa-2x"></i></a>
+                    }
+                    @if (Model.CreateUser.FacebookLink != null)
+                    {
+                        <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
+                    }
+                    @if (Model.CreateUser.TwitterLink != null)
+                    {
+                        <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
+                    }
+
+                }
+
+                <p class="fs-3 fw-bold">About this event</p><hr />
+                <p class="fs-4 fw-bold">The Cause</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
+
+                <p class="fs-4 fw-bold">Opportunity Type</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.TypeOfOpportunity)</p>
+
+                <p class="fs-4 fw-bold">Event Description</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
+
+                <p class="fs-4 fw-bold">Grade Level</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>
+
+                <p class="fs-4 fw-bold">Age</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.AgeBracket)</p>
+
+                <p class="fs-5 fw-bold">General Requirements</p>
+                @if (Model.Requirements != null)
+                {
+                    <ul class="col-md-8 fs-6"><li>@Html.Raw(Model.Requirements.Replace(Environment.NewLine, "<br/><li>"))</li></ul>
+                }
+                else
+                {
+                    <p class="col-md-8 fs-6">None</p>
+                }
+                <p class="fs-5 fw-bold">Event start and end dates</p>
+                <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - @Model.EndDate.Date.ToString("d")</p>
+            </div>
+
+            <div class="container-fluid text-sm-right text-right">
+                <p class="text-muted">Posted: @Model.CreateDate.Date.ToString("d")</p>
             </div>
         </div>
+
+        <!--Location & Contact details-->
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3 shadow">
+                    <h2><i class="fa fa-map-pin"></i> Location</h2>
+                    <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
+                    @if (Model.Address2 != null)
+                    {
+                        <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
+                    }
+                    <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
+                    <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3 shadow">
+                    <h2>Contact Information</h2>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
+                        <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
+                        <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
+                    </ul>
+                    <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center pt-2">
+            <a class="btn btn-primary" asp-area="" asp-controller="Opportunities" asp-action="List">Back</a>
+        </div>
+
+
     </div>
-
-    <div class="d-flex justify-content-center pt-2">
-        <a class="btn btn-primary" asp-area="" asp-controller="Opportunities" asp-action="List">Back</a>
-    </div>
-
-
-</div>
