@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -87,6 +88,22 @@ namespace VMS.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
+        [HttpPost, ActionName("deletePost")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> deletePost(int id)
+        {
+
+            var post = await _context.Post.FindAsync(id);
+
+            _context.Post.Remove(post);
+
+            await _context.SaveChangesAsync();
+
+            TempData["message"] = $"Post Deleted!";
+            return RedirectToAction(nameof(VolunTEENBlog));
         }
     }
 }

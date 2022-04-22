@@ -67,49 +67,58 @@
     @foreach (var item in Model.Posts)
     {
 
-        <div id="postContainer" class="card">
+<div id="postContainer" class="card">
 
-            <div class="card-header">
-                <div class="row">
-                    <h5>@item.title</h5>
+    <div class="card-header">
+        <div class="row">
+            <h5>@item.title</h5>
 
-                </div>
+        </div>
 
-                <div class="row">
-                    <div class="col">
-                        @if (item.ProfilePicture != null)
-                        {
-                            <img id="profilePicture" style="height: 30px; width: 30px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(item.ProfilePicture))">
-                        }
-                        @item.createUserName
-                    </div>
-                    <div class="col col-auto">
-                        Posted @item.datePosted.Date.ToString("d")
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col">
+                @if (item.ProfilePicture != null)
+                {
+                    <img id="profilePicture" style="height: 30px; width: 30px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(item.ProfilePicture))">
+                }
+                @item.createUserName
+            </div>
+            <div class="col col-auto">
+                Posted @item.datePosted.Date.ToString("d")
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col col-auto">
+                @if (item.image != null)
+                {
+                    <img id="blogImage"
+                         style="height: 300px; width: 300px; object-fit:cover; border-radius:25px;"
+                         class="img-fluid"
+                         src="data:image/*;base64,@(Convert.ToBase64String(item.image))">
+                }
             </div>
 
-            <div class="card-body">
-                <div class="row">
+            <div class="col">
 
-                    <div class="col col-auto">
-                        @if (item.image != null)
-                        {
-                            <img id="blogImage"
-                                 style="height: 300px; width: 300px; object-fit:cover; border-radius:25px;"
-                                 class="img-fluid"
-                                 src="data:image/*;base64,@(Convert.ToBase64String(item.image))">
-                        }
-                    </div>
-
-                    <div class="col">
-
-                        <p>@item.body</p>
-                    </div>
-
-                </div>
+                <p>@item.body</p>
             </div>
 
         </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="card-footer">
+            <form asp-action="deletePost" asp-route-id="@item.id" method="post">
+                <input type="submit" value="Delete Post" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
+            </form>
+        </div>
+    }
+
+    </div>
 
     }
