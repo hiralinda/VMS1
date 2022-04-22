@@ -5,105 +5,111 @@
 }
 
 <style>
-    #postContainer{
-        width:70%;
-        margin:auto;
-        margin-bottom:3%;
+    #postContainer {
+        width: 70%;
+        margin: auto;
+        margin-bottom: 3%;
     }
 </style>
 
-<!-- Button trigger modal -->
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blogPostModal">
-    New Post
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="blogPostModal" tabindex="-1" role="dialog" aria-labelledby="blogPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Create a new post</h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreatePost">
-                <div class="modal-body">
-
-
-                    <div class="form-group">
-                        <label asp-for="title" class="col-form-label">Title</label>
-                        <input asp-for="title" type="text" class="form-control" id="title-text">
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="body" class="col-form-label">Body Text</label>
-                        <textarea asp-for="body" rows="8" class="form-control" id="body-text"></textarea>
-                    </div>
-                    <div>
-                        <input asp-for="image" class="form-control" name="files" type="file" />
-                    </div>
-
-
-
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                    <input class="btn btn-success" type="submit" value="Post" />
-
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<br/>
-
-@foreach (var item in Model.Posts)
+@if (User.IsInRole("Admin"))
 {
+    <!-- Button trigger modal -->
 
-<div id="postContainer" class="card">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blogPostModal">
+        New Post
+    </button>
 
-    <div class="card-header">
-        <div class="row">
-            <h5>@item.title</h5>
+    <!-- Modal -->
+    <div class="modal fade" id="blogPostModal" tabindex="-1" role="dialog" aria-labelledby="blogPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a new post</h5>
 
-        </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreatePost">
+                    <div class="modal-body">
 
-        <div class="row">
-            <div class="col">
-                Poster Username
-            </div>
-            <div class="col">
-                Posted 1/01/0001
+
+                        <div class="form-group">
+                            <label asp-for="title" class="col-form-label">Title</label>
+                            <input asp-for="title" type="text" class="form-control" id="title-text">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="body" class="col-form-label">Body Text</label>
+                            <textarea asp-for="body" rows="8" class="form-control" id="body-text"></textarea>
+                        </div>
+                        <div>
+                            <input asp-for="image" class="form-control" name="files" type="file" />
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <input class="btn btn-success" type="submit" value="Post" />
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <div class="card-body">
-        <div class="row">
-
-            <div class="col col-auto">
-                @if (item.image != null)
-                {
-                    <img id="blogImage"
-                         style="height: 300px; width: 300px; object-fit:cover; border-radius:25px;"
-                         class="img-fluid"
-                         src="data:image/*;base64,@(Convert.ToBase64String(item.image))">
-                }
-            </div>
-
-            <div class="col">
-
-                <p>@item.body</p>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
 }
+    <br />
+
+    @foreach (var item in Model.Posts)
+    {
+
+        <div id="postContainer" class="card">
+
+            <div class="card-header">
+                <div class="row">
+                    <h5>@item.title</h5>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        @if (item.ProfilePicture != null)
+                        {
+                            <img id="profilePicture" style="height: 30px; width: 30px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(item.ProfilePicture))">
+                        }
+                        @item.createUserName
+                    </div>
+                    <div class="col col-auto">
+                        Posted @item.datePosted.Date.ToString("d")
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col col-auto">
+                        @if (item.image != null)
+                        {
+                            <img id="blogImage"
+                                 style="height: 300px; width: 300px; object-fit:cover; border-radius:25px;"
+                                 class="img-fluid"
+                                 src="data:image/*;base64,@(Convert.ToBase64String(item.image))">
+                        }
+                    </div>
+
+                    <div class="col">
+
+                        <p>@item.body</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    }

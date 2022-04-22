@@ -56,6 +56,12 @@ namespace VMS.Controllers
 
                 }
             }
+
+            post.datePosted = DateTime.UtcNow;
+            post.createUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == User.Id());
+            post.createUserName = post.createUser.UserName;
+            post.ProfilePicture = post.createUser.ProfilePicture;
+            post.totalLikes = 0;
             _context.Add(post);
             await _context.SaveChangesAsync();
             TempData["message"] = $"Blog Post Created!";

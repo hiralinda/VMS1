@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VMS.Data;
 
 namespace VMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220422162950_New_Post_Parameters")]
+    partial class New_Post_Parameters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -418,17 +420,11 @@ namespace VMS.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("body")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("createUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("createUserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("datePosted")
                         .HasColumnType("datetime2");
