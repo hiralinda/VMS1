@@ -47,17 +47,30 @@
         <div class="card rounded mb-5 p-2">
             <div class="card-body">
                 <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
+                <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p><hr />
                 @if (p.VolunteersApplied == p.VolunteersNeeded)
                 {
                     <p>This opportunity is full</p><hr />
                 }
                 else
                 {
-                    <p>Volunteers Needed: @(p.VolunteersNeeded - p.VolunteersApplied)</p><hr />
+                    <p>Volunteers Needed: @(p.VolunteersNeeded - p.VolunteersApplied)</p>
                 }
 
-                <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p>
-                <p>@Html.DisplayFor(modelItem => p.Description)</p>
+
+                @*<p>@Html.DisplayFor(modelItem => p.Description)</p>*@
+                <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.GradeLevel)</span>
+                <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.AgeBracket)</span>
+                <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
+                @if (p.Virtual)
+                {
+                    <span class="badge bg-primary">Virtual</span>
+                }
+                @if (p.GroupActivity)
+                {
+                    <span class="badge bg-primary"><i class="fa fa-users fa-sm" aria-hidden="true"></i></span>
+                }
+                <br />
 
                 <!-- Button trigger modal -->
                 @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
@@ -86,7 +99,7 @@
                 </div>
             </div>
         </div>*@
-                <a class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">See Details</a>
+                <a class="btn btn-outline-info btn-rounded mt-2" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">More</a>
             </div>
         </div>
 

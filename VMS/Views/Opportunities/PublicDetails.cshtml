@@ -12,7 +12,6 @@
     <div class="p-5 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid py-5">
             <div class="row">
-                <!--Left-->
                 <div class="col-lg-10">
                     <h1 class="display-5 fw-bold">
                         @Html.DisplayFor(model => model.OpportunityName)
@@ -33,17 +32,12 @@
                         <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
                     }
 
-                        @if (Model.GroupActivity)
-                        {
-                            <p class="lead col-md-8 fs-4">
-                                <i class="fa fa-users fa-lg" aria-hidden="true"></i>
-                            </p>
-                        }
+                        
                         <p />
 
                         @if (Model.Virtual)
                         {
-                            <p class="lead col-md-8 fs-4">This is a virtual opportunity   <i class="fa fa-laptop fa-lg" aria-hidden="true"></i></p>
+                            <p class="lead col-md-8 fs-4">This is a virtual opportunity</p>
                         }
                         <!-- Button trigger modal -->
                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
@@ -102,37 +96,24 @@
         </div>
 
         <!--Description & Date posted-->
-        <div class="p-2 mb-4 bg-light rounded-3 shadow">
+        <div class="p-3 mb-4 bg-light rounded-3 shadow">
             <div class="container-fluid py-5">
-                @if (Model.CreateUser.AboutYou != null)
-                {
-                    <p class="fs-3 fw-bold">About this organization:</p>
-                    <p class="text-sm text-muted"><a asp-controller="Opportunities" asp-action="ViewOrg">@Model.CreateUser.UserName</a></p>
-                    <p>@Model.CreateUser.AboutYou</p>
-                    @if (Model.CreateUser.InstagramLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #8a3ab9;" class="fa fa-lg fa-instagram fa-2x"></i></a>
-                    }
-                    @if (Model.CreateUser.FacebookLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
-                    }
-                    @if (Model.CreateUser.TwitterLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
-                    }
 
-                }
-
-                <p class="fs-3 fw-bold">About this event</p><hr />
-                <p class="fs-4 fw-bold">The Cause</p>
-                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
-
-                <p class="fs-4 fw-bold">Opportunity Type</p>
-                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.TypeOfOpportunity)</p>
+                <h3 class="fs-3 fw-bold">About this event</h3><hr />
 
                 <p class="fs-4 fw-bold">Event Description</p>
                 <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
+
+                <p class="fs-4 fw-bold">Cause Area</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
+
+                @if (Model.TypeOfOpportunity != "Select")
+                {
+                    <p class="fs-4 fw-bold">Opportunity Type</p>
+                    <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.TypeOfOpportunity)</p>
+                }
+
+
 
                 <p class="fs-4 fw-bold">Grade Level</p>
                 <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>
@@ -157,32 +138,60 @@
                 <p class="text-muted">Posted: @Model.CreateDate.Date.ToString("d")</p>
             </div>
         </div>
-
-        <!--Location & Contact details-->
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light border rounded-3 shadow">
-                    <h2><i class="fa fa-map-pin"></i> Location</h2>
-                    <p class="text-uppercase">@Html.DisplayFor(model => model.Address1)</p>
-                    @if (Model.Address2 != null)
+        <!--About Nonprofit-->
+        <div class="p-3 mb-2 bg-light rounded-3 shadow">
+            <div class="container-fluid py-5">
+                @if (Model.CreateUser.AboutYou != null)
+                {
+                    <h3 class="fs-3 fw-bold">About this Nonprofit</h3>
+                    <p class="text-info text-muted fw-bold">
+                        <!--Name of Nonprofit-->
+                        @Model.CreateUser.UserName
+                    </p>
+                    <p>@Model.CreateUser.AboutYou</p>
+                    @if (Model.CreateUser.InstagramLink != null)
                     {
-                        <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
+                        <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x"></i></a>
                     }
-                    <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                    <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
-                </div>
-            </div>
+                    @if (Model.CreateUser.FacebookLink != null)
+                    {
+                        <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
+                    }
+                    @if (Model.CreateUser.TwitterLink != null)
+                    {
+                        <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
+                    }
+                }
 
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light border rounded-3 shadow">
-                    <h2>Contact Information</h2>
-                    <ul class="fa-ul">
-                        <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
-                        <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
-                        <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
-                    </ul>
-                    <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
+                <div class="row align-items-md-stretch mt-3">
+                    <div class="col-md-6">
+                        <p class="fw-bold">Location</p>
+                        <p class="">@Html.DisplayFor(model => model.Address1)</p>
+                        @if (Model.Address2 != null)
+                        {
+                            <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
+                        }
+                        <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="fw-bold">Contact Information</p>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
+                            <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
+                            <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
+                        </ul>
+                        
+                    </div>
                 </div>
+                <div class="row align-items-md-stretch mt-3">
+                    <div class="col-md-6">
+                        <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
+                    </div>
+                </div>
+
             </div>
         </div>
 
