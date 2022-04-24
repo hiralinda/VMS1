@@ -9,5 +9,6 @@ namespace VMS.Models.ViewModels
     {
         public IEnumerable<Opportunity> Opportunities { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

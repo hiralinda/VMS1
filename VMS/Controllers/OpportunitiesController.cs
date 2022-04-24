@@ -29,9 +29,22 @@ namespace VMS.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.AnimalSortParm = sortOrder == "Animals" ? "animals" : "Animals";
+            ViewBag.AdvHumSortParm = sortOrder == "Advocacy and Human Rights" ? "Advocacy and Human Rights" : "Advocacy and Human Rights";
+            ViewBag.SuppTroopsParm = sortOrder == "Support Our Troops" ? "Support Our Troops" : "Support Our Troops";
+            ViewBag.ComSickSortParm = sortOrder == "Comfort the sick" ? "Comfort the sick" : "Comfort the sick";
+            ViewBag.SavePlanetParm = sortOrder == "Save the Planet" ? "Save the Planet" : "Save the Planet";
+            ViewBag.HomelessParm = sortOrder == "Homeless" ? "Homeless" : "Homeless";
+            ViewBag.CommunitySortParm = sortOrder == "Community Support" ? "Community Support" : "Community Support";
+            ViewBag.HelpRefSortParm = sortOrder == "Help Refugees" ? "Help Refugees" : "Help Refugees";
+            ViewBag.CompTechSortParm = sortOrder == "Computers & Technology" ? "Computers & Technology" : "Computers & Technology";
+            ViewBag.DonationSortParm = sortOrder == "Donations" ? "Donations" : "Donations";
+            ViewBag.EduLitSortParm = sortOrder == "Education & Literacy" ? "Education & Literacy" : "Education & Literacy";
+            ViewBag.ElderlySortParm = sortOrder == "Elderly" ? "Elderly" : "Elderly";
+            ViewBag.HelpKidsSortParm = sortOrder == "Help other kids" ? "Help other kids" : "Help other kids";
 
 
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 return View(new OpportunitiesListViewModel
                 {
@@ -43,6 +56,7 @@ namespace VMS.Controllers
                         ItemsPerPage = PageSize,
                         TotalItems = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString)).Count()
                     }
+
                 });
                 
             }
@@ -71,10 +85,153 @@ namespace VMS.Controllers
                         TotalItems = _context.Opportunity.Count()
                     }
                 }),
+                "Animals" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Animals").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Animals").Count()
+                    }
+                }),
+                "Support our troops" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Support our troops").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Support our troops").Count()
+                    }
+                }),
+                "Advocacy and Human Rights" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Advocacy and Human Rights").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Advocacy and Human Rights").Count()
+                    }
+                }),
+                "Comfort the sick" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Comfort the sick").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Comfort the sick").Count()
+                    }
+                }),
+                "Save the Planet" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Save the Planet").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Save the Planet").Count()
+                    }
+                }),
+                "Homeless" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Homeless").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Homeless").Count()
+                    }
+                }),
+                "Community Support" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Community Support").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Community Support").Count()
+                    }
+                }),
+                "Help Refugees" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Help Refugees").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Help Refugees").Count()
+                    }
+                }),
+                "Computers & Technology" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Computers & Technology").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Computers & Technology").Count()
+                    }
+                }),
+                "Donations" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Donations").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Donations").Count()
+                    }
+                }),
+                "Education & Literacy" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Education & Literacy").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Education & Literacy").Count()
+                    }
+                }),
+                "Elderly" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Elderly").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Elderly").Count()
+                    }
+                }),
+                "Help other kids" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Help other kids").Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Help other kids").Count()
+                    }
+                }),
                 _ => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus)).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus)).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize) ,
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
@@ -92,7 +249,6 @@ namespace VMS.Controllers
             /*return View(await _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
             return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
         }
-
 
         // GET: Opportunities/Details/5
         public async Task<IActionResult> Details(int? id)
