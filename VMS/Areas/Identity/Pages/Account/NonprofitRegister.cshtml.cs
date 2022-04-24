@@ -104,7 +104,7 @@ namespace VMS.Areas.Identity.Pages.Account
                     address = Input.Address,
                     zip = Input.Zip,
                     PhoneNumber = Input.PhoneNumber,
-                    FirstName = Input.NonprofitName
+                    OrganizationName = Input.NonprofitName
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

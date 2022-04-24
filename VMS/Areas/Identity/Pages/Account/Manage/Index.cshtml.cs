@@ -71,6 +71,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
         {
             var firstName = user.FirstName;
             var lastName = user.LastName;
+            var nonprofitName = user.OrganizationName;
             var profilePicture = user.ProfilePicture;
             var address = user.address;
             var zip = user.zip;
@@ -87,6 +88,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
+                nonprofitName = nonprofitName,
                 school = school,
                 FirstName = firstName,
                 LastName = lastName,
@@ -126,6 +128,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             }
 
             var school = user.school;
+            var nonprofitName = user.OrganizationName;
             var isStudent = user.isStudent;
             var firstName = user.FirstName;
             var lastName = user.LastName;
@@ -177,6 +180,12 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             if (Input.Zip != zip)
             {
                 user.zip = Input.Zip;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.nonprofitName != nonprofitName)
+            {
+                user.OrganizationName = Input.nonprofitName;
                 await _userManager.UpdateAsync(user);
             }
 

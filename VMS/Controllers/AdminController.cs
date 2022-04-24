@@ -342,6 +342,7 @@ namespace VMS.Controllers
                 thisViewModel.lastName = user.LastName;
                 thisViewModel.phone = user.PhoneNumber;
                 thisViewModel.address = user.address;
+                thisViewModel.nonprofitName = user.OrganizationName;
                 thisViewModel.zip = user.zip;
                 thisViewModel.Email = user.Email;
                 thisViewModel.Id = user.Id;

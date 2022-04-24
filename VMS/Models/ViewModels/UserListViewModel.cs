@@ -15,5 +15,6 @@ namespace VMS.Models.ViewModels
         public string phone {get; set;}
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string nonprofitName { get; set; }
     }
 }

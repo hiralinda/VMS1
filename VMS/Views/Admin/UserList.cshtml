@@ -135,7 +135,7 @@
                         @if (user.Roles.Contains("Organization"))
                         {
                             <tr>
-                                <td>@user.firstName</td>
+                                <td>@user.nonprofitName</td>
                                 <td>@user.phone</td>
                                 <td>@user.Email</td>
                                 <td>@user.address</td>
@@ -180,7 +180,7 @@
                             @if (user.Roles.Contains("Organization (Verified)"))
                             {
                                 <tr>
-                                    <td>@user.firstName</td>
+                                    <td>@user.nonprofitName</td>
                                     <td>@user.phone</td>
                                     <td>@user.Email</td>
                                     <td>@user.address</td>

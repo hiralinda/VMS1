@@ -73,9 +73,9 @@
             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization")))
             {
                 <div class="col">
-                    Organization Name
-                    <input asp-for="Input.FirstName" class="form-control" />
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    Nonprofit Name
+                    <input asp-for="Input.nonprofitName" class="form-control" />
+                    <span asp-validation-for="Input.nonprofitName" class="text-danger"></span>
                 </div>
             }
             <div class="row">

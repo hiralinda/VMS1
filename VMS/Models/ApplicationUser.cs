@@ -10,6 +10,7 @@ namespace VMS.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string OrganizationName { get; set; }
         public byte[] ProfilePicture { get; set; }
         public string zip { get; set; }
         public string address { get; set; }
