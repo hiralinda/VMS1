@@ -358,8 +358,10 @@
 
                         <div class="col-md-3 form-group">
                             <label class="control-label">Volunteers Needed: </label>
-                            @*<input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />*@
-                            <input type="number" class="form-control" value="@(Model.VolunteersNeeded - Model.VolunteersApplied)" disabled/>
+                            <input type="number" asp-for="VolunteersNeeded" class="form-control" disabled/>
+                            <span asp-validation-for="VolunteersNeeded" class="text-danger"></span>
+                            @*<input class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" value="@Model.VolunteersNeeded" disabled/>*@
+                            @*<input type="number" class="form-control" value="@Model.VolunteersNeeded" disabled />*@
                         </div>
                     </div>
 
