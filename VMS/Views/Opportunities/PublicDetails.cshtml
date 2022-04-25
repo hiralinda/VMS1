@@ -146,7 +146,7 @@
                     <h3 class="fs-3 fw-bold">About this Nonprofit</h3>
                     <p class="text-info text-muted fw-bold">
                         <!--Name of Nonprofit-->
-                        @Model.CreateUser.UserName
+                        @Model.CreateUser.OrganizationName
                     </p>
                     <p>@Model.CreateUser.AboutYou</p>
                     @if (Model.CreateUser.InstagramLink != null)
@@ -176,7 +176,7 @@
                     <div class="col-md-6">
                         <p class="fw-bold">Contact Information</p>
                         <ul class="fa-ul">
-                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.FirstName)</li>
+                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.OrganizationName)</li>
                             <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
                             <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                         </ul>

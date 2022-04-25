@@ -307,13 +307,12 @@
                         </div>
                     </div>
 
-                    
                     <div class="row mt-3">
                         <!--Type of opportunity-->
                         <div class="col-md-3 form-group">
                             <label class="control-label">What is this post for?</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity" required>
+                                <option selected disabled>Select</option>
                                 <option value="Summer Internship">Summer Internship</option>
                                 <option value="One Day">One Day Event</option>
                                 <option value="Long-Term">Long Term Assignment</option>
@@ -340,8 +339,8 @@
                         <!--Age Bracket-->
                         <div class="col-md-5 form-group">
                             <label class="control-label">Select an age group for this event</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket" required>
+                                <option selected disabled>Select</option>
                                 <option value="All Ages">All ages</option>
                                 <option value="3-5">5-10</option>
                                 <option value="6-13">11-13</option>
@@ -351,8 +350,8 @@
                         <!--Grade Bracket-->
                         <div class="col-md-4 form-group">
                             <label class="control-label">Select a targeted grade level group</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel" required>
+                                <option selected disabled>Select</option>
                                 <option value="All Levels">All levels</option>
                                 <option value="K-5">K-5</option>
                                 <option value="6-8">6-8</option>
@@ -360,6 +359,7 @@
                                 <option value="College & Higher">College & Higher</option>
                             </select>
                         </div>
+
 
                         <!--Volunteers needed-->
 
@@ -461,9 +461,9 @@
     $('#isOnGoingSelected').change(function () {
         if ($('#isOnGoingSelected').is(':checked') == true) {
             $('.EndDateInput').prop('disabled', true);
-            $('.EndDateInput').prop('disabled', false);
+            $('.EndDateInput').prop('required', false);
         } else {
-            $('.EndDateInput').val('').prop('required', false);
+            $('.EndDateInput').val('').prop('disabled', false);
         }
     });
 </script>

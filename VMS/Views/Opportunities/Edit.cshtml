@@ -307,8 +307,8 @@
                         <!--Type of opportunity-->
                         <div class="col-md-3 form-group">
                             <label class="control-label">What is this post for?</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity" required>
+                                <option selected disabled>Select</option>
                                 <option value="SummerInternship">Summer Internship</option>
                                 <option value="OneDay">One Day Event</option>
                                 <option value="LongTerm">Long Term Assignment</option>
@@ -333,8 +333,8 @@
                         <!--Age Bracket-->
                         <div class="col-md-5 form-group">
                             <label class="control-label">Select an age group for this event</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket" required>
+                                <option selected disabled>Select</option>
                                 <option value="All Ages">All ages</option>
                                 <option value="3-5">5-10</option>
                                 <option value="6-13">11-13</option>
@@ -344,8 +344,8 @@
                         <!--Grade Bracket-->
                         <div class="col-md-4 form-group">
                             <label class="control-label">Select a targeted grade level group</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel" required>
+                                <option selected disabled>Select</option>
                                 <option value="All Levels">All levels</option>
                                 <option value="K-5">K-5</option>
                                 <option value="6-8">6-8</option>
@@ -358,7 +358,8 @@
 
                         <div class="col-md-3 form-group">
                             <label class="control-label">Volunteers Needed: </label>
-                            <input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />
+                            @*<input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />*@
+                        <input type="number" class="form-control" value="@(Model.VolunteersNeeded - Model.VolunteersApplied)" disabled/>
                         </div>
                     </div>
 
@@ -367,8 +368,8 @@
                     <div class="form-group">
                         <div class="col-md-6 form-group">
                             <label class="control-label">Select a cause area</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas">
-                                <option selected>Select</option>
+                            <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas" required>
+                                <option selected disabled>Select</option>
                                 <option value="Advocacy & HumanRights">Advocacy & Human Rights</option>
                                 <option value="Animals">Animals</option>
                                 <option value="Comfort the Sick">Comfort the sick</option>
@@ -480,11 +481,9 @@
     $('#isOnGoingSelected').change(function () {
         if ($('#isOnGoingSelected').is(':checked') == true) {
             $('.EndDateInput').prop('disabled', true);
-            console.log("True");
         } else {
             $('.EndDateInput').val('').prop('disabled', false);
             $('.EndDateInput').val('').prop('required', true);
-            console.log("False");
         }
     });
 </script>
