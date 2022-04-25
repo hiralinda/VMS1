@@ -359,7 +359,7 @@
                         <div class="col-md-3 form-group">
                             <label class="control-label">Volunteers Needed: </label>
                             @*<input min="0" class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" />*@
-                        <input type="number" class="form-control" value="@(Model.VolunteersNeeded - Model.VolunteersApplied)" disabled/>
+                            <input type="number" class="form-control" value="@(Model.VolunteersNeeded - Model.VolunteersApplied)" disabled/>
                         </div>
                     </div>
 
@@ -407,6 +407,7 @@
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
                                 <input id="DatePicker" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" type="text" required>
+
                                 <label for="appt">Start time for event:</label>
                                 <input type="time" value="@Model.StartTime.TimeOfDay" name="StartTime"
                                        min="09:00" max="18:00" required>
@@ -420,21 +421,22 @@
                                     <div id="EndDatePicker">
                                         <label asp-for="EndDate" class="control-label">Event end date:</label>
                                         <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
+
                                         <label for="appt">Ending time for event:</label>
-                                        <input class="EndDateInput" type="time" name="EndTime"
+                                        <input class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
                                                min="09:00" max="18:00">
                                     </div>
                                 }
                                 else @if (!Model.OnGoing)
                                 {
-                            <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
-                            <div id="EndDatePicker">
-                                <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
-                                <label for="appt">Ending time for event:</label>
-                                <input class="EndDateInput" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                       min="09:00" max="18:00">
-                            </div>
+                                    <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
+                                    <div id="EndDatePicker">
+                                        <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                        <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
+                                        <label for="appt">Ending time for event:</label>
+                                        <input class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
+                                               min="09:00" max="18:00">
+                                    </div>
                                 }
 
 

@@ -1,4 +1,4 @@
-﻿@model OpportunitiesListViewModel
+﻿@model IEnumerable<VMS.Models.Opportunity>
 
 @{
     ViewData["Title"] = "Your Archived Posts";
@@ -14,8 +14,8 @@
 <!--Table-->
 <div class="card">
     <div class="card-header">
-       <h2 >@ViewData["Title"]</h2>
-       <p>These posts are not active.</p>
+        <h2>@ViewData["Title"]</h2>
+        <p>These posts are not active.</p>
     </div>
     <div class="card-body">
         <table class="table table-hover table-bordered">
@@ -28,16 +28,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var p in Model.Opportunities)
+                @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@p.OpportunityName</td>
-                        <td>@p.ArchivedDate</td>
-                        <td>@p.City, @p.State</td>
+                        <td>@item.OpportunityName</td>
+                        <td>@item.ArchivedDate</td>
+                        <td>@item.City, @item.State</td>
                         <td>
-                            <a class="btn btn-sm btn-info" type="button" asp-action="Edit" asp-route-id="@p.Id">Edit</a>
-                            <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@p.Id">Details</a>
-                            <input type="submit" asp-action="Delete" asp-route-id="@p.Id" value="Delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
+                            <a class="btn btn-sm btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <input type="submit" asp-action="Delete" asp-route-id="@item.Id" value="Delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
 
                         </td>
                     </tr>
