@@ -9,7 +9,7 @@
     @*Favicon link*@
     <link rel="icon" type="image/png" href="~/Images/volunteenLogo.png" />
     @*Bootswatch Theme*@
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-lumen.css" />
     @*Custom Site CSS*@
     <link rel="stylesheet" href="~/css/site.css" />
     @*Font Awesome*@
@@ -51,10 +51,10 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link btn text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Opportunities" asp-action="List">Browse</a>
+                            <a class="nav-link btn text-white" asp-area="" asp-controller="Opportunities" asp-action="List">Browse</a>
                         </li>
 
                         @if (signInManager.IsSignedIn(User))
@@ -62,7 +62,7 @@
                             @if (User.IsInRole("Volunteer"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Opportunities" asp-action="ViewApplications">Your Opportunities</a>
+                                    <a class="nav-link btn text-white" asp-area="" asp-controller="Opportunities" asp-action="ViewApplications">Your Opportunities</a>
                                 </li>
                             }
                             @if (User.IsInRole("Admin"))
