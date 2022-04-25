@@ -10,13 +10,7 @@
     <div class="card-body bg-light">
         <h4>All details for <strong>@Model.OpportunityName</strong></h4><hr />
         <div class="container-fluid">
-            <dl class="row">@*
-                <dt class="col-sm-3">
-                    Item Id
-                </dt>
-                <dd class="col-sm-8">
-                    @Model.Id
-                </dd>*@
+            <dl class="row">
                 <dt class="col-sm-3">
                     Name
                 </dt>
@@ -82,7 +76,7 @@
 
                 </dd>
                 <dt class="col-sm-3">
-                    StartDate
+                    Start Date
                 </dt>
                 <dd class="col-sm-8">
                     @if (Model.StartDate != null)
@@ -99,78 +93,51 @@
                     End Date
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.EndDate != null)
+                    @if (Model.OnGoing)
                     {
-                        @Model.EndDate.Date.ToString("d")
+                        <p>On-going event</p>
                     }
                     else
                     {
-                        <p>None chosen</p>
+                        <p>@Model.EndDate.Date.ToString("d")</p>
                     }
                 </dd>
                 <dt class="col-sm-3">
-                    start time
+                    Start time
                 </dt>
                 <dd class="col-sm-8">
-                    @Model.StartTime.ToShortTimeString();
+                    @Model.StartTime.ToShortTimeString()
                 </dd>
                 <dt class="col-sm-3">
-                    end time
+                    End time
                 </dt>
                 <dd class="col-sm-8">
-                    @Model.EndTime.ToShortTimeString();
-                </dd>@*
-                <dt class="col-sm-3">
-                    Create Date
-                </dt>
-                <dd class="col-sm-8">
-                    @Model.CreateDate
-                </dd>*@
+                    @Model.EndTime.ToShortTimeString()
+                </dd>
                 <dt class="col-sm-3">
                     Cause Areas
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.InterestAreas != null)
-                    {
-                        <p>@Model.InterestAreas</p>
-                        <p>True</p>
-                    }
-                    else
-                    {
-                        <p>False</p>
-                    }
+                   <p>@Model.InterestAreas</p>
                 </dd>
                 <dt class="col-sm-3">
-                    Age Bracket
+                    Targeted Age Bracket
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.AgeBracket != null)
-                    {
-                        <p>@Model.AgeBracket</p>
-                    }
-                    else
-                    {
-                        <p>None Selected</p>
-                    }
+                    <p>@Model.AgeBracket</p>
                 </dd>
                 <dt class="col-sm-3">
-                    Grade Levels
+                    Targeted Grade Levels
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.GradeLevel != null)
-                    {
-                        <p>@Model.GradeLevel</p>
-                    }
-                    else
-                    {
-                        <p>None Selected</p>
-                    }
+                    <p>@Model.GradeLevel</p>
                 </dd>
                 <dt class="col-sm-3">
-                    VolunteersNeeded
+                    Volunteers Needed
                 </dt>
                 <dd class="col-sm-8">
-                    @Model.VolunteersNeeded
+                    @* @Model.VolunteersNeeded*@
+                    @(Model.VolunteersNeeded - Model.VolunteersApplied)
                 </dd>
                 <dt class="col-sm-3">
                     Virtual
@@ -198,23 +165,9 @@
                         <p>No</p>
                     }
                 </dd>
-            <dt class="col-sm-3">
-                    Logo?
-                </dt>
-                <dd class="col-sm-8">
-                    @if (Model.CompanyLogo != null)
-                    {
-                        <p>Yes</p>
-                    }
-                    else
-                    {
-                        <p>No</p>
-                    }
-                </dd>
             </dl>
         </div>
     </div>
-
 </div>
 
 

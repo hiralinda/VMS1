@@ -23,14 +23,31 @@
             Sort By
         </button>
         <div class="dropdown-menu">
+            <h6 class="dropdown-header">Categories</h6>
+            @Html.ActionLink("Advocacy & Human Rights", "List", new { sortOrder = ViewBag.AdvHumSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Animals", "List", new { sortOrder = ViewBag.AnimalSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Comfort the sick", "List", new { sortOrder = ViewBag.ComSickSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Community Support", "List", new { sortOrder = ViewBag.CommunitySortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Computers & Technology", "List", new { sortOrder = ViewBag.CompTechSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Donations", "List", new { sortOrder = ViewBag.DonationSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Education & Literacy", "List", new { sortOrder = ViewBag.EduLitSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Elderly", "List", new { sortOrder = ViewBag.ElderlySortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Help other kids", "List", new { sortOrder = ViewBag.HelpKidsSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Help Refugees", "List", new { sortOrder = ViewBag.HelpRefSortParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Homeless", "List", new { sortOrder = ViewBag.HomelessParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Save the Planet", "List", new { sortOrder = ViewBag.SavePlanetParm }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Support our troops", "List", new { sortOrder = ViewBag.SuppTroopsParm }, new { @class = "dropdown-item" })
+
+            <h6 class="dropdown-header">Other</h6>
             @Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
             @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
             @Html.ActionLink("Name Desc.", "List", new { sortOrder = ViewBag.NameSortParm }, new { @class = "dropdown-item" })
+
             <div class="dropdown-divider"></div>
             <a type="button" class="dropdown-item" asp-action="List">All</a>
         </div>
 
-        <ul class="nav nav-pills flex-column">
+        @*<ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 @Html.ActionLink("Advocacy & Human Rights", "List", new { sortOrder = ViewBag.AdvHumSortParm }, new { @class = "nav-link" })
             </li>
@@ -71,7 +88,7 @@
                 @Html.ActionLink("Support our troops", "List", new { sortOrder = ViewBag.SuppTroopsParm }, new { @class = "nav-link" })
             </li>
 
-        </ul>
+        </ul>*@
 
     </div>
 

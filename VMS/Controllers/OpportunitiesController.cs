@@ -625,19 +625,10 @@ namespace VMS.Controllers
             return RedirectToAction();
         }
 
-        public ActionResult ViewArchived(int page = 1)
+        public async Task<IActionResult> ViewArchived(int page = 1)
         {
-            
-            return View(new OpportunitiesListViewModel
-            {
-                Opportunities =  _context.Opportunity.Where(t => (t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = _context.Opportunity.Count()
-                }
-            });
+
+            return View(await _context.Opportunity.Where(t => (t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
         }
 
         // GET: Opportunities/ViewOrg/5
