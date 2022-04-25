@@ -17,7 +17,7 @@ namespace VMS.Controllers
     public class OpportunitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public int PageSize = 3;
+        public int PageSize = 15;
 
         public OpportunitiesController(ApplicationDbContext context)
         {

@@ -39,7 +39,7 @@ namespace VMS.Controllers
 
         public IActionResult VolunTEENBlog(PostsViewModel model)
         {
-            model.Posts = _context.Post.ToList();
+            model.Posts = _context.Post.ToList().OrderByDescending(s => s.datePosted);
             return View(model);
         }
 
