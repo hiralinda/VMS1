@@ -7,8 +7,8 @@
 }
 
 <div class="container">
-    
-    
+
+
     <section class="container py-4">
         <div class="row">
             <div class="col-md-12">
@@ -19,7 +19,7 @@
                     }
                     @Model.CreateUser.OrganizationName
                 </h2>
-                
+
                 <ul id="tabs" class="nav nav-tabs">
                     <!--Picture gallery here maybe-->
                     <li class="nav-item"><a href="" data-target="#profile" data-toggle="tab" class="nav-link small text-uppercase active">Profile</a></li>
@@ -70,5 +70,5 @@
             </div>
         </div>
     </section>
-
+    <a class="btn btn-primary" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@Model.Id">Back</a>
 </div>
