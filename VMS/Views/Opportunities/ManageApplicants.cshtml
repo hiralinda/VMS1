@@ -3,6 +3,11 @@
     ViewData["Title"] = "Manage Applicants";
 }
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">Manage Applicants</li>
+</ol>
+
 <h2>Manage Applicants for your Posted Opportunities</h2>
 
 @if (Model.Any())

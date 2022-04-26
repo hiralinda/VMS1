@@ -13,6 +13,11 @@
 
 </style>
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">VolunTEEN Blog</li>
+</ol>
+
 @if (User.IsInRole("Admin"))
 {
     <!-- Button trigger modal -->
@@ -28,13 +33,11 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Create a new post</h5>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+
                 </div>
                 <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreatePost">
                     <div class="modal-body">
-
 
                         <div class="form-group">
                             <label asp-for="title" class="col-form-label">Title</label>
@@ -47,8 +50,6 @@
                         <div>
                             <input asp-for="image" class="form-control" name="files" type="file" />
                         </div>
-
-
 
                     </div>
                     <div class="modal-footer">

@@ -31,7 +31,7 @@ namespace VMS.Controllers
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             ViewBag.AnimalSortParm = sortOrder == "Animals" ? "animals" : "Animals";
             ViewBag.AdvHumSortParm = sortOrder == "Advocacy and Human Rights" ? "Advocacy and Human Rights" : "Advocacy and Human Rights";
-            ViewBag.SuppTroopsParm = sortOrder == "Support Our Troops" ? "Support Our Troops" : "Support Our Troops";
+            ViewBag.SuppTroopsParm = sortOrder == "Support our troops" ? "Support our troops" : "Support our troops";
             ViewBag.ComSickSortParm = sortOrder == "Comfort the sick" ? "Comfort the sick" : "Comfort the sick";
             ViewBag.SavePlanetParm = sortOrder == "Save the Planet" ? "Save the Planet" : "Save the Planet";
             ViewBag.HomelessParm = sortOrder == "Homeless" ? "Homeless" : "Homeless";

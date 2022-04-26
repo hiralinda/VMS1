@@ -31,6 +31,7 @@
                     {
                         <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
                     }
+
                         @if (Model.Virtual)
                         {
                             <p class="lead col-md-8 fs-4">This is a virtual opportunity</p>
@@ -40,63 +41,56 @@
                         {
                             <p></p>
                         }
+
+                        <!-- Button trigger modal -->
+                        @if (Model.VolunteersNeeded == Model.VolunteersApplied)
+                        {
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                                Join Waitlist
+                            </button>
+                        }
                         else
                         {
-                            <!-- Button trigger modal -->
-                            @if (Model.VolunteersNeeded == Model.VolunteersApplied)
-                            {
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-                                    Join Waitlist
-                                </button>
-                            }
-                            else
-                            {
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-                                    Apply
-                                </button>
-                            }
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                                Apply
+                            </button>
+                        }
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            @if (Model.VolunteersNeeded == Model.VolunteersApplied)
-                                            {
-                                                <h5 class="modal-title" id="exampleModalLabel">Opportunity is full, join waitlist instead...</h5>
-                                            }
-                                            else
-                                            {
-                                                <h5 class="modal-title" id="exampleModalLabel">Would you like to apply for...</h5>
-                                            }
+                        <!-- Modal -->
+                        <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @if (Model.VolunteersNeeded == Model.VolunteersApplied)
+                                        {
+                                            <h5 class="modal-title" id="exampleModalLabel">Opportunity is full, join waitlist instead...</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="modal-title" id="exampleModalLabel">Would you like to apply for...</h5>
+                                        }
 
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
-                                            <h6>Start: @Model.StartDate.Date.ToString("d") @Model.StartTime.ToShortTimeString()</h6>
-                                            <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            @if (Model.VolunteersNeeded == Model.VolunteersApplied)
-                                            {
-                                                <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Join Waitlist</a>
-                                            }
-                                            else
-                                            {
-                                                <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
-                                            }
-                                        </div>
+                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
+                                        <h6>Start: @Model.StartDate.Date.ToString("d") @Model.StartTime.ToShortTimeString()</h6>
+                                        <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        @if (Model.VolunteersNeeded == Model.VolunteersApplied)
+                                        {
+                                            <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Join Waitlist</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-primary" asp-route-oppID="@Model.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                        }
-
-
-
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,7 +181,7 @@
                             <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
                             <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                         </ul>
-                        
+
                     </div>
                 </div>
                 <div class="row align-items-md-stretch mt-3">

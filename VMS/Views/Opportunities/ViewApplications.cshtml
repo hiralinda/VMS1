@@ -3,6 +3,11 @@
     ViewData["Title"] = "Your Opportunities";
 }
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">Your Opportunities</li>
+</ol>
+
 <h2>Opportunities You've Signed Up For</h2>
 @if (Model.Any())
 {
