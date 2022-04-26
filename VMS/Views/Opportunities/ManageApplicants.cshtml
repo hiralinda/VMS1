@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<VMS.Models.Application>
+@using Microsoft.AspNetCore.Identity;
+
 @{
     ViewData["Title"] = "Manage Applicants";
 }
@@ -15,22 +17,76 @@
     <table>
         <thead>
             <tr>
-                <th>Volunteer Name</th>
-                <th>Opportunity</th>
-                <th>Approve</th>
+                <th class="col-md-3">Volunteer Name</th>
+                <th class="col-md-3">Profile</th>
+                <th class="col-md-3">Opportunity</th>
+                <th class="col-md-3">Approve</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var application in Model)
             {
                 <tr>
-                    <td width="50%">
+                    <td class="col-md-5">
                         @application.volunteerName
                     </td>
-                    <td width="50%">
+                    <td class="col-md-2">
+                        <!--ABOUT APPLICANT-->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#exampleModalCenter">
+                            View
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            @*@if (application.volunteer.ProfilePicture != null)
+                                            {
+                                                <img id="profilePicture" style="height: 50px; width: 50px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(application.volunteer.ProfilePicture))">
+                                            }*@ @application.volunteerName
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @application.AboutYou
+                                        <br />
+
+                                        @if (application.InstagramLink != null)
+                                        {
+                                            <a class="mb-1" href="@application.InstagramLink" target="_blank"><i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x"></i></a>
+                                        }
+                                        @if (application.FacebookLink != null)
+                                        {
+                                            <a class="mb-1" href="@application.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
+                                        }
+                                        @if (application.TwitterLink != null)
+                                        {
+                                            <a class="mb-1" href="@application.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
+                                        }
+                                        @if (application.OtherWebsite != null)
+                                        {
+                                            <a class="mb-1" href="@application.OtherWebsite" target="_blank">
+                                                <i class="fa fa-lg fa-external-link-square fa-2x"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </td>
+                    <td class="col-md-5">
                         @application.oppName
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         @if (application.status)
                         {
                             <form asp-action="ApproveApplicant">

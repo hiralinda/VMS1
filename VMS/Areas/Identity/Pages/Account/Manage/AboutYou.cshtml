@@ -1,30 +1,52 @@
 ﻿@page
 @model AboutYouModel
 @{
-    ViewData["Title"] = "Write about your organization.";
+    ViewData["Title"] = "Write about your";
     ViewData["ActivePage"] = ManageNavPages.AboutYou;
 }
 
-<h4>@ViewData["Title"]</h4>
+
 <partial name="_StatusMessage" for="StatusMessage" />
-<p>Write & edit information about your company here! This information will be presented on your public posts.</p>
-<div class="row">
-    <div class="col-md-9">
-        <form id="about-you-form" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="15">
+@if (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
+{
+    <h4>@ViewData["Title"] organization.</h4>
+    <p>Write & edit information about your company here! This information will be presented on your public posts.</p>
+    <div class="row">
+        <div class="col-md-9">
+            <form id="about-you-form" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="15">
                     </textarea>
-            </div>
-            <div class="form-group mt-3">
-                <h4>Your Mission Statement</h4>
-                <textarea style="resize: none;" asp-for="Input.MissionStatement" class="form-control" rows="3">
+                </div>
+                <div class="form-group mt-3">
+                    <h4>Your Mission Statement</h4>
+                    <textarea style="resize: none;" asp-for="Input.MissionStatement" class="form-control" rows="3">
                     </textarea>
-            </div>
-            <button id="update-about-you-button" type="submit" class="btn btn-primary mt-3">Save</button>
-        </form>
+                </div>
+                <button id="update-about-you-button" type="submit" class="btn btn-primary mt-3">Save</button>
+            </form>
+        </div>
     </div>
-</div>
+}
+else if (User.IsInRole("Volunteer"))
+{
+    <h4>@ViewData["Title"] experiences.</h4>
+    <p>Write & edit information about yourself here! This information will be presented on your public profile.</p>
+    <div class="row">
+        <div class="col-md-9">
+            <form id="about-you-form" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="15">
+                    </textarea>
+                </div>
+                <button id="update-about-you-button" type="submit" class="btn btn-primary mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+}
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
