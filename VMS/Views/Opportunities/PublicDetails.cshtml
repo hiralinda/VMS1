@@ -42,19 +42,27 @@
                             <p></p>
                         }
 
-                        <!-- Button trigger modal -->
-                        @if (Model.VolunteersNeeded == Model.VolunteersApplied)
+                        @if (User.IsInRole("Admin") || User.IsInRole("Volunteer"))
                         {
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-                                Join Waitlist
-                            </button>
+                            <!-- Button trigger modal -->
+                            @if (Model.VolunteersNeeded == Model.VolunteersApplied)
+                            {
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                                    Join Waitlist
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                                    Apply
+                                </button>
+                            }
                         }
                         else
                         {
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-                                Apply
-                            </button>
+                            <p class="fs-3 fw-bold text-danger">Only volunteers can apply for opportunities</p>
                         }
+
 
                         <!-- Modal -->
                         <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
