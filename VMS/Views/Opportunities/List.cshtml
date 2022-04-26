@@ -25,8 +25,9 @@
                 Search: @Html.TextBox("SearchString", null, new { @class = "form-control" })
             </p>
         }
+    <span>
         <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort By
+            Categories
         </button>
         <div class="dropdown-menu">
             <h6 style="color:black;" class="dropdown-header">Categories</h6>
@@ -43,57 +44,62 @@
             @Html.ActionLink("Homeless", "List", new { sortOrder = ViewBag.HomelessParm }, new { @class = "dropdown-item" })
             @Html.ActionLink("Save the Planet", "List", new { sortOrder = ViewBag.SavePlanetParm }, new { @class = "dropdown-item" })
             @Html.ActionLink("Support our troops", "List", new { sortOrder = ViewBag.SuppTroopsParm }, new { @class = "dropdown-item" })
-            <div class="dropdown-divider"></div>
-            <h6 style="color:black;" class="dropdown-header">Other</h6>
+        </div>
+    </span>
+
+    <span>
+        <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort by
+        </button>
+        <div class="dropdown-menu">
+            <h6 style="color:black;" class="dropdown-header">Filters</h6>
             @Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
             @*<a type="button" class="dropdown-item" asp-action="">No signups</a>*@
             @Html.ActionLink("Name Desc.", "List", new { sortOrder = ViewBag.NameSortParm }, new { @class = "dropdown-item" })
-
-
+        </div>
+    </span>
+            <a type="button" class="btn btn-outline-primary btn-block" asp-action="List">All</a>
 
         </div>
-        <a type="button" class="btn btn-outline-primary btn-block" asp-action="List">All</a>
 
-    </div>
-
-    <!--right-->
-    <div class="col col-md-9">
-        @if (Model.PagingInfo.TotalItems.Equals(0))
-        {
-            <p class="fs-4 fw-bold">No Results Found</p>
-        }
-        @foreach (var p in Model.Opportunities)
-        {
-            <div class="card rounded mb-5 p-2">
-                <div class="card-body">
-                    <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
-                    <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p><hr />
-                    @if (p.VolunteersApplied == p.VolunteersNeeded)
-                    {
-                        <p>This opportunity is full</p><hr />
-                    }
-                    else
-                    {
-                        <p>Volunteers Needed: @(p.VolunteersNeeded - p.VolunteersApplied)</p>
-                    }
+        <!--right-->
+        <div class="col col-md-9">
+            @if (Model.PagingInfo.TotalItems.Equals(0))
+            {
+                <p class="fs-4 fw-bold">No Results Found</p>
+            }
+            @foreach (var p in Model.Opportunities)
+            {
+                <div class="card rounded mb-5 p-2">
+                    <div class="card-body">
+                        <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
+                        <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p><hr />
+                        @if (p.VolunteersApplied == p.VolunteersNeeded)
+                        {
+                            <p>This opportunity is full</p><hr />
+                        }
+                        else
+                        {
+                            <p>Volunteers Needed: @(p.VolunteersNeeded - p.VolunteersApplied)</p>
+                        }
 
 
-                    @*<p>@Html.DisplayFor(modelItem => p.Description)</p>*@
-                    <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.GradeLevel)</span>
-                    <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.AgeBracket)</span>
-                    <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
-                    @if (p.Virtual)
-                    {
-                        <span class="badge bg-primary">Virtual</span>
-                    }
-                    @if (p.GroupActivity)
-                    {
-                        <span class="badge bg-primary"><i class="fa fa-users fa-sm" aria-hidden="true"></i></span>
-                    }
-                    <br />
+                        @*<p>@Html.DisplayFor(modelItem => p.Description)</p>*@
+                        <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.GradeLevel)</span>
+                        <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.AgeBracket)</span>
+                        <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
+                        @if (p.Virtual)
+                        {
+                            <span class="badge bg-primary">Virtual</span>
+                        }
+                        @if (p.GroupActivity)
+                        {
+                            <span class="badge bg-primary"><i class="fa fa-users fa-sm" aria-hidden="true"></i></span>
+                        }
+                        <br />
 
-                    <!-- Button trigger modal -->
-                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                        <!-- Button trigger modal -->
+                        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
                             Apply
                         </button>
 
@@ -119,16 +125,16 @@
                                 </div>
                             </div>
                         </div>*@
-                    <a class="btn btn-outline-info btn-rounded mt-2" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">More</a>
+                        <a class="btn btn-outline-info btn-rounded mt-2" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">More</a>
+                    </div>
                 </div>
+
+            }
+            <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+                 page-class="btn" page-class-normal="btn-outline-primary"
+                 page-class-selected="btn-info" class="btn-group float-right"
+                 page-url-category="@Model.CurrentCategory">
             </div>
 
-        }
-        <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
-             page-class="btn" page-class-normal="btn-outline-primary"
-             page-class-selected="btn-info" class="btn-group float-right"
-             page-url-category="@Model.CurrentCategory">
         </div>
-
     </div>
-</div>
