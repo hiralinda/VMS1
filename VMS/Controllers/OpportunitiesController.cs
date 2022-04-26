@@ -336,7 +336,7 @@ namespace VMS.Controllers
                     var userId = User.Id();
                     application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
                     application.opportunity = await _context.Opportunity.FindAsync(oppID);
-
+                    
                     application.oppName = application.opportunity.OpportunityName;
                     application.oppID = application.opportunity.Id;
                     application.volsNeeded = application.opportunity.VolunteersNeeded;
@@ -345,6 +345,15 @@ namespace VMS.Controllers
                     application.oppTime = application.opportunity.StartTime.ToShortTimeString() + " - " + application.opportunity.EndTime.ToShortTimeString();
                     application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
                         application.opportunity.Address1 + " " + application.opportunity.Address2;
+
+                    /*try - this info wasnt pulling from the volunteer property in application so I added in here*/
+                    application.AboutYou = application.volunteer.AboutYou;
+                    application.InstagramLink = application.volunteer.InstagramLink;
+                    application.FacebookLink = application.volunteer.FacebookLink;
+                    application.TwitterLink = application.volunteer.TwitterLink;
+                    application.OtherWebsite = application.volunteer.OtherWebsite;
+                    application.School = application.volunteer.OtherWebsite;
+
 
                     _context.Add(application);
                     await _context.SaveChangesAsync();
@@ -355,6 +364,8 @@ namespace VMS.Controllers
 
             return RedirectToAction(nameof(List));
         }
+
+       
 
         // GET: Opportunities/Create
         [Authorize]
