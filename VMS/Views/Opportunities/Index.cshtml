@@ -43,9 +43,34 @@
                         <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                         <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
                     </span>
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
-                    </form>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                        Delete
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Confirm deletion for @item.OpportunityName.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                    <input type="submit" value="Delete" class="btn btn-danger"/>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         }

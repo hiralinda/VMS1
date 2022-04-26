@@ -13,7 +13,12 @@
         <form id="about-you-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                    <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="20">
+                <textarea style="resize: none;" asp-for="Input.AboutYou" class="form-control" rows="15">
+                    </textarea>
+            </div>
+            <div class="form-group mt-3">
+                <h4>Your Mission Statement</h4>
+                <textarea style="resize: none;" asp-for="Input.MissionStatement" class="form-control" rows="3">
                     </textarea>
             </div>
             <button id="update-about-you-button" type="submit" class="btn btn-primary mt-3">Save</button>
