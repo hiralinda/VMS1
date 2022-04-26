@@ -37,15 +37,19 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
         {
             [Display(Name = "About You")]
             public string AboutYou { get; set; }
+
+            [Display(Name = "Your Mission Statement")]
+            public string MissionStatement { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var AboutYou = user.AboutYou;
-
+            var MissionStatement = user.MissionStatement;
             Input = new InputModel
             {
-                AboutYou = AboutYou
+                AboutYou = AboutYou,
+                MissionStatement = MissionStatement
             };
 
         }
@@ -77,21 +81,18 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             }
 
             var AboutYou = user.AboutYou;
+            var MissionStatement = user.MissionStatement;
 
-            if (Request.Form.Files.Count > 0)
-            {
-                IFormFile file = Request.Form.Files.FirstOrDefault();
-                using (var dataStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(dataStream);
-                    user.ProfilePicture = dataStream.ToArray();
-                }
-                await _userManager.UpdateAsync(user);
-            }
 
             if(Input.AboutYou != AboutYou)
             {
                 user.AboutYou = Input.AboutYou;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.MissionStatement != MissionStatement)
+            {
+                user.MissionStatement = Input.MissionStatement;
                 await _userManager.UpdateAsync(user);
             }
 

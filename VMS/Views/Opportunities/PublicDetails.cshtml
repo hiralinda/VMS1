@@ -148,26 +148,34 @@
         <!--About Nonprofit-->
         <div class="p-3 mb-2 bg-light rounded-3 shadow">
             <div class="container-fluid py-5">
+                <h3 class="fs-3 fw-bold">About this Nonprofit</h3>
+                <p class="text-info text-muted fw-bold">
+                    <!--Name of Nonprofit-->
+                    @Model.CreateUser.OrganizationName
+                </p>
                 @if (Model.CreateUser.AboutYou != null)
+                {<p>@Model.CreateUser.AboutYou</p>}
+
+                <!--View Org-->
+                <a class="btn btn-sm btn-warning mb-2" type="button" asp-action="ViewOrg" asp-route-id="@Model.Id">VolunTEEN Profile</a><br />
+
+                @if (Model.CreateUser.InstagramLink != null)
                 {
-                    <h3 class="fs-3 fw-bold">About this Nonprofit</h3>
-                    <p class="text-info text-muted fw-bold">
-                        <!--Name of Nonprofit-->
-                        @Model.CreateUser.OrganizationName
-                    </p>
-                    <p>@Model.CreateUser.AboutYou</p>
-                    @if (Model.CreateUser.InstagramLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x"></i></a>
-                    }
-                    @if (Model.CreateUser.FacebookLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
-                    }
-                    @if (Model.CreateUser.TwitterLink != null)
-                    {
-                        <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
-                    }
+                    <a class="mb-1" href="@Model.CreateUser.InstagramLink" target="_blank"><i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x"></i></a>
+                }
+                @if (Model.CreateUser.FacebookLink != null)
+                {
+                    <a class="mb-1" href="@Model.CreateUser.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
+                }
+                @if (Model.CreateUser.TwitterLink != null)
+                {
+                    <a class="mb-1" href="@Model.CreateUser.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
+                }
+                @if (Model.CreateUser.OtherWebsite != null)
+                {
+                    <a class="mb-1" href="@Model.CreateUser.OtherWebsite" target="_blank">
+                        <i class="fa fa-lg fa-external-link-square fa-2x"></i>
+                    </a>
                 }
 
                 <div class="row align-items-md-stretch mt-3">
@@ -187,7 +195,7 @@
                             <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
                             <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
                         </ul>
-                        
+
                     </div>
                 </div>
                 <div class="row align-items-md-stretch mt-3">

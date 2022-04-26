@@ -37,6 +37,9 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Twitter")]
             public string Twitter { get; set; }
+
+            [Display(Name = "Other Website")]
+            public string OtherWebsite { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -44,12 +47,14 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var instagram = user.InstagramLink;
             var facebook = user.FacebookLink;
             var twitter = user.TwitterLink;
+            var otherWebsite = user.OtherWebsite;
 
             Input = new InputModel
             {
                 Instagram = instagram,
                 Facebook = facebook,
-                Twitter = twitter
+                Twitter = twitter,
+                OtherWebsite = otherWebsite
             };
 
         }
@@ -83,8 +88,9 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var instagram = user.InstagramLink;
             var facebook = user.FacebookLink;
             var twitter = user.TwitterLink;
+            var otherWebsite = user.OtherWebsite;
 
-            if(Input.Instagram != instagram)
+            if (Input.Instagram != instagram)
             {
                 user.InstagramLink = Input.Instagram;
                 await _userManager.UpdateAsync(user);
@@ -99,6 +105,12 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             if (Input.Twitter != twitter)
             {
                 user.TwitterLink = Input.Twitter;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if(Input.OtherWebsite != otherWebsite)
+            {
+                user.OtherWebsite = Input.OtherWebsite;
                 await _userManager.UpdateAsync(user);
             }
 
