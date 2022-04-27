@@ -116,7 +116,7 @@
 
     </div>
 
-    <div class="container">
+    <div class="container" style="padding-bottom:150px;">
         <main role="main" class="pb-3">
             @if (TempData["message"] != null)
             {
@@ -126,11 +126,57 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-black position-absolute" style="height: 150px;">
+        <style>
+            a:hover {
+                font-weight: bold;
+            }
+        </style>
 
-        <div class="container">
+        <div class="container row mx-auto mt-3" style="line-height:150%;">
 
-            &copy; 2021 - VolunTEEN <!-- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> -->
+            <div class="col mt-2">
+                <span class="fw-bold">Quick Links</span><br />
+                <a class="text-decoration-none text-black" asp-controller="Home" asp-action="Index">Home</a><br />
+                <a class="text-decoration-none text-black" asp-controller="Opportunities" asp-action="List">Browse</a><br />
+                @if (User.IsInRole("Volunteer"))
+                {
+                    <a class="text-decoration-none text-black" asp-controller="Opportunities" asp-action="ViewApplications">View Your Signups</a><br />
+                }
+                @if (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
+                {
+                    <a class="text-decoration-none text-black" asp-controller="Opportunities" asp-action="Index">Manage Your Posts</a>
+                }
+            </div>
+
+            <div class="col mt-2">
+                <span class="fw-bold">Learn More</span><br />
+                <a class="text-decoration-none text-black" asp-controller="Home" asp-action="AboutUs">About Us</a><br />
+                <a class="text-decoration-none text-black" asp-controller="Home" asp-action="ExploreCauses">Explore Causes</a><br />
+                <a class="text-decoration-none text-black" asp-controller="Home" asp-action="VolunTEENBlog">The VolunTEEN Blog</a>
+            </div>
+
+            <div class="col mt-2">
+                <span class="fw-bold">Contact</span><br />
+                <span>VolunTEEN@gmail.com</span><br />
+                <span>(904)345-0095</span><br />
+                <span>Jacksonville, Florida</span>
+            </div>
+
+            <div class="col mt-2">
+                <span class="fw-bold">Join us on social media</span><br />
+                <a href="https://www.instagram.com/volunteenjax/?hl=en" target="_blank">
+                    <i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x mt-2"></i>
+                </a>
+            </div>
+
+            <div class="col mt-2">
+                <span class="fw-bold text-center">&copy; VolunTEEN - @DateTime.Now.Year</span><br />
+                <a asp-controller="Home" asp-action="Index">
+                    <img height="75" width="75" src="~/Images/volunteenLogo.png" alt="footerLogo">
+                </a>
+            </div>
+
         </div>
     </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
