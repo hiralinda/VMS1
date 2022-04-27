@@ -129,7 +129,7 @@
         <div id="footerContents" class="container row mx-auto mt-3" style="line-height:150%;">
 
             <div class="col mt-2">
-                <span class="fw-bold">Quick Links</span><br />
+                <span class="fw-bold" style="color: #00224B;">Quick Links</span><br />
                 <a class="text-decoration-none text-black" asp-controller="Home" asp-action="Index">Home</a><br />
                 <a class="text-decoration-none text-black" asp-controller="Opportunities" asp-action="List">Browse</a><br />
                 @if (User.IsInRole("Volunteer"))
@@ -143,28 +143,28 @@
             </div>
 
             <div class="col mt-2">
-                <span class="fw-bold">Learn More</span><br />
+                <span class="fw-bold" style="color: #00224B;">Learn More</span><br />
                 <a class="text-decoration-none text-black" asp-controller="Home" asp-action="AboutUs">About Us</a><br />
                 <a class="text-decoration-none text-black" asp-controller="Home" asp-action="ExploreCauses">Explore Causes</a><br />
                 <a class="text-decoration-none text-black" asp-controller="Home" asp-action="VolunTEENBlog">The VolunTEEN Blog</a>
             </div>
 
             <div class="col mt-2">
-                <span class="fw-bold">Contact</span><br />
+                <span class="fw-bold" style="color: #00224B;">Contact</span><br />
                 <span>VolunTEEN@gmail.com</span><br />
                 <span>(904)345-0095</span><br />
                 <span>Jacksonville, Florida</span>
             </div>
 
             <div class="col mt-2">
-                <span class="fw-bold">Join us on social media</span><br />
+                <span class="fw-bold" style="color: #00224B;">Join us on social media</span><br />
                 <a href="https://www.instagram.com/volunteenjax/?hl=en" target="_blank">
                     <i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x mt-2"></i>
                 </a>
             </div>
 
             <div class="col mt-2">
-                <span class="fw-bold text-center">&copy; VolunTEEN - @DateTime.Now.Year</span><br />
+                <span class="fw-bold text-center" style="color: #00224B;">&copy; VolunTEEN - @DateTime.Now.Year</span><br />
                 <a asp-controller="Home" asp-action="Index">
                     <img height="75" width="75" src="~/Images/volunteenLogo.png" alt="footerLogo">
                 </a>

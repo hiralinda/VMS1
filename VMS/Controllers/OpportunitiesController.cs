@@ -32,10 +32,12 @@ namespace VMS.Controllers
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
             ViewBag.VirtualSortParm = sortOrder == "Virtual" ? "Virtual" : "Virtual";
+            ViewBag.InPersonSortParm = sortOrder == "InPerson" ? "In Person" : "InPerson";
             ViewBag.OngoingSortParm = sortOrder == "Ongoing" ? "Ongoing" : "Ongoing";
             ViewBag.OneDaySortParm = sortOrder == "OneDay" ? "One Day" : "OneDay"; 
             ViewBag.InternSortParm = sortOrder == "Internship" ? "Internship" : "Internship";
             ViewBag.GroupSortParm = sortOrder == "Group" ? "Group" : "Group";
+            ViewBag.IndividualSortParm = sortOrder == "Individual" ? "Individual" : "Individual";
 
             /*Category Sorts*/
             ViewBag.AnimalSortParm = sortOrder == "Animals" ? "animals" : "Animals";
@@ -83,6 +85,17 @@ namespace VMS.Controllers
                         TotalItems = _context.Opportunity.Where(s => s.Virtual).Count()
                     }
                 }),
+                "InPerson" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => !s.Virtual).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => !s.Virtual).Count()
+                    }
+                }),
                 "Group" => View(new OpportunitiesListViewModel
                 {
 
@@ -92,6 +105,17 @@ namespace VMS.Controllers
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
                         TotalItems = _context.Opportunity.Where(s => s.GroupActivity).Count()
+                    }
+                }),
+                "Individual" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => !s.GroupActivity).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => !s.GroupActivity).Count()
                     }
                 }),
                 "OneDay" => View(new OpportunitiesListViewModel
