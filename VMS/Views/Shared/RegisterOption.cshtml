@@ -1,27 +1,21 @@
-﻿@{
+﻿
+<div class="card-deck row">
 
-}
-
-<h2 style="text-align: center">Register as a...</h2>
-
-<div style="margin-top:2%" class="row">
-
-    <div class="col">
-        <a asp-area="Identity" asp-page="/Account/VolunteerRegister" class="btn">
-            <div class="card btn-outline-primary" style="height:200px;">
-                <div style="text-align: center; padding-top:5%" class="card-title"><h2>Volunteer</h2></div>
-                <div style="text-align: center; padding-right:5%;" class="card-body"><p>Volunteers are always welcome to join our platform and connect with nonprofits for their next adventure</p></div>
-            </div>
-        </a>
+    <div id="card1" class="card text-white border-0 mx-auto p-0 mb-4" style="width: 600px; background-color: #00224B;">
+        <img id="image1" class="card-img opacity-25" src="~/Images/3.png" alt="Card image 1" style="object-fit: cover; height: 650px; " />
+        <div class="card-img-overlay w-75 text-center mx-auto" style="margin-top:25%;">
+            <h5 class="card-title fw-bold m-4">BECOME A VOLUNTEER</h5>
+            <p class="card-text m-4 mt-1">Volunteers are always welcome to join our platform and connect with nonprofits for their next adventure</p>
+            <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-area="Identity" asp-page="/Account/VolunteerRegister">I AM A VOLUNTEER</a>
+        </div>
     </div>
-
-    <div class="col">
-        <a asp-area="Identity" asp-page="/Account/NonprofitRegister" class="btn">
-            <div class="card btn-outline-primary" style="height: 200px;">
-                <div style="text-align: center; padding-top: 5%" class="card-title"><h2>Nonprofit</h2></div>
-                <div style="text-align: center; padding-right:5%;" class="card-body"><p>Are you a not for profit organization looking to get your opportunities out to the public? Sign up today and connect with potential volunteers.</p></div>
-            </div>
-        </a>
+    <div class="card text-white border-0 mx-auto p-0 mb-4" style="width: 600px; background-color: #00224B; ">
+        <img class="card-img opacity-25" src="~/Images/10.png" alt="Card image 2" style="object-fit: cover; height: 650px; " />
+        <div class="card-img-overlay w-75 text-center mx-auto" style="margin-top:25%;">
+            <h5 class="card-title fw-bold m-4">BECOME A NONPROFIT</h5>
+            <p class="card-text m-4 mt-1">Are you a not for profit organization looking to get your opportunities out to the public? Sign up today and connect with potential volunteers.</p>
+            <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-area="Identity" asp-page="/Account/NonprofitRegister">I AM A NONPROFIT</a>
+        </div>
     </div>
 
 </div>
