@@ -4,99 +4,37 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div style="margin:0;">
-    <style>
 
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin: 0;
-        }
+@{
+    Layout = "_HomeLayout";
+}
 
-        .container-specific {
-            position: relative;
-            text-align: center;
-            color: white;
-            margin-left: 0;
-            margin-right: 0;
-            margin-bottom: 45px;
-        }
-    </style>
-    <div>
-
-        <div class="container-specific">
-            <div style="background-color:black;">
-                <img class="d-block w-100 opacity-50" src="~/Images/8.png" alt="volunteers">
-            </div>
-
-            <div class="centered">
-                <div class="jumbotron">
-
-                    <h1 class="display-4" style="color:white;">Become a Volunteer</h1>
-                    <p class="lead">As a nonprofit, our core mission is to help teach empathy and social responsibility to young people.</p>
-                    <hr class="my-4">
-                    <p>We envision a more compassionate world, and believe that encouraging and making it easier for kids, teens, and families to engage in volunteer service builds empathy, compassion, communication, and teamwork.</p>
-                    <p class="lead">
-
-                        <a class="btn text-white rounded-pill bg-info" style="text-decoration-line:none; background-color:aquamarine;" asp-area="" asp-controller="Opportunities" asp-action="List">Explore now</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div style="width:70%;text-align:center;margin:auto;margin-top:3%;margin-bottom:5%;">
+    <h1 class="display-4 fw-bolder" style="color: #00224B;">We Are VolunTEEN</h1>
+    <p class="lead fw-bold">As a nonprofit, our core mission is to help teach empathy and social responsibility to young people.</p>
+    <p>We envision a more compassionate world, and believe that encouraging and making it easier for kids, teens, and families to engage in volunteer service builds empathy, compassion, communication, and teamwork.</p>
+    <p class="lead">
+    <a class="btn text-white rounded-pill bg-primary" style="text-decoration-line:none; background-color:aquamarine;" asp-area="" asp-controller="Opportunities" asp-action="List">VOLUNTEER NOW!</a>
 </div>
 
 <!-- Register Cards Only shown if user is not logged in -->
-@if (signInManager.IsSignedIn(User))
+@if (!signInManager.IsSignedIn(User))
 {
-<div>
-    <h2 class="text-center">Check Us Out!</h2>
-    <hr class="my-4">
-</div>
-    <div class="row gx-4 gx-lg-5">
-        <div class="col-md-6 mb-5">
-            <div class="card h-100 rounded" style="text-align:center;">
-                <div class="card-body">
-                    <h2 class="card-title">View Opportunities</h2><hr />
-                    <p class="card-text">Browse opportunities posted by nonprofits to find the best fit for you!</p>
-                </div>
-                <div class="card-footer"><a class="btn btn-outline-success btn-sm rounded" asp-controller="Opportunities" asp-action="List">Browse</a></div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-5">
-            <div class="card h-100" style="text-align:center;">
-                <div class="card-body">
-                    <h2 class="card-title">About Us</h2><hr />
-                    <p class="card-text">Get to know more about VolunTEEN and what we hope to accomplish.</p>
-                </div>
-                <div class="card-footer"><a class="btn btn-outline-success btn-sm rounded-1" asp-controller="Home" asp-action="AboutUs">Explore</a></div>
-            </div>
-        </div>
 
-    </div>
-}
-else
-{
-    <div>
-        <h2 class="text-center">Sign Up Today!</h2>
-    </div>
     <div class="row gx-4 gx-lg-5">
         <div class="col-md-6 mb-5">
             <div class="card h-100 rounded" style="text-align:center;">
                 <div class="card-body">
-                    <h2 class="card-title">Volunteers</h2><hr />
+                    <h2 class="card-title text-info fw-bold">VOLUNTEERS</h2><hr />
                     <p class="card-text">Sign up today! Volunteers are always welcome to join our platform and connect with nonprofits for their next adventure.</p>
                 </div>
-                <div class="card-footer"><a class="btn btn-outline-success btn-sm rounded" asp-area="Identity" asp-page="/Account/VolunteerRegister">Register</a></div>
+                <div class="card-footer"><a class="btn btn-outline-info btn-sm rounded" asp-area="Identity" asp-page="/Account/VolunteerRegister">Register</a></div>
             </div>
         </div>
         <div class="col-md-6 mb-5">
-            <div class="card h-100" style="text-align:center;">
+            <div class="card h-100 rounded" style="text-align: center;">
                 <div class="card-body">
-                    <h2 class="card-title">Nonprofit</h2><hr />
+                    <h2 class="card-title text-success fw-bold">NONPROFITS</h2><hr />
                     <p class="card-text">Are you a not for profit organization looking to get your opportunities out to the public? Sign up today and connect with potential volunteers.</p>
                 </div>
                 <div class="card-footer"><a class="btn btn-outline-success btn-sm rounded-1" asp-area="Identity" asp-page="/Account/NonprofitRegister">Register</a></div>
@@ -105,6 +43,35 @@ else
 
     </div>
 }
+
+    <div class="card-deck row">
+        <div class="card text-white border-0 mx-auto p-0 mb-4" style="width: 350px; background-color: #00224B; ">
+            <img class="card-img opacity-25" src="/Images/LearnCard1.jpeg" alt="Card image 1" style="object-fit: cover; height: 350px;">
+            <div class="card-img-overlay">
+                <h5 class="card-title fw-bold m-4">EXPLORE CAUSES</h5>
+                <p class="card-text m-4 mt-1">Don't know where to start? Take a minute to look into the different cause areas available here on VolunTEEN.</p>
+                <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-controller="Home" asp-action="ExploreCauses">Explore Causes</a>
+            </div>
+        </div>
+
+        <div class="card text-white border-0 mx-auto p-0 mb-4" style="width: 350px; background-color: #00224B; ">
+            <img class="card-img opacity-25" src="/Images/LearnCard2.jpeg" alt="Card image 2" style="object-fit: cover; height: 350px; ">
+            <div class="card-img-overlay">
+                <h5 class="card-title fw-bold m-4">LEARN ABOUT US</h5>
+                <p class="card-text m-4 mt-1">Curious about VolunTEEN as an organization? Learn more about our start and what our mission is.</p>
+                <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            </div>
+        </div>
+
+        <div class="card text-white border-0 mx-auto p-0 mb-4" style="width: 350px; background-color: #00224B; ">
+            <img class="card-img opacity-25" src="/Images/LearnCard3.jpeg" alt="Card image 3" style="object-fit: cover; height: 350px; ">
+            <div class="card-img-overlay">
+                <h5 class="card-title fw-bold m-4">FOLLOW OUR BLOG</h5>
+                <p class="card-text m-4 mt-1">Want to stay up to date with the latest new straight from us. Check out the VolunTEEN Blog to see our latest posts.</p>
+                <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-controller="Home" asp-action="VolunTEENBlog">The VolunTEEN Blog</a>
+            </div>
+        </div>
+    </div>
 
 <!--Carousel Wrapper-->
 
@@ -149,15 +116,3 @@ else
     </a>
 
 </div>
-
-<div class="container">
-
-</div>
-
-
-
-
-
-
-
-
