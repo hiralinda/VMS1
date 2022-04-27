@@ -580,14 +580,15 @@ namespace VMS.Controllers
         public async Task<IActionResult> ViewApplications()
         {
 
-            return View(await _context.Application.Where(t => t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+            return View(await _context.Application.Where(t => t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.opportunity.ArchivedStatus).ToListAsync());
 
         }
 
         public async Task<IActionResult> ManageApplicants()
         {
 
-            List<Application> applications = await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync();
+            List<Application> applications = await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.opportunity.ArchivedStatus).OrderByDescending(t => t.oppName).ToListAsync();
+
             return View(applications);
         }
 
