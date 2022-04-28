@@ -358,11 +358,10 @@
                         <!--Volunteers needed-->
 
                         <div class="col-md-3 form-group">
-                            <label class="control-label">Volunteers Needed: </label>
-                            <input type="number" asp-for="VolunteersNeeded" class="form-control" disabled/>
-                            <span asp-validation-for="VolunteersNeeded" class="text-danger"></span>
-                            @*<input class="form-control col-md-3" type="number" asp-for="VolunteersNeeded" value="@Model.VolunteersNeeded" disabled/>*@
-                            @*<input type="number" class="form-control" value="@Model.VolunteersNeeded" disabled />*@
+                            @*<label class="control-label">Volunteers Needed: </label>*@
+                            <input min="0" class="form-control col-md-3" type="hidden" asp-for="VolunteersNeeded"/>
+                            @*<span asp-validation-for="VolunteersNeeded" class="text-danger"></span>*@
+
                         </div>
                     </div>
 
@@ -413,7 +412,7 @@
 
                                 <label for="appt">Start time for event:</label>
                                 <input type="time" value="@Model.StartTime.TimeOfDay" name="StartTime"
-                                       min="09:00" max="18:00" required>
+                                       min="00:00" max="24:00" required>
                             </div>
                             <div class="col-sm-4">
 
@@ -427,7 +426,7 @@
 
                                         <label for="appt">Ending time for event:</label>
                                         <input class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                               min="09:00" max="18:00">
+                                               min="00:00" max="24:00">
                                     </div>
                                 }
                                 else @if (!Model.OnGoing)
@@ -438,7 +437,7 @@
                                         <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
                                         <label for="appt">Ending time for event:</label>
                                         <input class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                               min="09:00" max="18:00">
+                                               min="00:00" max="24:00">
                                     </div>
                                 }
 
@@ -492,7 +491,6 @@
         }
     });
 </script>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
