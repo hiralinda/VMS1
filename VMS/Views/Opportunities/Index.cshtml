@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VMS.Models.Opportunity>
+﻿@model OpportunitiesListViewModel
 
 @{
     ViewData["Title"] = "Your Posted Opportunities";
@@ -13,78 +13,93 @@
     <li class="breadcrumb-item active">Manage</li>
 </ol>
 <h2 class="">Manage your posts here</h2>
-<span class="input-group-btn">
-    <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
-    <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
-</span>
+<div class="row">
+    <div class="col-md-3">
+        <span class="input-group-btn">
+            <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
+            <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
+        </span>
+    </div>
+</div>
+    
+
+
 
 <hr />
 <div class="row align-items-sm-stretch d-flex pt-3">
     <h3>Active posts</h3>
 
-    @if (!Model.Any())
+    @if (!Model.Opportunities.Any())
     {
         <p>You have not posted any opportunities yet.</p>
     }
-
-    @foreach (var item in Model)
+    else
     {
 
-        @if (!item.ArchivedStatus)
+        @foreach (var item in Model.Opportunities)
         {
 
-            <div class="col-sm-4 pb-3">
-                <div class="h-100 p-5 bg-light rounded-3 shadow">
-                    <div class="row align-items-center">
-                        <p class="fs-4 fw-bold">
-                            @Html.DisplayFor(modelItem => item.OpportunityName)
-                        </p>
-                    </div>
-                    <div class="row align-items-center">
-                        <p class="text-muted">
-                            Posted: @item.CreateDate.ToString("d")
-                        </p>
-                    </div>
-                    <span class="input-group-btn">
-                        <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    </span>
+            @if (!item.ArchivedStatus)
+            {
+                <div class="col-sm-4 pb-3">
+                    <div class="h-100 p-5 bg-light rounded-3 shadow">
+                        <div class="row align-items-center">
+                            <p class="fs-4 fw-bold">
+                                @Html.DisplayFor(modelItem => item.OpportunityName)
+                            </p>
+                        </div>
+                        <div class="row align-items-center">
+                            <p class="text-muted">
+                                Posted: @item.CreateDate.ToString("d")
+                            </p>
+                        </div>
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        </span>
 
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete, @item.OpportunityName?')" />
-                    </form>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete, @item.OpportunityName?')" />
+                        </form>
 
-                    @*
-                    <!-- Had to remove this cause it wouldnt delete the right one -->
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                        Delete
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Confirm deletion for @item.OpportunityName.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        @*
+                            <!-- Had to remove this cause it wouldnt delete the right one -->
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                Delete
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Confirm deletion for @item.OpportunityName.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        *@
                     </div>
-                    *@
                 </div>
-            </div>
+
+            }
         }
 
-    }
 
+    }
+    
+</div>
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-primary"
+     page-class-selected="btn-info" class="btn-group">
 </div>

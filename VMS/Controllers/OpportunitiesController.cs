@@ -332,10 +332,23 @@ namespace VMS.Controllers
 
         // GET: Opportunities // Managing Opportunities
         [Authorize]
-        public async Task<IActionResult> Index()
+        public ActionResult Index(int page = 1)
         {
-            /*return View(await _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
-            return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+            /*Original */
+            /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
+            
+            /*Pagination*/
+            return View(new OpportunitiesListViewModel
+            {
+
+                Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Skip((page - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()
+                }
+            });
         }
 
         // GET: Opportunities/Details/5
