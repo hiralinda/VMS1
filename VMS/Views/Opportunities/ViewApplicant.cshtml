@@ -1,0 +1,72 @@
+﻿@model VMS.Models.Application
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager;
+
+@{
+    ViewData["Title"] = "View Applicant Profile";
+}
+
+<div class="container">
+
+
+    <section class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    @if (Model.volunteer.ProfilePicture != null)
+                    {
+                        <img id="profilePicture" style="height: 65px; width: 65px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.volunteer.ProfilePicture))">
+                    }
+                    @Model.volunteerName
+                </h2>
+
+                <ul id="tabs" class="nav nav-tabs">
+                    <li class="nav-item"><a href="" data-target="#profile" data-toggle="tab" class="nav-link small text-uppercase active">Profile</a></li>
+                    <li class="nav-item"><a href="" data-target="#contact" data-toggle="tab" class="nav-link small text-uppercase">Contact</a></li>
+                </ul>
+                <br>
+                <div id="tabsContent" class="tab-content">
+
+                    <!--Profile-->
+                    <div id="profile" class="tab-pane fade active show">
+                        <div class="row pb-2">
+                            <div class="col-md-7">
+                                <h4><span class="fw-bold">More</span></h4>
+                                <p>@Model.AboutYou</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Contact-->
+                    <div id="contact" class="tab-pane fade">
+                        <p class="fw-bold">Contact Information</p>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.volunteer.OrganizationName)</li>
+                            <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.volunteer.Email)</li>
+                            <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.volunteer.PhoneNumber)</li>
+                        </ul>
+                        @if (Model.InstagramLink != null)
+                        {
+                            <a class="mb-1" href="@Model.InstagramLink" target="_blank"><i style="color: #DD217B;" class="fa fa-lg fa-instagram fa-2x"></i></a>
+                        }
+                        @if (Model.FacebookLink != null)
+                        {
+                            <a class="mb-1" href="@Model.FacebookLink" target="_blank"><i style="color: #4267B2; " class="fa fa-lg fa-facebook-square fa-2x"></i></a>
+                        }
+                        @if (Model.TwitterLink != null)
+                        {
+                            <a class="mb-1" href="@Model.TwitterLink" target="_blank"><i style="color: #00acee;" class="fa fa-lg fa-twitter-square fa-2x"></i></a>
+                        }
+                        @if (Model.OtherWebsite != null)
+                        {
+                            <a class="mb-1" href="@Model.OtherWebsite" target="_blank">
+                                <i class="fa fa-lg fa-external-link-square fa-2x"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
+</div>

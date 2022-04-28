@@ -18,7 +18,6 @@ namespace VMS.Models
             public ApplicationUser volunteer { get; set; }
             public string volunteerName { get; set; }
             public bool status { get; set; }
-            /*try*/
             public string AboutYou { get; set; }
             public string InstagramLink { get; set; }
             public string FacebookLink { get; set; }

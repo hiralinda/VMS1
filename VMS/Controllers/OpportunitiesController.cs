@@ -749,7 +749,25 @@ namespace VMS.Controllers
             }
 
             return View(opportunity);
-            /*return View();*/
+        }
+
+        // GET: Opportunities/ViewApplicant/5
+        public async Task<IActionResult> ViewApplicant(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Application.Include(t=>t.volunteer)
+                .FirstOrDefaultAsync(m => m.id == id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
         }
     }
 }
