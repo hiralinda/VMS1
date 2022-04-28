@@ -5,8 +5,8 @@
 }
 
 <style>
-    .dropdown-menu{
-        margin-top:.5%;
+    .dropdown-menu {
+        margin-top: .5%;
     }
 </style>
 
@@ -18,91 +18,105 @@
 <div class="row">
     <!--left-->
     <div class="col col-md-3">
-        <h4>Filters</h4>
+
         @using (Html.BeginForm())
         {
-            <p>
-                Search: @Html.TextBox("SearchString", null, new { @class = "form-control" })
-            </p>
+        <p>
+            Search by key word, city, state, zip: @Html.TextBox("SearchString", null, new { @class = "form-control" })
+        </p>
+            <p></p>
         }
-    <span>
-        <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
-        </button>
-        <div class="dropdown-menu">
-            <h6 style="color:black;" class="dropdown-header">Categories</h6>
-            @Html.ActionLink("Advocacy & Human Rights", "List", new { sortOrder = ViewBag.AdvHumSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Animals", "List", new { sortOrder = ViewBag.AnimalSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Comfort the sick", "List", new { sortOrder = ViewBag.ComSickSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Community Support", "List", new { sortOrder = ViewBag.CommunitySortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Computers & Technology", "List", new { sortOrder = ViewBag.CompTechSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Donations", "List", new { sortOrder = ViewBag.DonationSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Education & Literacy", "List", new { sortOrder = ViewBag.EduLitSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Elderly", "List", new { sortOrder = ViewBag.ElderlySortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Help other kids", "List", new { sortOrder = ViewBag.HelpKidsSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Help Refugees", "List", new { sortOrder = ViewBag.HelpRefSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Homeless", "List", new { sortOrder = ViewBag.HomelessParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Save the Planet", "List", new { sortOrder = ViewBag.SavePlanetParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Support our troops", "List", new { sortOrder = ViewBag.SuppTroopsParm }, new { @class = "dropdown-item" })
-        </div>
-    </span>
+        <h4>Sort By</h4>
+        <span>
+            <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+            </button>
+            <div class="dropdown-menu">
+                <h6 style="color:black;" class="dropdown-header">Category</h6>
+                @Html.ActionLink("Advocacy & Human Rights", "List", new { sortOrder = ViewBag.AdvHumSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Animals", "List", new { sortOrder = ViewBag.AnimalSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Comfort the sick", "List", new { sortOrder = ViewBag.ComSickSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Community Support", "List", new { sortOrder = ViewBag.CommunitySortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Computers & Technology", "List", new { sortOrder = ViewBag.CompTechSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Donations", "List", new { sortOrder = ViewBag.DonationSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Education & Literacy", "List", new { sortOrder = ViewBag.EduLitSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Elderly", "List", new { sortOrder = ViewBag.ElderlySortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Help other kids", "List", new { sortOrder = ViewBag.HelpKidsSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Help Refugees", "List", new { sortOrder = ViewBag.HelpRefSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Homeless", "List", new { sortOrder = ViewBag.HomelessParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Save the Planet", "List", new { sortOrder = ViewBag.SavePlanetParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Support our troops", "List", new { sortOrder = ViewBag.SuppTroopsParm }, new { @class = "dropdown-item" })
+            </div>
+        </span>
 
-    <span>
-        <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort by
-        </button>
-        <div class="dropdown-menu">
-            <h6 style="color:black;" class="dropdown-header">Opportunity Types</h6>
+        <span>
+            <button type="button" class="btn btn-outline-primary btn-block ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Type
+            </button>
+            <div class="dropdown-menu">
+                <h6 style="color:black;" class="dropdown-header">Opportunity Types</h6>
 
-            @*
+                @*
         <a type="button" class="dropdown-item" asp-action="">No signups</a>
-            *@
+                *@
 
-            @*
+                @*
         Not sure this is a useful filter
         @Html.ActionLink("Name Desc.", "List", new { sortOrder = ViewBag.NameSortParm }, new { @class = "dropdown-item" })
-            *@
+                *@
 
+                @Html.ActionLink("Happening Soon", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Virtual", "List", new { sortOrder = ViewBag.VirtualSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("In Person", "List", new { sortOrder = ViewBag.InPersonSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Group", "List", new { sortOrder = ViewBag.GroupSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Individual", "List", new { sortOrder = ViewBag.IndividualSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Summer Internship", "List", new { sortOrder = ViewBag.InternSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("One Day Event", "List", new { sortOrder = ViewBag.OneDaySortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Ongoing", "List", new { sortOrder = ViewBag.OngoingSortParm }, new { @class = "dropdown-item" })
+                @Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
 
-            @Html.ActionLink("Virtual", "List", new { sortOrder = ViewBag.VirtualSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("In Person", "List", new { sortOrder = ViewBag.InPersonSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Group", "List", new { sortOrder = ViewBag.GroupSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Individual", "List", new { sortOrder = ViewBag.IndividualSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Summer Internship", "List", new { sortOrder = ViewBag.InternSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("One Day Event", "List", new { sortOrder = ViewBag.OneDaySortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Ongoing", "List", new { sortOrder = ViewBag.OngoingSortParm }, new { @class = "dropdown-item" })
-            @Html.ActionLink("Last created", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
+            </div>
+        </span>
+        <a type="button" class="btn btn-outline-primary btn-block" asp-action="List">All</a>
 
-        </div>
-    </span>
-            <a type="button" class="btn btn-outline-primary btn-block" asp-action="List">All</a>
+    </div>
 
-        </div>
+    <!--right-->
+    <div class="col col-md-9">
+        @if (Model.PagingInfo.TotalItems.Equals(0))
+        {
+            <p class="fs-4 fw-bold">No Results Found</p>
+        }
+        @foreach (var p in Model.Opportunities)
+        {
+            <div class="card rounded mb-5 p-2">
+                <div class="card-body">
+                    <p class="fs-4 fw-bolder" style="color: #00224B;">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
 
-        <!--right-->
-        <div class="col col-md-9">
-            @if (Model.PagingInfo.TotalItems.Equals(0))
-            {
-                <p class="fs-4 fw-bold">No Results Found</p>
-            }
-            @foreach (var p in Model.Opportunities)
-            {
-                <div class="card rounded mb-5 p-2">
-                    <div class="card-body">
-                        <p class="fs-4 fw-bold">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
+                    <p class="font-weight-light">
+                        @if (@p.StartDate.Date.ToString("M") == @p.EndDate.Date.ToString("M"))
+                        {
+                        <p>@p.StartDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
 
-                        <p class="font-weight-light">@Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State)</p><hr />
+                    }
+                    else
+                    {
+                        <p>@p.StartDate.Date.ToString("M") - @p.EndDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
+                    }
+                        </p>
+
                         @if (p.VolunteersApplied == p.VolunteersNeeded)
                         {
-                            <p>This opportunity is full</p><hr />
+                            <p class="fw-bold">This opportunity is full</p>
                         }
                         else
                         {
-                            <p>Volunteers Needed: @(p.VolunteersNeeded - p.VolunteersApplied)</p>
+                            <p>Volunteers Needed: <strong>@(p.VolunteersNeeded - p.VolunteersApplied)</strong></p>
                         }
+                        <hr />
 
+                        <p>@Html.DisplayFor(modelItem => p.Description)</p>
 
-                        @*<p>@Html.DisplayFor(modelItem => p.Description)</p>*@
                         <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.GradeLevel)</span>
                         <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.AgeBracket)</span>
                         <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
@@ -118,41 +132,41 @@
 
                         <!-- Button trigger modal -->
                         @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-            Apply
-        </button>
+                                Apply
+                            </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Would you like to apply for...</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <h5>@item.OpportunityName</h5>
-                        <h6>Start: @item.StartDate</h6>
-                        <h6>End: @item.EndDate</h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a class="btn btn-primary" asp-area="" asp-route-oppID="@item.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                            <!-- Modal -->
+                            <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Would you like to apply for...</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>@item.OpportunityName</h5>
+                                            <h6>Start: @item.StartDate</h6>
+                                            <h6>End: @item.EndDate</h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a class="btn btn-primary" asp-area="" asp-route-oppID="@item.Id" asp-controller="Opportunities" asp-action="Apply">Apply</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
                         <a class="btn btn-outline-info btn-rounded mt-2" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@p.Id">More</a>
                     </div>
                 </div>
 
             }
-            <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
-                 page-class="btn" page-class-normal="btn-outline-primary"
-                 page-class-selected="btn-info" class="btn-group float-right"
-                 page-url-category="@Model.CurrentCategory">
-            </div>
-
+        <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-outline-primary"
+             page-class-selected="btn-info" class="btn-group float-right"
+             page-url-category="@Model.CurrentCategory">
         </div>
+
     </div>
+</div>

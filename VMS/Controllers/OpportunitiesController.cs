@@ -29,7 +29,7 @@ namespace VMS.Controllers
         {
             /*Main Filters*/
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date" : "Date";
 
             ViewBag.VirtualSortParm = sortOrder == "Virtual" ? "Virtual" : "Virtual";
             ViewBag.InPersonSortParm = sortOrder == "InPerson" ? "In Person" : "InPerson";
@@ -59,13 +59,13 @@ namespace VMS.Controllers
             {
                 return View(new OpportunitiesListViewModel
                 {
-                    Opportunities = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString))
+                    Opportunities = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString))
                     .Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString)).Count()
+                        TotalItems = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString)).Count()
                     }
 
                 });
@@ -162,10 +162,10 @@ namespace VMS.Controllers
                         TotalItems = _context.Opportunity.Count()
                     }
                 }),
-                "date_desc" => View(new OpportunitiesListViewModel
+                "Date" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderByDescending(s => s.CreateDate).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunity.OrderBy(s => s.StartDate).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
@@ -319,7 +319,7 @@ namespace VMS.Controllers
                 _ => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus)).OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize) ,
+                    Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus)).OrderByDescending(p => p.CreateDate).Skip((page - 1) * PageSize).Take(PageSize) ,
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,

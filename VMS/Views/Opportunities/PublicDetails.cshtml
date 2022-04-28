@@ -83,7 +83,15 @@
                                     <div class="modal-body">
                                         <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
                                         <h6>Start: @Model.StartDate.Date.ToString("d") @Model.StartTime.ToShortTimeString()</h6>
-                                        <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
+                                        @if (Model.OnGoing)
+                                        {
+                                            <h6>End: Ongoing @Model.EndTime.ToShortTimeString()</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
+                                        }
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -140,7 +148,23 @@
                     <p class="col-md-8 fs-6">None</p>
                 }
                 <p class="fs-5 fw-bold">Event start and end dates</p>
-                <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - @Model.EndDate.Date.ToString("d")</p>
+                @if (Model.OnGoing)
+                { 
+                    <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - Ongoing</p>
+                }
+                else
+                {
+                    @if (@Model.StartDate.Date.ToString("M") == @Model.EndDate.Date.ToString("M"))
+                    {
+                        <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d")</p>
+                    }
+                    else
+                    {
+                        <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - @Model.EndDate.Date.ToString("d")</p>
+                    }
+
+                }
+            <p class="col-md-8 fs-6 fw-bold">@Model.StartTime.ToShortTimeString() - @Model.EndTime.ToShortTimeString()</p>
             </div>
 
             <div class="container-fluid text-sm-right text-right">
