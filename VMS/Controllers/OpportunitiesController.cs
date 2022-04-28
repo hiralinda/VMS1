@@ -18,6 +18,7 @@ namespace VMS.Controllers
     {
         private readonly ApplicationDbContext _context;
         public int PageSize = 15;
+        public int ManagePostsPageSize = 9;
 
         public OpportunitiesController(ApplicationDbContext context)
         {
@@ -312,7 +313,7 @@ namespace VMS.Controllers
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
-                    ItemsPerPage = PageSize,
+                    ItemsPerPage = ManagePostsPageSize,
                     TotalItems = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()
                 }
             });
