@@ -12,38 +12,75 @@
 </ol>
 
 <!--Table-->
-<div class="card">
+<div class="card mb-2">
     <div class="card-header">
         <h2>@ViewData["Title"]</h2>
         <p>These posts are not active.</p>
     </div>
-    <div class="card-body">
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>Opportunity Name</th>
-                    <th>Archived Date</th>
-                    <th>Location</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    @if (Model.Any())
+    {
+        <div class="card-body">
+            <table class="table table-hover table-bordered">
+                <thead>
                     <tr>
-                        <td>@item.OpportunityName</td>
-                        <td>@item.ArchivedDate</td>
-                        <td>@item.City, @item.State</td>
-                        <td>
-                            <a class="btn btn-sm btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                            <input type="submit" asp-action="Delete" asp-route-id="@item.Id" value="Delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
-
-                        </td>
+                        <th>Opportunity Name</th>
+                        <th>Archived Date</th>
+                        <th>Location</th>
+                        <th>Actions</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <a class="btn btn-info" asp-action="Index">Back</a>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OpportunityName</td>
+                            <td>@item.ArchivedDate</td>
+                            <td>@item.City, @item.State</td>
+                            <td>
+                                <span>
+                                    <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn btn-sm btn-warning" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit/Restore</a>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Delete
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Confirm deletion for @item.OpportunityName.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <p class="p-5 fs-4 fw-bold">Empty <i class="fa fa-lg fa-folder-empty-o"></i></p>
+
+    }
 </div>
+<a class="btn btn-info" asp-action="Index">Back</a>
