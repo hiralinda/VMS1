@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VMS.Models.Opportunity>
+﻿@model OpportunitiesListViewModel
 
 @{
     ViewData["Title"] = "Your Posted Opportunities";
@@ -13,22 +13,31 @@
     <li class="breadcrumb-item active">Manage</li>
 </ol>
 <h2 class="">Manage your posts here</h2>
-<span class="input-group-btn">
-    <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
-    <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
-</span>
+<div class="row">
+    <div class="col-md-3">
+        <span class="input-group-btn">
+            <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
+            <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
+        </span>
+    </div>
+</div>
+    
+
+
 
 <hr />
 <div class="row align-items-sm-stretch d-flex pt-3">
     <h3>Active posts</h3>
 
-    @if (!Model.Any())
+    @if (!Model.Opportunities.Any())
     {
         <p>You have not posted any opportunities yet.</p>
     }
-
-    @foreach (var item in Model)
+    else
     {
+
+        @foreach (var item in Model.Opportunities)
+        {
 
         @if (!item.ArchivedStatus)
         {
@@ -88,6 +97,11 @@
             </div>
         }
 
-    }
 
+    }
+    
+</div>
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-primary"
+     page-class-selected="btn-info" class="btn-group">
 </div>

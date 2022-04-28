@@ -299,10 +299,23 @@ namespace VMS.Controllers
 
         // GET: Opportunities // Managing Opportunities
         [Authorize]
-        public async Task<IActionResult> Index()
+        public ActionResult Index(int page = 1)
         {
-            /*return View(await _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
-            return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+            /*Original */
+            /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
+            
+            /*Pagination*/
+            return View(new OpportunitiesListViewModel
+            {
+
+                Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Skip((page - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()
+                }
+            });
         }
 
         // GET: Opportunities/Details/5
@@ -714,7 +727,25 @@ namespace VMS.Controllers
             }
 
             return View(opportunity);
-            /*return View();*/
+        }
+
+        // GET: Opportunities/ViewApplicant/5
+        public async Task<IActionResult> ViewApplicant(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Application.Include(t=>t.volunteer)
+                .FirstOrDefaultAsync(m => m.id == id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
         }
     }
 }

@@ -60,11 +60,6 @@
                     <a type="button" class="dropdown-item" asp-action="">No signups</a>
                 *@
 
-                @*
-                    Not sure this is a useful filter
-                    @Html.ActionLink("Name Desc.", "List", new { sortOrder = ViewBag.NameSortParm }, new { @class = "dropdown-item" })
-                *@
-
                 @Html.ActionLink("Happening Soon", "List", new { sortOrder = ViewBag.DateSortParm }, new { @class = "dropdown-item" })
                 @Html.ActionLink("Virtual", "List", new { sortOrder = ViewBag.VirtualSortParm }, new { @class = "dropdown-item" })
                 @Html.ActionLink("Group", "List", new { sortOrder = ViewBag.GroupSortParm }, new { @class = "dropdown-item" })
