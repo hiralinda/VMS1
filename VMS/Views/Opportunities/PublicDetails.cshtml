@@ -42,7 +42,7 @@
                             <p></p>
                         }
 
-                        @if (User.IsInRole("Admin") || User.IsInRole("Volunteer"))
+                        @if (User.IsInRole("Volunteer"))
                         {
                             <!-- Button trigger modal -->
                             @if (Model.VolunteersNeeded == Model.VolunteersApplied)
