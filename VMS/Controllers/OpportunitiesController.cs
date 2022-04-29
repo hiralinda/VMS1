@@ -54,7 +54,7 @@ namespace VMS.Controllers
             ViewBag.EduLitSortParm = sortOrder == "Education & Literacy" ? "Education & Literacy" : "Education & Literacy";
             ViewBag.ElderlySortParm = sortOrder == "Elderly" ? "Elderly" : "Elderly";
             ViewBag.HelpKidsSortParm = sortOrder == "Help other kids" ? "Help other kids" : "Help other kids";
-
+            ViewBag.HungerSortParm = sortOrder == "Fighting Hunger" ? "Fighting Hunger" : "Fighting Hunger";
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -282,6 +282,17 @@ namespace VMS.Controllers
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
                         TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Help other kids" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                    }
+                }),
+                "Fighting Hunger" => View(new OpportunitiesListViewModel
+                {
+
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Fighting Hunger" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Fighting Hunger" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
                     }
                 }),
                 _ => View(new OpportunitiesListViewModel
