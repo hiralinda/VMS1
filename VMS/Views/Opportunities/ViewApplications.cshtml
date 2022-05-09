@@ -13,9 +13,9 @@
 {
     @foreach (var application in Model)
     {
-        <div class="card">
-            <div class="card-header">
-                Opportunity Name: @application.oppName
+        <div class="card bg-light rounded-3 shadow mb-3">
+            <div class="card-header fw-bolder">
+                @application.oppName
             </div>
             <div class="card-body">
                 <p>Location: @application.oppLocation</p>
@@ -23,11 +23,11 @@
                 <p>Time: @application.oppTime</p>
                 @if (!application.status)
                 {
-                    <p class="text-danger">Not Yet Approved</p>
+                    <p class="text-danger fw-bold">AWAITING APPROVAL</p>
                 }
                 else
                 {
-                    <p class="text-success">Approved</p>
+                    <p class="text-success fw-bold">APPROVED</p>
                 }
                 <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
                     <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
