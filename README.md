@@ -28,7 +28,7 @@ This web application was built for a local not-for-profit organization to connec
 * Danan Hudson
 * Oniel Martin
 
-###### https://volunteenprototype.azurewebsites.net/
+###### https://volunteen.azurewebsites.net/
 
 ## Course & School
 ###### University of North Florida, College of Computing
