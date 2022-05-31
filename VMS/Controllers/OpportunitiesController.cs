@@ -42,7 +42,7 @@ namespace VMS.Controllers
 
             /*Category Sorts*/
             ViewBag.AnimalSortParm = sortOrder == "Animals" ? "animals" : "Animals";
-            ViewBag.AdvHumSortParm = sortOrder == "Advocacy and Human Rights" ? "Advocacy and Human Rights" : "Advocacy and Human Rights";
+            ViewBag.AdvHumSortParm = sortOrder == "Advocacy & Human Rights" ? "Advocacy & Human Rights" : "Advocacy & Human Rights";
             ViewBag.SuppTroopsParm = sortOrder == "Support our troops" ? "Support our troops" : "Support our troops";
             ViewBag.ComSickSortParm = sortOrder == "Comfort the sick" ? "Comfort the sick" : "Comfort the sick";
             ViewBag.SavePlanetParm = sortOrder == "Save the Planet" ? "Save the Planet" : "Save the Planet";
@@ -53,7 +53,7 @@ namespace VMS.Controllers
             ViewBag.DonationSortParm = sortOrder == "Donations" ? "Donations" : "Donations";
             ViewBag.EduLitSortParm = sortOrder == "Education & Literacy" ? "Education & Literacy" : "Education & Literacy";
             ViewBag.ElderlySortParm = sortOrder == "Elderly" ? "Elderly" : "Elderly";
-            ViewBag.HelpKidsSortParm = sortOrder == "Help other kids" ? "Help other kids" : "Help other kids";
+            ViewBag.HelpKidsSortParm = sortOrder == "Help kids" ? "Help kids" : "Help kids";
             ViewBag.HungerSortParm = sortOrder == "Fighting Hunger" ? "Fighting Hunger" : "Fighting Hunger";
 
             if (!String.IsNullOrEmpty(searchString))
@@ -163,15 +163,15 @@ namespace VMS.Controllers
                         TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Support our troops" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
                     }
                 }),
-                "Advocacy and Human Rights" => View(new OpportunitiesListViewModel
+                "Advocacy & Human Rights" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Advocacy and Human Rights" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Advocacy & Human Rights" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Advocacy and Human Rights" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Advocacy & Human Rights" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
                     }
                 }),
                 "Comfort the sick" => View(new OpportunitiesListViewModel
@@ -273,15 +273,15 @@ namespace VMS.Controllers
                         TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Elderly" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
                     }
                 }),
-                "Help other kids" => View(new OpportunitiesListViewModel
+                "Help kids" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Help other kids" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas == "Help kids" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Help other kids" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas == "Help kids" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
                     }
                 }),
                 "Fighting Hunger" => View(new OpportunitiesListViewModel

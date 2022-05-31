@@ -409,7 +409,7 @@
                         <div class="col-md-6 form-group">
                             <label class="control-label">Select a cause area</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas" required>
-                                <option value="Advocacy & HumanRights">Advocacy & Human Rights</option>
+                                <option value="Advocacy & Human Rights">Advocacy & Human Rights</option>
                                 <option value="Animals">Animals</option>
                                 <option value="Comfort the Sick">Comfort the sick</option>
                                 <option value="Community Support">Community Support</option>
@@ -417,7 +417,7 @@
                                 <option value="Donations">Donations</option>
                                 <option value="Education & Literacy">Education & Literacy</option>
                                 <option value="Elderly">Elderly</option>
-                                <option value="Help kids">Help other kids</option>
+                                <option value="Help kids">Help kids</option>
                                 <option value="Help Refugees">Help Refugees</option>
                                 <option value="Homeless">Homeless</option>
                                 <option value="Save the Planet">Save the Planet</option>
@@ -458,7 +458,7 @@
                             <div class="col-sm-4">
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
                                 <input id="DatePicker" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" type="text" required>
-
+                                <p></p>
                                 <label for="appt">Start time for event:</label>
 
                                 @if (!Model.Virtual)
@@ -477,22 +477,22 @@
 
                                 @if (Model.OnGoing)
                                 {
-                                    <div id="EndDatePicker">
-                                        <label asp-for="EndDate" class="control-label">Event end date:</label>
-                                        <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
-
-                                        <label for="appt">Ending time for event:</label>
-                                        @if (!Model.Virtual)
-                                        {
-                                            <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                                   min="00:00" max="24:00">
-                                        }
-                                        else
-                                        {
-                                            <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
-                                                   min="00:00" max="24:00" disabled>
-                                        }
-                                    </div>
+                                <div id="EndDatePicker">
+                                    <label asp-for="EndDate" class="control-label">Event end date:</label>
+                                    <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
+                                    <p></p>
+                                    <label for="appt">Ending time for event:</label>
+                                    @if (!Model.Virtual)
+                                    {
+                                        <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
+                                               min="00:00" max="24:00">
+                                    }
+                                    else
+                                    {
+                                        <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
+                                               min="00:00" max="24:00" disabled>
+                                    }
+                                </div>
                                 }
 
                                 else
@@ -502,6 +502,7 @@
                                         <label asp-for="EndDate" class="control-label">Event end date:</label>
 
                                         <input id="DatePicker2" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="EndDateInput" name="EndDate" type="text" required>
+                                        <p></p>
                                         <label for="appt">Ending time for event:</label>
 
                                         @if (!Model.Virtual)

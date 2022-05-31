@@ -32,45 +32,53 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@item.OpportunityName</td>
-                            <td>@item.ArchivedDate</td>
+                    <tr>
+                        <td>@item.OpportunityName</td>
+                        <td>@item.ArchivedDate</td>
+                        @if (!item.Virtual)
+                        {
                             <td>@item.City, @item.State</td>
-                            <td>
-                                <span>
-                                    <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                                    <a class="btn btn-sm btn-warning" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit/Restore</a>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                                        Delete
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Confirm deletion for @item.OpportunityName.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                                                        <input type="submit" value="Delete" class="btn btn-danger" />
-                                                    </form>
-                                                </div>
+                        }
+                        else
+                        {
+                            <td>Remote</td>
+                        }
+
+                        <td>
+                            <span>
+                                <a class="btn btn-sm btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a class="btn btn-sm btn-warning" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit/Restore</a>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Delete
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Confirm deletion for @item.OpportunityName.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
 
-                                </span>
-                            </td>
-                        </tr>
+                            </span>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
