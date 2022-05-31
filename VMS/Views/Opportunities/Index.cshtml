@@ -1,4 +1,6 @@
 ﻿@model OpportunitiesListViewModel
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Your Posted Opportunities";
@@ -16,12 +18,19 @@
 <div class="row">
     <div class="col-md-3">
         <span class="input-group-btn">
-            <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
+            @if (User.IsInRole("Organization (Verified)"))
+            {
+                <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
+            }
+            else
+            {
+                <a type="button" class="btn btn-success disabled" asp-action="Create">Add New+</a>
+            }
             <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
         </span>
     </div>
 </div>
-    
+
 
 
 
@@ -39,42 +48,42 @@
         @foreach (var item in Model.Opportunities)
         {
 
-        @if (!item.ArchivedStatus)
-        {
+            @if (!item.ArchivedStatus)
+            {
 
-            <div class="col-sm-4 pb-3">
-                <div class="h-100 p-5 bg-light rounded-3 shadow">
-                    <div class="row align-items-center">
-                        <p class="fs-4 fw-bold">
-                            @item.OpportunityName
-                        </p>
-                    </div>
-                    <div class="row align-items-center">
-                        <p class="text-muted">
-                            Posted: @item.CreateDate.ToString("d")
-                        </p>
-                    </div>
-                    <span class="input-group-btn">
-                        <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    </span>
-                    @if (item.EndDate < DateTime.Today && !item.OnGoing)
-                    {
-                        <p class="text-warning fw-bold">Posts where the end date has passed will not be displayed on the Browse page, even when active</p>
-                    }
-                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete, @item.OpportunityName?')" />
-                    </form>
+                <div class="col-sm-4 pb-3">
+                    <div class="h-100 p-5 bg-light rounded-3 shadow">
+                        <div class="row align-items-center">
+                            <p class="fs-4 fw-bold">
+                                @item.OpportunityName
+                            </p>
+                        </div>
+                        <div class="row align-items-center">
+                            <p class="text-muted">
+                                Posted: @item.CreateDate.ToString("d")
+                            </p>
+                        </div>
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" type="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-info" type="button" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        </span>
+                        @if (item.EndDate < DateTime.Today && !item.OnGoing)
+                        {
+                            <p class="text-warning fw-bold">Posts where the end date has passed will not be displayed on the Browse page, even when active</p>
+                        }
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete, @item.OpportunityName?')" />
+                        </form>
 
+                    </div>
                 </div>
-            </div>
-        }
+            }
 
 
         }
     }
-<div/>
-<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-outline-primary"
-     page-class-selected="btn-info" class="btn-group">
-</div>
+    <div />
+    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-primary"
+         page-class-selected="btn-info" class="btn-group">
+    </div>
