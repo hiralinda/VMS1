@@ -18,22 +18,32 @@
                 @application.oppName
             </div>
             <div class="card-body">
-                <p>Location: @application.oppLocation</p>
-                <p>Date: @application.oppDate</p>
-                <p>Time: @application.oppTime</p>
-                @if (!application.status)
+                @if (!application.isVirtual)
                 {
-                    <p class="text-danger fw-bold">AWAITING APPROVAL</p>
+                    <p>Location: @application.oppLocation</p>
                 }
                 else
                 {
-                    <p class="text-success fw-bold">APPROVED</p>
+                    <p>Location: Remote</p>
                 }
-                <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
-                    <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
-                </form>
-                <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
-            </div>
+                <p>Date: @application.oppDate</p>
+                @if (!application.isVirtual)
+                {
+                    <p>Time: @application.oppTime</p>
+                }
+                    @if (!application.status)
+                    {
+                        <p class="text-danger fw-bold">AWAITING APPROVAL</p>
+                    }
+                    else
+                    {
+                        <p class="text-success fw-bold">APPROVED</p>
+                    }
+                    <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
+                        <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
+                    </form>
+                    <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
+                </div>
         </div>
 
     }

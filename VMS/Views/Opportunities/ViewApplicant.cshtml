@@ -31,8 +31,15 @@
                     <div id="profile" class="tab-pane fade active show">
                         <div class="row pb-2">
                             <div class="col-md-7">
-                                <h4><span class="fw-bold">More</span></h4>
-                                <p>@Model.AboutYou</p>
+                                <h4><span class="fw-bold">About this volunteer</span></h4>
+                                @if (Model.AboutYou != null)
+                                {
+                                    <p>@Model.AboutYou</p>
+                                }
+                                else 
+                                {
+                                    <p>This volunteer has yet to add an about section to their profile.</p>
+                                }
                             </div>
                         </div>
                     </div>

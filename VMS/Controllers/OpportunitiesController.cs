@@ -419,6 +419,7 @@ namespace VMS.Controllers
                     
                     application.oppName = application.opportunity.OpportunityName;
                     application.oppID = application.opportunity.Id;
+                    application.isVirtual = application.opportunity.Virtual;
                     application.volsNeeded = application.opportunity.VolunteersNeeded;
                     application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
                     application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");

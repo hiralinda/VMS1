@@ -33,9 +33,25 @@
                         <div class="row pb-2">
                             <div class="col-md-7">
                                 <h3 class="fw-bold">Mission Statement</h3>
-                                <p>@Model.CreateUser.MissionStatement</p>
-                                <h4><span class="fw-bold">More</span></h4>
-                                <p>@Model.CreateUser.AboutYou</p>
+                                @if (Model.CreateUser.MissionStatement != null)
+                                {
+                                    <p>@Model.CreateUser.MissionStatement</p>
+                                }
+                                else
+                                {
+                                    <p>This organization has yet to add a mission statement.</p>
+                                }
+
+                                <h4><span class="fw-bold">About this organization</span></h4>
+                                @if (Model.CreateUser.AboutYou != null)
+                                {
+                                    <p>@Model.CreateUser.AboutYou</p>
+                                }
+                                else
+                                {
+                                    <p>This organization has yet to add an about section.</p>
+                                }
+
                             </div>
                         </div>
                     </div>

@@ -87,19 +87,23 @@
                     <p class="fs-4 fw-bolder" style="color: #00224B;">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
 
                     <p class="font-weight-light">
-                        @if (@p.StartDate.Date.ToString("M") == @p.EndDate.Date.ToString("M"))
+                        @if (@p.StartDate.Date.ToString("M") == @p.EndDate.Date.ToString("M") && !p.Virtual)
                         {
                         <p>@p.StartDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
 
                     }
-                    else if (p.OnGoing)
+                    else if (p.OnGoing && !p.Virtual)
                     {
                         <p>@p.StartDate.Date.ToString("M") - Ongoing <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
 
                     }
-                    else
+                    else if (!p.Virtual)
                     {
                         <p>@p.StartDate.Date.ToString("M") - @p.EndDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
+                    }
+                    else
+                    {
+                        <p>@p.StartDate.Date.ToString("M") - @p.EndDate.Date.ToString("M") <strong class="text-warning">|</strong> Remote</p>
                     }
                         </p>
 
@@ -115,8 +119,14 @@
 
                         <p>@Html.DisplayFor(modelItem => p.Description)</p>
 
-                        <span class="badge bg-primary">Grades: @Html.DisplayFor(modelItem => p.GradeLevel)</span>
-                        <span class="badge bg-primary">Ages: @Html.DisplayFor(modelItem => p.AgeBracket)</span>
+                        @if (p.GradeLevel != "Not applicable")
+                        {
+                            <span class="badge bg-primary">Grades: @Html.DisplayFor(modelItem => p.GradeLevel)</span>
+                        }
+                        @if (p.AgeBracket != "Not applicable")
+                        {
+                            <span class="badge bg-primary">Ages: @Html.DisplayFor(modelItem => p.AgeBracket)</span>
+                        }
                         <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
                         @if (p.Virtual)
                         {

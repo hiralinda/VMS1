@@ -12,37 +12,53 @@
             <div class="row">
                 <form enctype="multipart/form-data" method="post" asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                     <div class="form-group col-md-5">
                         <label asp-for="OpportunityName" class="control-label">Event Name</label>
                         <input asp-for="OpportunityName" class="form-control" required />
                         <span asp-validation-for="OpportunityName" class="text-danger"></span>
                     </div>
+
+                    <div class="row">
+                        <!--Virtual-->
+                        <div class="col-md-3 form-group">
+                            <input type="checkbox" value="True" name="Virtual" id="isVirtualSelected" asp-for="Virtual" />
+                            <Label>Is this a Virtual activity? </Label>
+                        </div>
+
+                        <!--Single or Group activity-->
+                        <div class="col-md-3 form-group">
+                            <input type="checkbox" value="True" name="GroupActivity" asp-for="GroupActivity" />
+                            <Label>Is this a group activity? </Label>
+                        </div>
+                    </div>
+
                     <!--Location-->
                     <div class="form-group col-md-5">
                         <label asp-for="Address1" class="control-label">Address1</label>
-                        <input asp-for="Address1" class="form-control" required />
+                        <input id="address1" asp-for="Address1" class="form-control" required />
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-5">
                         <label asp-for="Address2" class="control-label">Address2</label>
-                        <input asp-for="Address2" class="form-control" />
+                        <input id="address2" asp-for="Address2" class="form-control" />
                         <span asp-validation-for="Address2" class="text-danger"></span>
                     </div>
                     <!--Row-->
                     <div class="row">
                         <div class="col-md-5">
                             <label asp-for="City" class="control-label">City</label>
-                            <input asp-for="City" class="form-control" required />
+                            <input id="cityInput" asp-for="City" class="form-control" required />
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
                         <div class="col-md-3">
                             <label asp-for="State" class="control-label">State</label>
-                            <input asp-for="State" class="form-control" required />
+                            <input id="stateInput" asp-for="State" class="form-control" required />
                             <span asp-validation-for="State" class="text-danger"></span>
                         </div>
                         <div class="col-md-4">
                             <label asp-for="Zip" class="control-label">Zip</label>
-                            <input asp-for="Zip" class="form-control" required />
+                            <input id="zipInput" asp-for="Zip" class="form-control" required />
                             <span asp-validation-for="Zip" class="text-danger"></span>
                         </div>
                     </div>
@@ -308,23 +324,11 @@
                         <div class="col-md-3 form-group">
                             <label class="control-label">What is this post for?</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="TypeOfOpportunity" name="TypeOfOpportunity" required>
-                                <option selected disabled>Select</option>
-                                <option value="Summer Internship">Summer Internship</option>
                                 <option value="One Day">One Day Event</option>
-                                <option value="Long-Term">Long Term Assignment</option>
+                                <option value="Summer Internship">Summer Internship</option>
+                                <option value="Long Term">Long Term Assignment</option>
+                                <option value="Other">Other</option>
                             </select>
-                        </div>
-                        <!--Virtual-->
-                        <div class="col-md-3 form-group">
-                            <input type="checkbox" value="True" name="Virtual" asp-for="Virtual" />
-                            <Label>Is this a Virtual activity? </Label>
-                        </div>
-
-
-                        <!--Single or Group activity-->
-                        <div class="col-md-3 form-group">
-                            <input type="checkbox" value="True" name="GroupActivity" asp-for="GroupActivity" />
-                            <Label>Is this a group activity? </Label>
                         </div>
 
                     </div>
@@ -336,24 +340,24 @@
                         <div class="col-md-5 form-group">
                             <label class="control-label">Select an age group for this event</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="AgeBracket" name="AgeBracket" required>
-                                <option selected disabled>Select</option>
                                 <option value="All Ages">All ages</option>
                                 <option value="5-9">5-9</option>
                                 <option value="10-13">10-13</option>
                                 <option value="14-18">14-18</option>
                                 <option value="18+">18+</option>
+                                <option value="Not applicable">Not applicable</option>
                             </select>
                         </div>
                         <!--Grade Bracket-->
                         <div class="col-md-4 form-group">
                             <label class="control-label">Select a targeted grade level group</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="GradeLevel" name="GradeLevel" required>
-                                <option selected disabled>Select</option>
                                 <option value="All Levels">All levels</option>
                                 <option value="K-5">K-5</option>
                                 <option value="6-8">6-8</option>
                                 <option value="9-12">9-12</option>
                                 <option value="College & Higher">College & Higher</option>
+                                <option value="Not applicable">Not applicable</option>
                             </select>
                         </div>
 
@@ -371,7 +375,6 @@
                         <div class="col-md-6 form-group">
                             <label class="control-label">Select a cause area</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas">
-                                <option selected>Select</option>
                                 <option value="Advocacy & Human Rights">Advocacy & Human Rights</option>
                                 <option value="Animals">Animals</option>
                                 <option value="Comfort the Sick">Comfort the sick</option>
@@ -406,13 +409,19 @@
                     <!--Event start and end dates-->
                     <div class="form-group mt-3">
                         <div class="row">
+                            <div class="col-md-4">
+                                <label>Ongoing Event</label>
+                                <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-4">
 
                                 <label asp-for="StartDate" class="control-label">Event start date:</label>
                                 <input id="DatePicker" name="StartDate" type="text" required>
 
                                 <label for="appt">Start time for event:</label>
-                                <input type="time" value="00:00" name="StartTime"
+                                <input id="startTimeInput" type="time" value="00:00" name="StartTime"
                                        min="00:00" max="24:00" required>
 
                             </div>
@@ -424,16 +433,14 @@
                                     <input id="DatePicker2" class="EndDateInput" name="EndDate" type="text" required>
 
                                     <label for="appt">Ending time for event:</label>
-                                    <input type="time" value="00:00" name="EndTime"
+                                    <input id="endTimeInput" type="time" value="00:00" name="EndTime"
                                            min="00:00" max="24:00">
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <label>Ongoing Event</label>
-                                <input type="checkbox" name="OnGoing" value="True" id="isOnGoingSelected" asp-for="OnGoing" />
-                            </div>
+
                         </div>
+
                     </div>
 
 
@@ -465,8 +472,60 @@
         if ($('#isOnGoingSelected').is(':checked') == true) {
             $('.EndDateInput').prop('disabled', true);
             $('.EndDateInput').prop('required', false);
+            $('.EndDateInput').val('');
         } else {
             $('.EndDateInput').val('').prop('disabled', false);
+        }
+    });
+</script>
+<script>
+
+    // Disable features for virtual opportunity
+    $('#isVirtualSelected').change(function () {
+        if ($('#isVirtualSelected').is(':checked') == true) {
+
+            $('#address1').val('Virtual');
+            $('#address1').prop('disabled', true);
+            $('#address1').prop('required', false);
+
+            $('#address2').prop('disabled', true);
+            $('#address2').val('');
+            $('#address2').prop('required', false);
+
+            $('#stateInput').prop('disabled', true);
+            $('#stateInput').val('');
+            $('#stateInput').prop('required', false);
+
+            $('#cityInput').prop('disabled', true);
+            $('#cityInput').val('');
+            $('#cityInput').prop('required', false);
+
+            $('#zipInput').prop('disabled', true);
+            $('#zipInput').val('');
+            $('#zipInput').prop('required', false);
+
+            $('#endTimeInput').prop('disabled', true);
+            $('#endTimeInput').val('');
+            $('#endTimeInput').prop('required', false);
+
+            $('#startTimeInput').prop('disabled', true);
+            $('#startTimeInput').val('');
+            $('#startTimeInput').prop('required', false);
+        } else {
+
+            $('#address1').prop('disabled', false);
+
+            $('#address2').val('').prop('disabled', false);
+
+            $('#stateInput').val('').prop('disabled', false);
+
+            $('#cityInput').val('').prop('disabled', false);
+
+            $('#zipInput').val('').prop('disabled', false);
+
+            $('#startTimeInput').val('').prop('disabled', false);
+
+            $('#endTimeInput').val('').prop('disabled', false);
         }
     });
 </script>

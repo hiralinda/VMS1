@@ -21,7 +21,15 @@
                         }
 
                     </h1>
-                    <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
+                    @if (Model.Virtual)
+                    {
+                        <p class="lead col-md-8 fs-4">Remote</p>
+                    }
+                    else
+                    {
+                        <p class="lead col-md-8 fs-4">@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State)</p>
+                    }
+
                     <p class="lead col-md-8 fs-4">
                         @if (Model.VolunteersNeeded == Model.VolunteersApplied)
                         {
@@ -82,14 +90,49 @@
                                     </div>
                                     <div class="modal-body">
                                         <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
-                                        <h6>Start: @Model.StartDate.Date.ToString("d") @Model.StartTime.ToShortTimeString()</h6>
-                                        @if (Model.OnGoing)
+
+                                        @if (!Model.Virtual)
                                         {
-                                            <h6>End: Ongoing @Model.EndTime.ToShortTimeString()</h6>
+                                            <h6>
+                                                Start:
+                                                @Model.StartDate.Date.ToString("d")
+                                                @Model.StartTime.ToShortTimeString()
+                                            </h6>
+                                            @if (Model.OnGoing)
+                                            {
+                                                <h6>
+                                                    Ongoing
+                                                    @Model.EndTime.ToShortTimeString()
+                                                </h6>
+                                            }
+                                            else
+                                            {
+                                                <h6>
+                                                    End:
+                                                    @Model.EndDate.Date.ToString("d")
+                                                    @Model.EndTime.ToShortTimeString()
+                                                </h6>
+                                            }
                                         }
                                         else
                                         {
-                                            <h6>End: @Model.EndDate.Date.ToString("d") @Model.EndTime.ToShortTimeString()</h6>
+                                            <h6>
+                                                Start:
+                                                @Model.StartDate.Date.ToString("d")
+                                            </h6>
+                                            @if (Model.OnGoing)
+                                            {
+                                                <h6>
+                                                    Ongoing
+                                                </h6>
+                                            }
+                                            else
+                                            {
+                                                <h6>
+                                                    End:
+                                                    @Model.EndDate.Date.ToString("d")
+                                                </h6>
+                                            }
                                         }
 
                                     </div>
@@ -131,12 +174,13 @@
                 }
 
 
+                @if (Model.GradeLevel != "Not applicable")
+                {<p class="fs-4 fw-bold">Grade Level</p>
+                    <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>}
 
-                <p class="fs-4 fw-bold">Grade Level</p>
-                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.GradeLevel)</p>
-
-                <p class="fs-4 fw-bold">Age</p>
-                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.AgeBracket)</p>
+                @if (Model.AgeBracket != "Not applicable")
+                {<p class="fs-4 fw-bold">For Ages</p>
+                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.AgeBracket)</p>}
 
                 <p class="fs-5 fw-bold">General Requirements</p>
                 @if (Model.Requirements != null)
@@ -149,7 +193,7 @@
                 }
                 <p class="fs-5 fw-bold">Event start and end dates</p>
                 @if (Model.OnGoing)
-                { 
+                {
                     <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - Ongoing</p>
                 }
                 else
@@ -164,7 +208,11 @@
                     }
 
                 }
-            <p class="col-md-8 fs-6 fw-bold">@Model.StartTime.ToShortTimeString() - @Model.EndTime.ToShortTimeString()</p>
+                @if (!Model.Virtual)
+                {
+                    <p class="col-md-8 fs-6 fw-bold">@Model.StartTime.ToShortTimeString() - @Model.EndTime.ToShortTimeString()</p>
+
+                }
             </div>
 
             <div class="container-fluid text-sm-right text-right">
@@ -204,34 +252,44 @@
                     </a>
                 }
 
-                <div class="row align-items-md-stretch mt-3">
-                    <div class="col-md-6">
-                        <p class="fw-bold">Location</p>
+            <div class="row align-items-md-stretch mt-3">
+                <div class="col-md-6">
+                    <p class="fw-bold">Contact Information</p>
+                    <ul class="fa-ul">
+                        <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.OrganizationName)</li>
+                        <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
+                        <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
+                    </ul>
+
+                </div>
+                <div class="col-md-6">
+                    <p class="fw-bold">Location</p>
+                    @if (!Model.Virtual)
+                    {
                         <p class="">@Html.DisplayFor(model => model.Address1)</p>
                         @if (Model.Address2 != null)
                         {
                             <p class="text-uppercase">Address 2: @Html.DisplayFor(model => model.Address2)</p>
                         }
                         <p>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.Zip)</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="fw-bold">Contact Information</p>
-                        <ul class="fa-ul">
-                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.CreateUser.OrganizationName)</li>
-                            <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.CreateUser.Email)</li>
-                            <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.CreateUser.PhoneNumber)</li>
-                        </ul>
-
-                    </div>
+                    }
+                    else
+                    {
+                        <p>This opportunity is virtual and therefore does not have a physical location.</p>
+                    }
                 </div>
-                <div class="row align-items-md-stretch mt-3">
+            </div>
+            <div class="row align-items-md-stretch mt-3">
+                <div class="col-md-6">
+                    <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
+                </div>
+                @if (!Model.Virtual)
+                {
                     <div class="col-md-6">
                         <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>
                     </div>
-                    <div class="col-md-6">
-                        <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
-                    </div>
-                </div>
+                }
+            </div>
 
             </div>
         </div>
