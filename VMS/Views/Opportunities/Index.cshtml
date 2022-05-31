@@ -1,6 +1,4 @@
 ﻿@model OpportunitiesListViewModel
-@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<ApplicationUser> signInManager;
 
 @{
     ViewData["Title"] = "Your Posted Opportunities";
@@ -18,14 +16,7 @@
 <div class="row">
     <div class="col-md-3">
         <span class="input-group-btn">
-            @if (User.IsInRole("Organization (Verified)"))
-            {
-                <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
-            }
-            else
-            {
-                <a type="button" class="btn btn-success disabled" asp-action="Create">Add New+</a>
-            }
+            <a type="button" class="btn btn-success" asp-action="Create">Add New+</a>
             <a type="button" class="btn btn-warning" asp-action="ViewArchived">View Archived</a>
         </span>
     </div>
