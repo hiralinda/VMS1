@@ -10,7 +10,7 @@
 @if (User.IsInRole("Organization (Verified)") || User.IsInRole("Organization"))
 {
     <h4>@ViewData["Title"] organization.</h4>
-    <p>Write & edit information about your company here! This information will be presented on your public posts.</p>
+    <p>Write and edit information about your company here! This information will be presented on your public posts.</p>
     <div class="row">
         <div class="col-md-9">
             <form id="about-you-form" method="post" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
 else if (User.IsInRole("Volunteer"))
 {
     <h4>@ViewData["Title"] experiences.</h4>
-    <p>Write & edit information about yourself here! This information will be presented on your public profile.</p>
+    <p>Write and edit information about yourself here! This information will be presented on your public profile.</p>
     <div class="row">
         <div class="col-md-9">
             <form id="about-you-form" method="post" enctype="multipart/form-data">
