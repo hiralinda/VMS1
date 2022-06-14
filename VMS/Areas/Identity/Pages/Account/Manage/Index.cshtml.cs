@@ -62,6 +62,12 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
             public int Age {get; set;}
 
+            [Display(Name = "User Name")]
+            public string userName { get; set; }
+
+            [Display(Name = "Email")]
+            public string email { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -82,6 +88,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var age = today.Year - DoB.Year;
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var email = await _userManager.GetEmailAsync(user);
 
             Username = userName;
 
@@ -96,7 +103,9 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
                 Address = address,
                 Zip = zip,
                 dob = DoB,
-                Age = age
+                Age = age,
+                userName = userName,
+                email = email
             };
         }
 
@@ -135,6 +144,8 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var profilePicture = user.ProfilePicture;
             var address = user.address;
             var zip = user.zip;
+            var userName = user.UserName;
+            var email = user.Email;
 
             if (Request.Form.Files.Count > 0)
             {
@@ -187,6 +198,23 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             {
                 user.OrganizationName = Input.nonprofitName;
                 await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.userName != userName)
+            {
+                user.UserName = Input.userName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            var EmailAddress = await _userManager.GetEmailAsync(user);
+            if (Input.email != EmailAddress)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, Input.email);
+                if (!setEmailResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set email address.";
+                    return RedirectToPage();
+                }
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

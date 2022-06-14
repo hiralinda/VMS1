@@ -16,8 +16,15 @@
         <form id="profile-form" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <label asp-for="Input.userName"></label>
+                <input asp-for="Input.userName" class="form-control" />
+                <span asp-validation-for="Input.userName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.email"></label>
+                <input asp-for="Input.email" class="form-control" />
+                <span asp-validation-for="Input.email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -60,13 +67,13 @@
                     </div>
                 </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <label asp-for="Input.school"></label>
-                            <input asp-for="Input.school" class="form-control" />
-                            <span asp-validation-for="Input.school" class="text-danger"></span>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <label asp-for="Input.school"></label>
+                        <input asp-for="Input.school" class="form-control" />
+                        <span asp-validation-for="Input.school" class="text-danger"></span>
                     </div>
+                </div>
 
             }
 
