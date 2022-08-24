@@ -36,7 +36,7 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Display(Name = "Nonprofit Name")]
-            public string nonprofitName { get; set; }
+            public string NonprofitName { get; set; }
 
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
@@ -54,19 +54,19 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             public string Zip { get; set; }
 
             [Display(Name = "School")]
-            public string school { get; set; }
+            public string School { get; set; }
 
-            public bool isStudent { get; set; }
+            public bool IsStudent { get; set; }
 
-            public DateTime dob { get; set; }
+            public DateTime Dob { get; set; }
 
             public int Age {get; set;}
 
             [Display(Name = "User Name")]
-            public string userName { get; set; }
+            public string UserName { get; set; }
 
             [Display(Name = "Email")]
-            public string email { get; set; }
+            public string Email { get; set; }
 
             [Phone]
             [Display(Name = "Phone number")]
@@ -79,13 +79,13 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             var lastName = user.LastName;
             var nonprofitName = user.OrganizationName;
             var profilePicture = user.ProfilePicture;
-            var address = user.address;
-            var zip = user.zip;
-            var school = user.school;
-            var isStudent = user.isStudent;
-            var DoB = user.birthdate;
+            var address = user.Address;
+            var zip = user.Zip;
+            var school = user.School;
+            var isStudent = user.IsStudent;
+            var doB = user.Birthdate;
             var today = DateTime.Today;
-            var age = today.Year - DoB.Year;
+            var age = today.Year - doB.Year;
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var email = await _userManager.GetEmailAsync(user);
@@ -95,17 +95,17 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                nonprofitName = nonprofitName,
-                school = school,
+                NonprofitName = nonprofitName,
+                School = school,
                 FirstName = firstName,
                 LastName = lastName,
                 ProfilePicture = profilePicture,
                 Address = address,
                 Zip = zip,
-                dob = DoB,
+                Dob = doB,
                 Age = age,
-                userName = userName,
-                email = email
+                UserName = userName,
+                Email = email
             };
         }
 
@@ -136,14 +136,14 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var school = user.school;
+            var school = user.School;
             var nonprofitName = user.OrganizationName;
-            var isStudent = user.isStudent;
+            var isStudent = user.IsStudent;
             var firstName = user.FirstName;
             var lastName = user.LastName;
             var profilePicture = user.ProfilePicture;
-            var address = user.address;
-            var zip = user.zip;
+            var address = user.Address;
+            var zip = user.Zip;
             var userName = user.UserName;
             var email = user.Email;
 
@@ -172,44 +172,44 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
             if (Input.Address != address)
             {
-                user.address = Input.Address;
+                user.Address = Input.Address;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.school != school)
+            if (Input.School != school)
             {
-                user.school = Input.school;
+                user.School = Input.School;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.isStudent != isStudent)
+            if (Input.IsStudent != isStudent)
             {
-                user.isStudent = Input.isStudent;
+                user.IsStudent = Input.IsStudent;
                 await _userManager.UpdateAsync(user);
             }
 
             if (Input.Zip != zip)
             {
-                user.zip = Input.Zip;
+                user.Zip = Input.Zip;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.nonprofitName != nonprofitName)
+            if (Input.NonprofitName != nonprofitName)
             {
-                user.OrganizationName = Input.nonprofitName;
+                user.OrganizationName = Input.NonprofitName;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.userName != userName)
+            if (Input.UserName != userName)
             {
-                user.UserName = Input.userName;
+                user.UserName = Input.UserName;
                 await _userManager.UpdateAsync(user);
             }
 
-            var EmailAddress = await _userManager.GetEmailAsync(user);
-            if (Input.email != EmailAddress)
+            var emailAddress = await _userManager.GetEmailAsync(user);
+            if (Input.Email != emailAddress)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, Input.email);
+                var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
                 if (!setEmailResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set email address.";

@@ -1,6 +1,6 @@
 ﻿@model VMS.Models.Application
 @using Microsoft.AspNetCore.Identity;
-@inject SignInManager<ApplicationUser> signInManager;
+@inject SignInManager<ApplicationUser> SignInManager;
 
 @{
     ViewData["Title"] = "View Applicant Profile";
@@ -13,11 +13,11 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>
-                    @if (Model.volunteer.ProfilePicture != null)
+                    @if (Model.Volunteer.ProfilePicture != null)
                     {
-                        <img id="profilePicture" style="height: 65px; width: 65px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.volunteer.ProfilePicture))">
+                        <img id="profilePicture" style="height: 65px; width: 65px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.Volunteer.ProfilePicture))">
                     }
-                    @Model.volunteerName
+                    @Model.VolunteerName
                 </h2>
 
                 <ul id="tabs" class="nav nav-tabs">
@@ -48,9 +48,9 @@
                     <div id="contact" class="tab-pane fade">
                         <p class="fw-bold">Contact Information</p>
                         <ul class="fa-ul">
-                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.volunteer.OrganizationName)</li>
-                            <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.volunteer.Email)</li>
-                            <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.volunteer.PhoneNumber)</li>
+                            <li><span class="fa-li"><i class="fa fa-user"></i></span>@Html.DisplayFor(model => model.Volunteer.OrganizationName)</li>
+                            <li><span class="fa-li"><i class="fa fa-envelope"></i></span>@Html.DisplayFor(model => model.Volunteer.Email)</li>
+                            <li><span class="fa-li"><i class="fa fa-phone"></i></span>@Html.DisplayFor(model => model.Volunteer.PhoneNumber)</li>
                         </ul>
                         @if (Model.InstagramLink != null)
                         {

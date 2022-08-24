@@ -15,23 +15,23 @@
     {
         <div class="card bg-light rounded-3 shadow mb-3">
             <div class="card-header fw-bolder">
-                @application.oppName
+                @application.OppName
             </div>
             <div class="card-body">
-                @if (!application.isVirtual)
+                @if (!application.IsVirtual)
                 {
-                    <p>Location: @application.oppLocation</p>
+                    <p>Location: @application.OppLocation</p>
                 }
                 else
                 {
                     <p>Location: Remote</p>
                 }
-                <p>Date: @application.oppDate</p>
-                @if (!application.isVirtual)
+                <p>Date: @application.OppDate</p>
+                @if (!application.IsVirtual)
                 {
-                    <p>Time: @application.oppTime</p>
+                    <p>Time: @application.OppTime</p>
                 }
-                    @if (!application.status)
+                    @if (!application.Status)
                     {
                         <p class="text-danger fw-bold">AWAITING APPROVAL</p>
                     }
@@ -39,10 +39,10 @@
                     {
                         <p class="text-success fw-bold">APPROVED</p>
                     }
-                    <form asp-action="withdrawApplication" asp-route-id="@application.id" method="post">
+                    <form asp-action="withdrawApplication" asp-route-id="@application.Id" method="post">
                         <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
                     </form>
-                    <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.oppID">View Full Opportunity</a>
+                    <a style="margin-top:1%" class="btn btn-outline-info btn-rounded" asp-area="" asp-controller="Opportunities" asp-action="PublicDetails" asp-route-id="@application.OppId">View Full Opportunity</a>
                 </div>
         </div>
 

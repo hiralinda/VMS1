@@ -10,11 +10,11 @@ namespace VMS.Models.ViewModels
         public string Id { get; set; }
         public string Email { get; set; }
         public IEnumerable<string> Roles { get; set; }
-        public string zip { get; set; }
-        public string address { get; set; }
-        public string phone {get; set;}
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string nonprofitName { get; set; }
+        public string Zip { get; set; }
+        public string Address { get; set; }
+        public string Phone {get; set;}
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string NonprofitName { get; set; }
     }
 }

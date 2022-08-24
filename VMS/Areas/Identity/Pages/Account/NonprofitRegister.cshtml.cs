@@ -96,13 +96,13 @@ namespace VMS.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 MailAddress address = new MailAddress(Input.Email);
-                string UserName = address.User;
+                string userName = address.User;
                 var user = new ApplicationUser
                 {
-                    UserName = UserName,
+                    UserName = userName,
                     Email = Input.Email,
-                    address = Input.Address,
-                    zip = Input.Zip,
+                    Address = Input.Address,
+                    Zip = Input.Zip,
                     PhoneNumber = Input.PhoneNumber,
                     OrganizationName = Input.NonprofitName
                 };

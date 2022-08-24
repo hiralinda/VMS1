@@ -373,9 +373,9 @@ namespace VMS.Controllers
         }
 
         // POST: Opportunities/ShowSearchResults
-        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        public async Task<IActionResult> ShowSearchResults(String searchPhrase)
         {
-            return View("Browse", await _context.Opportunity.Where( j => j.OpportunityName.Contains(SearchPhrase)).ToListAsync());
+            return View("Browse", await _context.Opportunity.Where( j => j.OpportunityName.Contains(searchPhrase)).ToListAsync());
         }
 
         // POST: Opportunities/MostRecent
@@ -402,9 +402,9 @@ namespace VMS.Controllers
 
         // GET: Application
         [Authorize]
-        public async Task<IActionResult> Apply(Application application, int? oppID)
+        public async Task<IActionResult> Apply(Application application, int? oppId)
         {
-            if (_context.Application.Where(t => (t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.opportunity.Id == oppID)).ToList().Any())
+            if (_context.Application.Where(t => (t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.Opportunity.Id == oppId)).ToList().Any())
             {
                 TempData["message"] = $"You have already applied to this opportunity!";
                 return RedirectToAction(nameof(List));
@@ -414,26 +414,26 @@ namespace VMS.Controllers
                 if (ModelState.IsValid)
                 {
                     var userId = User.Id();
-                    application.volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                    application.opportunity = await _context.Opportunity.FindAsync(oppID);
+                    application.Volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                    application.Opportunity = await _context.Opportunity.FindAsync(oppId);
                     
-                    application.oppName = application.opportunity.OpportunityName;
-                    application.oppID = application.opportunity.Id;
-                    application.isVirtual = application.opportunity.Virtual;
-                    application.volsNeeded = application.opportunity.VolunteersNeeded;
-                    application.volunteerName = application.volunteer.FirstName + " " + application.volunteer.LastName;
-                    application.oppDate = application.opportunity.StartDate.Date.ToString("d") + " - " + application.opportunity.EndDate.Date.ToString("d");
-                    application.oppTime = application.opportunity.StartTime.ToShortTimeString() + " - " + application.opportunity.EndTime.ToShortTimeString();
-                    application.oppLocation = application.opportunity.City + ", " + application.opportunity.State + ", " + application.opportunity.Zip + " at " +
-                        application.opportunity.Address1 + " " + application.opportunity.Address2;
+                    application.OppName = application.Opportunity.OpportunityName;
+                    application.OppId = application.Opportunity.Id;
+                    application.IsVirtual = application.Opportunity.Virtual;
+                    application.VolsNeeded = application.Opportunity.VolunteersNeeded;
+                    application.VolunteerName = application.Volunteer.FirstName + " " + application.Volunteer.LastName;
+                    application.OppDate = application.Opportunity.StartDate.Date.ToString("d") + " - " + application.Opportunity.EndDate.Date.ToString("d");
+                    application.OppTime = application.Opportunity.StartTime.ToShortTimeString() + " - " + application.Opportunity.EndTime.ToShortTimeString();
+                    application.OppLocation = application.Opportunity.City + ", " + application.Opportunity.State + ", " + application.Opportunity.Zip + " at " +
+                        application.Opportunity.Address1 + " " + application.Opportunity.Address2;
 
                     /*try - this info wasnt pulling from the volunteer property in application so I added in here*/
-                    application.AboutYou = application.volunteer.AboutYou;
-                    application.InstagramLink = application.volunteer.InstagramLink;
-                    application.FacebookLink = application.volunteer.FacebookLink;
-                    application.TwitterLink = application.volunteer.TwitterLink;
-                    application.OtherWebsite = application.volunteer.OtherWebsite;
-                    application.School = application.volunteer.OtherWebsite;
+                    application.AboutYou = application.Volunteer.AboutYou;
+                    application.InstagramLink = application.Volunteer.InstagramLink;
+                    application.FacebookLink = application.Volunteer.FacebookLink;
+                    application.TwitterLink = application.Volunteer.TwitterLink;
+                    application.OtherWebsite = application.Volunteer.OtherWebsite;
+                    application.School = application.Volunteer.OtherWebsite;
 
 
                     _context.Add(application);
@@ -573,48 +573,48 @@ namespace VMS.Controllers
         public async Task<IActionResult> ViewApplications()
         {
 
-            return View(await _context.Application.Where(t => t.volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.opportunity.ArchivedStatus).ToListAsync());
+            return View(await _context.Application.Where(t => t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.Opportunity.ArchivedStatus).ToListAsync());
 
         }
 
         public async Task<IActionResult> ManageApplicants()
         {
 
-            List<Application> applications = await _context.Application.Where(t => t.opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.opportunity.ArchivedStatus).OrderByDescending(t => t.oppName).ToListAsync();
+            List<Application> applications = await _context.Application.Where(t => t.Opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.Opportunity.ArchivedStatus).OrderByDescending(t => t.OppName).ToListAsync();
 
             return View(applications);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> ApproveApplicant(int ApplicationID, Application application, Opportunity opportunity)
+        public async Task<IActionResult> ApproveApplicant(int applicationId, Application application, Opportunity opportunity)
         {
             if(ModelState.IsValid)
             {
-                application = await _context.Application.FindAsync(ApplicationID);
-                opportunity = await _context.Opportunity.FindAsync(application.oppID);
+                application = await _context.Application.FindAsync(applicationId);
+                opportunity = await _context.Opportunity.FindAsync(application.OppId);
                 int volunteersSignedUp = opportunity.VolunteersApplied;
 
                 if(volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
-                    if (application.status == true)
+                    if (application.Status == true)
                     {
-                        application.status = false;
+                        application.Status = false;
                         volunteersSignedUp--;
                         opportunity.VolunteersApplied = volunteersSignedUp;
                     }
                     else
                     {
-                        application.status = true;
+                        application.Status = true;
                         volunteersSignedUp++;
                         opportunity.VolunteersApplied = volunteersSignedUp;
                     }
                 }
                 else
                 {
-                    if (application.status == true)
+                    if (application.Status == true)
                     {
-                        application.status = false;
+                        application.Status = false;
                         volunteersSignedUp--;
                         opportunity.VolunteersApplied = volunteersSignedUp;
                     }
@@ -637,13 +637,13 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost, ActionName("withdrawApplication")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> withdrawApplication(int id, Opportunity opportunity)
+        public async Task<IActionResult> WithdrawApplication(int id, Opportunity opportunity)
         {
 
             var application = await _context.Application.FindAsync(id);
-            opportunity = await _context.Opportunity.FindAsync(application.oppID);
+            opportunity = await _context.Opportunity.FindAsync(application.OppId);
             int volunteersSignedUp = opportunity.VolunteersApplied;
-            if (application.status == true)
+            if (application.Status == true)
             {
                 volunteersSignedUp--;
                 opportunity.VolunteersApplied = volunteersSignedUp;
@@ -750,8 +750,8 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var application = await _context.Application.Include(t=>t.volunteer)
-                .FirstOrDefaultAsync(m => m.id == id);
+            var application = await _context.Application.Include(t=>t.Volunteer)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (application == null)
             {

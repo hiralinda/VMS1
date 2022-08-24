@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<ApplicationUser> signInManager;
+@inject SignInManager<ApplicationUser> SignInManager;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -18,7 +18,7 @@
 </div>
 
 <!-- Register Cards Only shown if user is not logged in -->
-@if (!signInManager.IsSignedIn(User))
+@if (!SignInManager.IsSignedIn(User))
 {
 
     <div class="row gx-4 gx-lg-5">
@@ -68,7 +68,7 @@
         <div class="card-img-overlay">
             <h5 class="card-title fw-bold m-4">FOLLOW OUR BLOG</h5>
             <p class="card-text m-4 mt-1">Want to stay “up-to-date” with VolunTEEN? Check out our VolunTEEN Blog!</p>
-            <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-controller="Home" asp-action="VolunTEENBlog">The VolunTEEN Blog</a>
+            <a class="m-4 mt-1 btn btn-outline-primary text-decoration-none text-white" asp-controller="Home" asp-action="VolunTeenBlog">The VolunTEEN Blog</a>
         </div>
     </div>
 </div>

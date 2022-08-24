@@ -39,15 +39,15 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label asp-for="title" class="col-form-label">Title</label>
-                            <input asp-for="title" type="text" class="form-control" id="title-text">
+                            <label asp-for="Title" class="col-form-label">Title</label>
+                            <input asp-for="Title" type="text" class="form-control" id="title-text">
                         </div>
                         <div class="form-group">
-                            <label asp-for="body" class="col-form-label">Body Text</label>
-                            <textarea asp-for="body" rows="8" class="form-control" id="body-text"></textarea>
+                            <label asp-for="Body" class="col-form-label">Body Text</label>
+                            <textarea asp-for="Body" rows="8" class="form-control" id="body-text"></textarea>
                         </div>
                         <div>
-                            <input asp-for="image" class="form-control" name="files" type="file" />
+                            <input asp-for="Image" class="form-control" name="files" type="file" />
                         </div>
 
                     </div>
@@ -70,24 +70,24 @@
     {
 
         <div class="card mb-4" style="width:450px; margin:auto;">
-            @if (item.image != null)
+            @if (item.Image != null)
             {
-                <img class="card-img-top p-0" style="height: 400px; width: 100%; margin: auto; object-fit:cover; " src="data:image/*;base64,@(Convert.ToBase64String(item.image))" alt="Card image cap">
+                <img class="card-img-top p-0" style="height: 400px; width: 100%; margin: auto; object-fit:cover; " src="data:image/*;base64,@(Convert.ToBase64String(item.Image))" alt="Card image cap">
             }
             <div class="card-body">
-                <h5 class="card-title fw-bold">@item.title</h5>
+                <h5 class="card-title fw-bold">@item.Title</h5>
                 @if (item.ProfilePicture != null)
                 {
                     <img id="profilePicture" style="height: 30px; width: 30px; border-radius: 50%; object-fit:cover;" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(item.ProfilePicture))">
                 }
-                @item.createUserName
-                <p class="card-text">@item.body</p>
-                <p class="card-text"><small class="text-muted">Posted @item.datePosted.Date.ToString("d")</small></p>
+                @item.CreateUserName
+                <p class="card-text">@item.Body</p>
+                <p class="card-text"><small class="text-muted">Posted @item.DatePosted.Date.ToString("d")</small></p>
 
                 @if (User.IsInRole("Admin"))
                 {
                     <div class="card-footer">
-                        <form asp-action="deletePost" asp-route-id="@item.id" method="post">
+                        <form asp-action="deletePost" asp-route-id="@item.Id" method="post">
                             <input type="submit" value="Delete Post" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
                         </form>
                     </div>

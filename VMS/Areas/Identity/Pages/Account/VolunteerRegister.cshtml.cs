@@ -56,11 +56,11 @@ namespace VMS.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Check this box if you are currently a student")]
-            public bool isStudent { get; set; }
+            public bool IsStudent { get; set; }
 
             [Required]
             [Display(Name = "Date of Birth")]
-            public DateTime birthdate { get; set; }
+            public DateTime Birthdate { get; set; }
 
             [Required]
             [Display(Name = "Zip")]
@@ -109,15 +109,15 @@ namespace VMS.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 MailAddress address = new MailAddress(Input.Email);
-                string UserName = address.User;
+                string userName = address.User;
                 var user = new ApplicationUser
                 {
-                    UserName = UserName,
-                    isStudent = Input.isStudent,
-                    birthdate = Input.birthdate,
+                    UserName = userName,
+                    IsStudent = Input.IsStudent,
+                    Birthdate = Input.Birthdate,
                     Email = Input.Email,
-                    address = Input.Address,
-                    zip = Input.Zip,
+                    Address = Input.Address,
+                    Zip = Input.Zip,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     PhoneNumber = Input.PhoneNumber

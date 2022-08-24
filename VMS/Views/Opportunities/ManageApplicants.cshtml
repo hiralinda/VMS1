@@ -28,21 +28,21 @@
             {
                 <tr>
                     <td class="col-md-5">
-                        @application.volunteerName
+                        @application.VolunteerName
                     </td>
                     <td class="col-md-2">
-                        <a class="btn btn-sm btn-warning mb-2" type="button" asp-action="ViewApplicant" asp-route-id="@application.id">View</a><br />
+                        <a class="btn btn-sm btn-warning mb-2" type="button" asp-action="ViewApplicant" asp-route-id="@application.Id">View</a><br />
                     </td>
                     <td class="col-md-5">
-                        @application.oppName
+                        @application.OppName
                     </td>
                     <td class="col-md-1">
-                        @if (application.status)
+                        @if (application.Status)
                         {
                             <form asp-action="ApproveApplicant">
 
                                 <input type="submit" class="btn btn-danger" value="Deny" />
-                                <input type="hidden" name="applicationID" value="@application.id" />
+                                <input type="hidden" name="applicationID" value="@application.Id" />
                             </form>
                         }
 
@@ -51,7 +51,7 @@
                             <form asp-action="ApproveApplicant">
 
                                 <input type="submit" class="btn btn-primary" value="Approve" />
-                                <input type="hidden" name="applicationID" value="@application.id" />
+                                <input type="hidden" name="applicationID" value="@application.Id" />
                             </form>
                         }
                     </td>

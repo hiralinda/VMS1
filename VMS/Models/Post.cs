@@ -7,14 +7,14 @@ namespace VMS.Models
 {
     public class Post
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string body { get; set; }
-        public byte[] image { get; set; }
-        public DateTime datePosted { get; set; }
-        public ApplicationUser createUser {get; set;}
-        public string createUserName { get; set; }
-        public int totalLikes { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Body { get; set; }
+        public byte[] Image { get; set; }
+        public DateTime DatePosted { get; set; }
+        public ApplicationUser CreateUser {get; set;}
+        public string CreateUserName { get; set; }
+        public int TotalLikes { get; set; }
         public byte[] ProfilePicture { get; set; }
     }
 }

@@ -15,8 +15,8 @@ namespace VMS.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
 
@@ -27,24 +27,24 @@ namespace VMS.Controllers
 
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
+            this._roleManager = roleManager;
+            this._userManager = userManager;
             _context = context;
     }
 
         [HttpGet]
         public IActionResult Analytics()
         {
-            int userTotal = userManager.Users.Count();
+            int userTotal = _userManager.Users.Count();
             ViewBag.userTotal = userTotal;
 
-            int volTotal = userManager.GetUsersInRoleAsync("Volunteer").Result.Count;
+            int volTotal = _userManager.GetUsersInRoleAsync("Volunteer").Result.Count;
             ViewBag.volTotal = volTotal;
 
-            int orgTotal = userManager.GetUsersInRoleAsync("Organization (Verified)").Result.Count;
+            int orgTotal = _userManager.GetUsersInRoleAsync("Organization (Verified)").Result.Count;
             ViewBag.orgTotal = orgTotal;
 
-            int unvOrgTotal = userManager.GetUsersInRoleAsync("Organization").Result.Count;
+            int unvOrgTotal = _userManager.GetUsersInRoleAsync("Organization").Result.Count;
             ViewBag.unvOrgTotal = unvOrgTotal;
 
             ViewBag.oppTotal = _context.Opportunity.Count();
@@ -70,7 +70,7 @@ namespace VMS.Controllers
                     Name = model.RoleName
                 };
 
-                IdentityResult result = await roleManager.CreateAsync(identityRole);
+                IdentityResult result = await _roleManager.CreateAsync(identityRole);
 
                 if (result.Succeeded)
                 {
@@ -90,7 +90,7 @@ namespace VMS.Controllers
         public async Task<IActionResult> DeleteUser(string id)
 
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
         
             if(user == null)
             {
@@ -99,7 +99,7 @@ namespace VMS.Controllers
             }
             else
             {
-                var result = await userManager.DeleteAsync(user);
+                var result = await _userManager.DeleteAsync(user);
 
                 if (result.Succeeded)
                 {
@@ -119,7 +119,7 @@ namespace VMS.Controllers
         [HttpGet]
         public IActionResult ListRoles()
         {
-            var roles = roleManager.Roles;
+            var roles = _roleManager.Roles;
             return View(roles);
         }
 
@@ -127,15 +127,15 @@ namespace VMS.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
 
             if(user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
             }
 
-            var userClaims = await userManager.GetClaimsAsync(user);
-            var userRoles = await userManager.GetRolesAsync(user);
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var userRoles = await _userManager.GetRolesAsync(user);
 
             var model = new EditUserViewModel
             {
@@ -153,7 +153,7 @@ namespace VMS.Controllers
         public async Task<IActionResult> DeleteRole(string id)
 
         {
-            var role = await roleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id);
 
             if (role == null)
             {
@@ -162,7 +162,7 @@ namespace VMS.Controllers
             }
             else
             {
-                var result = await roleManager.DeleteAsync(role);
+                var result = await _roleManager.DeleteAsync(role);
 
                 if (result.Succeeded)
                 {
@@ -182,7 +182,7 @@ namespace VMS.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            var user = await userManager.FindByIdAsync(model.Id);
+            var user = await _userManager.FindByIdAsync(model.Id);
 
             if (user == null)
             {
@@ -193,7 +193,7 @@ namespace VMS.Controllers
                 user.Email = model.Email;
                 user.UserName = model.UserName;
 
-                var result = await userManager.UpdateAsync(user);
+                var result = await _userManager.UpdateAsync(user);
 
                 if (result.Succeeded)
                 {
@@ -212,7 +212,7 @@ namespace VMS.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            var role = await roleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id);
 
             if(role == null)
             {
@@ -227,9 +227,9 @@ namespace VMS.Controllers
 
             };
 
-            foreach (var user in userManager.Users.ToList())
+            foreach (var user in _userManager.Users.ToList())
             {
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if(await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -240,7 +240,7 @@ namespace VMS.Controllers
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
-            var role = await roleManager.FindByIdAsync(model.Id);
+            var role = await _roleManager.FindByIdAsync(model.Id);
 
             if (role == null)
             {
@@ -250,7 +250,7 @@ namespace VMS.Controllers
             else
             {
                 role.Name = model.RoleName;
-                var result = await roleManager.UpdateAsync(role);
+                var result = await _roleManager.UpdateAsync(role);
                 if(result.Succeeded)
                 {
                     return RedirectToAction("ListRoles");
@@ -270,7 +270,7 @@ namespace VMS.Controllers
         {
             ViewBag.userId = userId;
 
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
             if(user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
@@ -279,7 +279,7 @@ namespace VMS.Controllers
 
             var model = new List<UserRolesViewModel>();
 
-            foreach(var role in roleManager.Roles.ToList())
+            foreach(var role in _roleManager.Roles.ToList())
             {
                 var userRolesViewModel = new UserRolesViewModel
                 {
@@ -287,13 +287,13 @@ namespace VMS.Controllers
                     RoleName = role.Name,
                 };
 
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if(await _userManager.IsInRoleAsync(user, role.Name))
                 {
-                    userRolesViewModel.isSelected = true;
+                    userRolesViewModel.IsSelected = true;
                 }
                 else
                 {
-                    userRolesViewModel.isSelected = false;
+                    userRolesViewModel.IsSelected = false;
                 }
 
                 model.Add(userRolesViewModel);
@@ -304,15 +304,15 @@ namespace VMS.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
         {
-            var user = await userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId);
             if(user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
                 return View("NotFound");
             }
 
-            var roles = await userManager.GetRolesAsync(user);
-            var result = await userManager.RemoveFromRolesAsync(user, roles);
+            var roles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, roles);
 
             if(!result.Succeeded)
             {
@@ -320,7 +320,7 @@ namespace VMS.Controllers
                 return View(model);
             }
 
-            result = await userManager.AddToRolesAsync(user, model.Where(x => x.isSelected).Select(y => y.RoleName));
+            result = await _userManager.AddToRolesAsync(user, model.Where(x => x.IsSelected).Select(y => y.RoleName));
 
             if(!result.Succeeded)
             {
@@ -333,27 +333,27 @@ namespace VMS.Controllers
 
         public async Task<IActionResult> UserList()
         {
-            var users = await userManager.Users.ToListAsync();
-            var UserListViewModel = new List<UserListViewModel>();
+            var users = await _userManager.Users.ToListAsync();
+            var userListViewModel = new List<UserListViewModel>();
             foreach (ApplicationUser user in users)
             {
                 var thisViewModel = new UserListViewModel();
-                thisViewModel.firstName = user.FirstName;
-                thisViewModel.lastName = user.LastName;
-                thisViewModel.phone = user.PhoneNumber;
-                thisViewModel.address = user.address;
-                thisViewModel.nonprofitName = user.OrganizationName;
-                thisViewModel.zip = user.zip;
+                thisViewModel.FirstName = user.FirstName;
+                thisViewModel.LastName = user.LastName;
+                thisViewModel.Phone = user.PhoneNumber;
+                thisViewModel.Address = user.Address;
+                thisViewModel.NonprofitName = user.OrganizationName;
+                thisViewModel.Zip = user.Zip;
                 thisViewModel.Email = user.Email;
                 thisViewModel.Id = user.Id;
                 thisViewModel.Roles = await GetUserRoles(user);
-                UserListViewModel.Add(thisViewModel);
+                userListViewModel.Add(thisViewModel);
             }
-            return View(UserListViewModel);
+            return View(userListViewModel);
         }
         private async Task<List<string>> GetUserRoles(ApplicationUser user)
         {
-            return new List<string>(await userManager.GetRolesAsync(user));
+            return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
     }

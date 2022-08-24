@@ -36,34 +36,34 @@ namespace VMS.Controllers
 
         // POST: Volunteers/ShowSearchResults
         [Authorize]
-        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        public async Task<IActionResult> ShowSearchResults(String searchPhrase)
         {
-            return View("Index", await _context.Volunteer.Where(j => j.firstName.Contains(SearchPhrase)).ToListAsync());
+            return View("Index", await _context.Volunteer.Where(j => j.FirstName.Contains(searchPhrase)).ToListAsync());
         }
 
         // /ShowApproved
         public async Task<IActionResult> ShowApproved()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.approvalStatus.Contains("Y")).ToListAsync());
+            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("Y")).ToListAsync());
         }
 
         // /ShowDisapproved
         public async Task<IActionResult> ShowDisapproved()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.approvalStatus.Contains("N")).ToListAsync());
+            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("N")).ToListAsync());
         }
 
         // /ShowApprovedPending
         public async Task<IActionResult> ShowApprovedPending()
         {
             _ = ShowApproved();
-            return View("Index", await _context.Volunteer.Where(j => j.approvalStatus.Contains("P")).ToListAsync());
+            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
         }
 
         // /ShowPending
         public async Task<IActionResult> ShowPending()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.approvalStatus.Contains("P")).ToListAsync());
+            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
         }
 
 

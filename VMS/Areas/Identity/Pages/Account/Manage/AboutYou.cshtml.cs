@@ -44,12 +44,12 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var AboutYou = user.AboutYou;
-            var MissionStatement = user.MissionStatement;
+            var aboutYou = user.AboutYou;
+            var missionStatement = user.MissionStatement;
             Input = new InputModel
             {
-                AboutYou = AboutYou,
-                MissionStatement = MissionStatement
+                AboutYou = aboutYou,
+                MissionStatement = missionStatement
             };
 
         }
@@ -80,17 +80,17 @@ namespace VMS.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var AboutYou = user.AboutYou;
-            var MissionStatement = user.MissionStatement;
+            var aboutYou = user.AboutYou;
+            var missionStatement = user.MissionStatement;
 
 
-            if(Input.AboutYou != AboutYou)
+            if(Input.AboutYou != aboutYou)
             {
                 user.AboutYou = Input.AboutYou;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.MissionStatement != MissionStatement)
+            if (Input.MissionStatement != missionStatement)
             {
                 user.MissionStatement = Input.MissionStatement;
                 await _userManager.UpdateAsync(user);

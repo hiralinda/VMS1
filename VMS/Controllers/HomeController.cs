@@ -37,9 +37,9 @@ namespace VMS.Controllers
             return View();
         }
 
-        public IActionResult VolunTEENBlog(PostsViewModel model)
+        public IActionResult VolunTeenBlog(PostsViewModel model)
         {
-            model.Posts = _context.Post.ToList().OrderByDescending(s => s.datePosted);
+            model.Posts = _context.Post.ToList().OrderByDescending(s => s.DatePosted);
             return View(model);
         }
 
@@ -52,21 +52,21 @@ namespace VMS.Controllers
                     using (var stream = new MemoryStream())
                     {
                         await files.CopyToAsync(stream);
-                        post.image = stream.ToArray();
+                        post.Image = stream.ToArray();
                     }
 
                 }
             }
 
-            post.datePosted = DateTime.UtcNow;
-            post.createUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == User.Id());
-            post.createUserName = post.createUser.UserName;
-            post.ProfilePicture = post.createUser.ProfilePicture;
-            post.totalLikes = 0;
+            post.DatePosted = DateTime.UtcNow;
+            post.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == User.Id());
+            post.CreateUserName = post.CreateUser.UserName;
+            post.ProfilePicture = post.CreateUser.ProfilePicture;
+            post.TotalLikes = 0;
             _context.Add(post);
             await _context.SaveChangesAsync();
             TempData["message"] = $"Blog Post Created!";
-            return RedirectToAction(nameof(VolunTEENBlog));
+            return RedirectToAction(nameof(VolunTeenBlog));
         }
 
         public IActionResult Privacy()
@@ -93,7 +93,7 @@ namespace VMS.Controllers
         [Authorize]
         [HttpPost, ActionName("deletePost")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> deletePost(int id)
+        public async Task<IActionResult> DeletePost(int id)
         {
 
             var post = await _context.Post.FindAsync(id);
@@ -103,7 +103,7 @@ namespace VMS.Controllers
             await _context.SaveChangesAsync();
 
             TempData["message"] = $"Post Deleted!";
-            return RedirectToAction(nameof(VolunTEENBlog));
+            return RedirectToAction(nameof(VolunTeenBlog));
         }
     }
 }
