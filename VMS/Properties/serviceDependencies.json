@@ -4,13 +4,13 @@
       "type": "secrets",
       "connectionId": "VaultUri"
     },
-    "mssql2": {
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:VolunTEENDB"
-    },
     "mssql1": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:DefaultConnection"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:VolunTEENDB"
     }
   }
 }
