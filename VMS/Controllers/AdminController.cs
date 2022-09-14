@@ -25,7 +25,9 @@ namespace VMS.Controllers
             return View();
         }
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public AdminController(RoleManager<IdentityRole> roleManager,
+                               UserManager<ApplicationUser> userManager,
+                               ApplicationDbContext context)
         {
             this._roleManager = roleManager;
             this._userManager = userManager;
