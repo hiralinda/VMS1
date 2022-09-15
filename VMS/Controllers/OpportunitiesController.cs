@@ -404,7 +404,8 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Apply(Application application, int? oppId)
         {
-            if (_context.Application.Where(t => (t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.Opportunity.Id == oppId)).ToList().Any())
+            var opp = await _context.Application.Where(t => (t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.Opportunity.Id == oppId)).ToListAsync();
+            if (opp.Count > 0)
             {
                 TempData["message"] = $"You have already applied to this opportunity!";
                 return RedirectToAction(nameof(List));
@@ -572,8 +573,9 @@ namespace VMS.Controllers
 
         public async Task<IActionResult> ViewApplications()
         {
-
-            return View(await _context.Application.Where(t => t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.Opportunity.ArchivedStatus).ToListAsync());
+            var view = await _context.Application.Where(t => t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value
+                                                        && !t.Opportunity.ArchivedStatus).Include(e => e.Opportunity).ToListAsync();
+            return View(view);
 
         }
 
@@ -589,6 +591,8 @@ namespace VMS.Controllers
         [HttpPost]
         public async Task<IActionResult> ApproveApplicant(int applicationId, Application application, Opportunity opportunity)
         {
+
+
             if(ModelState.IsValid)
             {
                 application = await _context.Application.FindAsync(applicationId);
@@ -608,6 +612,8 @@ namespace VMS.Controllers
                         application.Status = true;
                         volunteersSignedUp++;
                         opportunity.VolunteersApplied = volunteersSignedUp;
+                        //todo mandar email confirmando aprovacao
+
                     }
                 }
                 else
