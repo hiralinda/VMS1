@@ -24,6 +24,7 @@
     <Compile Remove="Data\Migrations\20220421052007_blogpost.Designer.cs" />
     <Compile Remove="Data\Migrations\20220426165632_addvolunteerprofilepictoapplication.cs" />
     <Compile Remove="Data\Migrations\20220426165632_addvolunteerprofilepictoapplication.Designer.cs" />
+    <Compile Remove="Controllers\Mailer.cs" />
   </ItemGroup>
 
   <ItemGroup>

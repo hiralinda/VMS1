@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using VMS.Data;
 using VMS.Models;
 using VMS.Models.ViewModels;
+using VMS.Infrastructure;
 
 namespace VMS.Controllers
 {    
@@ -591,30 +594,36 @@ namespace VMS.Controllers
         [HttpPost]
         public async Task<IActionResult> ApproveApplicant(int applicationId, Application application, Opportunity opportunity)
         {
+            
 
-
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                application = await _context.Application.FindAsync(applicationId);
+                application = await _context.Application.Include(a=>a.Volunteer).Where(a=>a.Id==applicationId).FirstOrDefaultAsync();
                 opportunity = await _context.Opportunity.FindAsync(application.OppId);
                 int volunteersSignedUp = opportunity.VolunteersApplied;
+               
 
-                if(volunteersSignedUp < opportunity.VolunteersNeeded)
+                
+
+                if (volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
                     if (application.Status == true)
                     {
                         application.Status = false;
                         volunteersSignedUp--;
                         opportunity.VolunteersApplied = volunteersSignedUp;
+
                     }
                     else
                     {
                         application.Status = true;
                         volunteersSignedUp++;
                         opportunity.VolunteersApplied = volunteersSignedUp;
-                        //todo mandar email confirmando aprovacao
 
-                    }
+                        var mailer = new SendEmail();
+                        mailer.sendEmail(application.Volunteer.Email);
+                        
+                    } 
                 }
                 else
                 {
