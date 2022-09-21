@@ -598,13 +598,17 @@ namespace VMS.Controllers
 
             if (ModelState.IsValid)
             {
-                application = await _context.Application.Include(a=>a.Volunteer).Where(a=>a.Id==applicationId).FirstOrDefaultAsync();
-                opportunity = await _context.Opportunity.FindAsync(application.OppId);
-                int volunteersSignedUp = opportunity.VolunteersApplied;
-               
-
+                application = await _context.Application
+                    .Include(a=>a.Volunteer)
+                    .Where(a=>a.Id==applicationId)
+                    .FirstOrDefaultAsync();
+                opportunity = await _context.Opportunity
+                    .Where(o => o.Id == application.OppId)
+                    .Include(t => t.CreateUser)
+                    .FirstOrDefaultAsync();
                 
-
+                int volunteersSignedUp = opportunity.VolunteersApplied;
+                var mailer = new SendEmail();
                 if (volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
                     if (application.Status == true)
@@ -612,6 +616,7 @@ namespace VMS.Controllers
                         application.Status = false;
                         volunteersSignedUp--;
                         opportunity.VolunteersApplied = volunteersSignedUp;
+                        mailer.sendEmail(application, opportunity, false); ;
 
                     }
                     else
@@ -619,9 +624,7 @@ namespace VMS.Controllers
                         application.Status = true;
                         volunteersSignedUp++;
                         opportunity.VolunteersApplied = volunteersSignedUp;
-
-                        var mailer = new SendEmail();
-                        mailer.sendEmail(application.Volunteer.Email);
+                        mailer.sendEmail(application, opportunity, true);
                         
                     } 
                 }
