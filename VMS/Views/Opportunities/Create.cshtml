@@ -1,9 +1,13 @@
-﻿@model VMS.Models.Opportunity
+﻿@model VMS.Models.ViewModels.CreateOpportunityViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
+@using (Html.BeginForm("Create", "Opportunities", FormMethod.Post)){
+
+
+                            
 <div class="card">
     <div class="card-body bg-light">
         <div class="container-fluid">
@@ -372,7 +376,31 @@
 
                     <!--Interest-->
                     <div class="form-group">
-                        <div class="col-md-6 form-group">
+
+                        <div class="container">
+                             
+                            
+                            
+                                  @foreach (var item in Model.AvailableInterestAreas)
+                                  {
+                                      <div class="checkbox">
+                                          <label>
+                                              <input type="checkbox"
+                                                     name="SelectedInterestAreas"
+                                                     value="@item.Value"
+                                                     @if(Model.SelectedInterestAreas.Contains(item.Value))
+                                                     {
+                                                         <text> checked </text> 
+                                                     } 
+                                                     /> @item.Text 
+
+                                              </label>
+                                          </div>
+                                  }
+                                  
+                            
+                        </div>
+                        @*<div class="col-md-6 form-group">
                             <label class="control-label">Select a cause area</label>
                             <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas">
                                 <option value="Advocacy & Human Rights">Advocacy & Human Rights</option>
@@ -390,7 +418,7 @@
                                 <option value="Support Our troops">Support our troops</option>
                                 <option value="Fighting Hunger">Fighting Hunger</option>
                             </select>
-                        </div>
+                        </div>*@
                     </div>
 
                     <!--Description-->
@@ -443,16 +471,20 @@
 
                     </div>
 
+                    <div class="form-group text-center">
+                       <a asp-action="Create"> <input type="submit" class="btn btn-success mr-3" value="Create" /> </a>
+                    </div>
 
-                    <div class="form-group pt-3">
+                    @*<div class="form-group pt-3">
                         <input type="submit" value="Create" class="btn btn-success mr-3" />
                         <a class="btn btn-info" asp-action="Index">Back to List</a>
-                    </div>
+                    </div>*@
                 </form>
             </div>
         </div>
     </div>
 </div>
+    }
 <script language="javascript">
     $(document).ready(function () {
         $("#DatePicker").datepicker({

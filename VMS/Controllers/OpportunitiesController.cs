@@ -14,6 +14,8 @@ using VMS.Data;
 using VMS.Models;
 using VMS.Models.ViewModels;
 using VMS.Infrastructure;
+using AutoMapper;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace VMS.Controllers
 {    
@@ -22,6 +24,9 @@ namespace VMS.Controllers
         private readonly ApplicationDbContext _context;
         public int PageSize = 15;
         public int ManagePostsPageSize = 9;
+        private Mapper Mapper = (Mapper) new MapperConfiguration(cfg => {
+            cfg.CreateMap<CreateOpportunityViewModel, Opportunity>();
+        }).CreateMapper();
 
         public OpportunitiesController(ApplicationDbContext context)
         {
@@ -456,7 +461,11 @@ namespace VMS.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            return View();
+            var model = new CreateOpportunityViewModel
+            {
+                AvailableInterestAreas = GetInterestAreas()
+            };
+            return View(model);
         }
 
         // POST: Opportunities/Create
@@ -464,13 +473,19 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
+
+        //Create(CreateOpportunityViewModel model, Opportunity opportunity)
+        //public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")]
+        public async Task<IActionResult> Create(CreateOpportunityViewModel model)
         {
+            var opportunity = Mapper.Map<Opportunity>(model);
+
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
                 opportunity.VolunteersApplied = 0;
                 opportunity.CreateDate = DateTime.UtcNow;
+                opportunity.InterestAreas = String.Join(",", model.SelectedInterestAreas);
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
                 _context.Add(opportunity);
                 await _context.SaveChangesAsync();
@@ -777,6 +792,28 @@ namespace VMS.Controllers
             }
 
             return View(application);
+        }
+
+        private IList<SelectListItem> GetInterestAreas()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Advocacy & Human Rights", Value = "Advocacy & Human Rights"},
+                new SelectListItem {Text = "Animals", Value = "Animals"},
+                new SelectListItem {Text = "Comfort the city", Value = "Comfort the city"},
+                new SelectListItem {Text = "Community Support", Value = "Community Support"},
+                new SelectListItem {Text = "Computers & Technology", Value = "Computers & Technology"},
+                new SelectListItem {Text = "Donations", Value = "Donations"},
+                new SelectListItem {Text = "Education & Literacy", Value = "Education & Literacy"},
+                new SelectListItem {Text = "Elderly", Value = "Elderly"},
+                new SelectListItem {Text = "Help Kids", Value = "Help Kids"},
+                new SelectListItem {Text = "Help Refugees", Value = "Help Refugees"},
+                new SelectListItem {Text = "Help the Homeless", Value = "Help the Homeless"},
+                new SelectListItem {Text = "Save the Planet", Value = "Save the Planet"},
+                new SelectListItem {Text = "Support our Troops", Value = "Support our Troops"},
+                new SelectListItem {Text = "Fighting Hunger", Value = "Fighting Hunger"},
+
+            };
         }
     }
 }
