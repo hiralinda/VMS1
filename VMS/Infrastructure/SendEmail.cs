@@ -20,7 +20,7 @@ namespace VMS.Infrastructure
                 $"<p> Thank you for your interest in volunteering.\n</p>" +
                 $"<p>You have been approved for the \"{opp.OpportunityName}\" opportunity,</p>" +
                 $"<p><h3>Congratulations!</h3></p>" + 
-                $"<p> {opp.CreateUser} will contact you soon with more information.</p>" + //create user ta errado
+                $"<p> The non-profit will contact you soon with more information.</p>" + 
                 $"<p><a href=\"https://volunteen.azurewebsites.net/Opportunities/ViewApplications\">Click here to see your opportunities</a></p>" +
                 $"<p><img src=\"https://volunteen.azurewebsites.net/Images/volunteenLogo-min.png\" alt=volunTEEN logo width=\"150\" height=\"150\"></p>";
                 
@@ -43,7 +43,7 @@ namespace VMS.Infrastructure
             using var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential("lilirezerata@gmail.com", "gnudwovjaaaykfhl"), //inserir gmail volunteen
+                Credentials = new NetworkCredential("volunteenjax@gmail.com", "otqcnbojxicqcpgg"), 
                 EnableSsl = true,
             };
             smtpClient.Send(mail);

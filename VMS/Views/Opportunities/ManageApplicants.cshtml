@@ -11,6 +11,7 @@
 </ol>
 
 <h2>Manage Applicants for your Posted Opportunities</h2>
+<h4>Once approved or denied, the applicant will receive an update email letting them know about their status.</h4>
 
 @if (Model.Any())
 {
@@ -21,6 +22,8 @@
                 <th class="col-md-3">Profile</th>
                 <th class="col-md-3">Opportunity</th>
                 <th class="col-md-3">Approve</th>
+                <th class="col-md-3">Deny</th>
+                <th class="col-md-3">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -37,26 +40,29 @@
                         @application.OppName
                     </td>
                     <td class="col-md-1">
-                        @if (application.Status)
-                        {
-                            <form asp-action="ApproveApplicant">
-
-                                <input type="submit" class="btn btn-danger" value="Deny" />
-                                <input type="hidden" name="applicationID" value="@application.Id" />
-                            </form>
-                        }
-
-                        else
-                        {
                             <form asp-action="ApproveApplicant">
 
                                 <input type="submit" class="btn btn-primary" value="Approve" />
                                 <input type="hidden" name="applicationID" value="@application.Id" />
                             </form>
-                        }
+                        
                     </td>
                     <td class="col-md-1">
+                        <form asp-action="ApproveApplicant">
 
+                            <input type="submit" class="btn btn-danger" value="Deny" />
+                            <input type="hidden" name="applicationID" value="@application.Id" />
+                        </form>
+                    </td>
+                    <td class="col-md-1">
+                            @if (application.Status is true)
+                            {
+                                <p>Approved</p>
+                            }
+                            else
+                            {
+                                <p>On hold</p>
+                            }
                     </td>
                 </tr>
             }
