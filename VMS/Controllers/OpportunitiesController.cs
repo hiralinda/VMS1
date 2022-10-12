@@ -434,8 +434,8 @@ namespace VMS.Controllers
                     application.OppDate = application.Opportunity.StartDate.Date.ToString("d") + " - " + application.Opportunity.EndDate.Date.ToString("d");
                     application.OppTime = application.Opportunity.StartTime.ToShortTimeString() + " - " + application.Opportunity.EndTime.ToShortTimeString();
                     application.OppLocation = application.Opportunity.City + ", " + application.Opportunity.State + ", " + application.Opportunity.Zip + " at " +
-                        application.Opportunity.Address1 + " " + application.Opportunity.Address2;
-
+                    application.Opportunity.Address1 + " " + application.Opportunity.Address2;
+                    application.Status = (int)Application.ApplicationStatus.Pending;
                     /*try - this info wasnt pulling from the volunteer property in application so I added in here*/
                     application.AboutYou = application.Volunteer.AboutYou;
                     application.InstagramLink = application.Volunteer.InstagramLink;
@@ -626,9 +626,9 @@ namespace VMS.Controllers
                 var mailer = new SendEmail();
                 if (volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
-                    if (application.Status == false)
+                    if (application.Status == (int)Application.ApplicationStatus.Pending)
                     {
-                        application.Status = true;
+                        application.Status = (int)Application.ApplicationStatus.Approved;
                         volunteersSignedUp++;
                         opportunity.VolunteersApplied = volunteersSignedUp;
                         mailer.sendEmail(application, opportunity, true);
@@ -668,9 +668,9 @@ namespace VMS.Controllers
 
                 int volunteersSignedUp = opportunity.VolunteersApplied;
                 var mailer = new SendEmail();
-                if (application.Status == true)
+                if (application.Status == (int)Application.ApplicationStatus.Pending)
                 {
-                    application.Status = false;
+                    application.Status = (int)Application.ApplicationStatus.Denied;
                     volunteersSignedUp--;
                     opportunity.VolunteersApplied = volunteersSignedUp;
                     mailer.sendEmail(application, opportunity, false); ;
@@ -678,16 +678,16 @@ namespace VMS.Controllers
                 }
                 else
                 {
-                    if (application.Status == true)
-                    {
-                        application.Status = false;
-                        volunteersSignedUp--;
-                        opportunity.VolunteersApplied = volunteersSignedUp;
-                    }
-                    else
-                    {
-                        TempData["message"] = $"This opportunity is full!";
-                    }
+                    //if (application.Status == true)
+                    //{
+                    //    application.Status = false;
+                    //    volunteersSignedUp--;
+                    //    opportunity.VolunteersApplied = volunteersSignedUp;
+                    //}
+                    //else
+                    //{
+                    //    TempData["message"] = $"This opportunity is full!";
+                    //}
                 }
 
                 _context.Update(application);
@@ -709,11 +709,9 @@ namespace VMS.Controllers
             var application = await _context.Application.FindAsync(id);
             opportunity = await _context.Opportunity.FindAsync(application.OppId);
             int volunteersSignedUp = opportunity.VolunteersApplied;
-            if (application.Status == true)
-            {
-                volunteersSignedUp--;
-                opportunity.VolunteersApplied = volunteersSignedUp;
-            }
+            volunteersSignedUp--;
+            opportunity.VolunteersApplied = volunteersSignedUp;
+            
 
             _context.Update(opportunity);
             _context.Application.Remove(application);

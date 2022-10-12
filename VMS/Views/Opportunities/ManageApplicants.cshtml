@@ -55,13 +55,15 @@
                         </form>
                     </td>
                     <td class="col-md-1">
-                            @if (application.Status is true)
+                            @if (application.Status is (int)Application.ApplicationStatus.Approved)
                             {
                                 <p>Approved</p>
                             }
-                            else
+                            else if (application.Status is (int)Application.ApplicationStatus.Denied)
                             {
-                                <p>Not approved</p>
+                                <p>Denied</p>
+                            }else{
+                                <p>Pending approval</p>
                             }
                     </td>
                 </tr>

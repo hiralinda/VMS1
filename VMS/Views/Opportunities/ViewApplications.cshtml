@@ -40,13 +40,16 @@
                 {
                     <p>Time: @application.OppTime</p>
                 }
-                @if (!application.Status)
+                @if (application.Status == (int)Application.ApplicationStatus.Pending)
                 {
                     <p class="text-danger fw-bold">AWAITING APPROVAL</p>
                 }
-                else
+                else if(application.Status == (int)Application.ApplicationStatus.Approved)
                 {
                     <p class="text-success fw-bold">APPROVED</p>
+                }else{
+                    <p class="text-success fw-bold">DENIED</p>
+
                 }
                 <form asp-action="withdrawApplication" asp-route-id="@application.Id" method="post">
                     <input type="submit" value="Withdraw Application" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')" />
