@@ -17,7 +17,7 @@
                 <dd class="col-sm-8">
                     @Model.OpportunityName
                 </dd>
-                @if (!Model.Virtual)
+                @if ((bool)!Model.Virtual)
                 {
                     <dt class="col-sm-3">
                         Address 1
@@ -97,7 +97,7 @@
                     End Date
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.OnGoing)
+                    @if ((bool)Model.OnGoing)
                     {
                         <p>On-going event</p>
                     }
@@ -147,7 +147,7 @@
                     Virtual
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.Virtual)
+                    @if ((bool)Model.Virtual)
                     {
                         <p>Yes</p>
                     }
@@ -160,7 +160,7 @@
                     Group Activity
                 </dt>
                 <dd class="col-sm-8">
-                    @if (Model.GroupActivity)
+                    @if ((bool)Model.GroupActivity)
                     {
                         <p>Yes</p>
                     }

@@ -10,6 +10,7 @@ using Azure.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using VMS.Data;
 using Microsoft.EntityFrameworkCore;
+using VMS.Models;
 
 namespace VMS
 {

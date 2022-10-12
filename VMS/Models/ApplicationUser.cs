@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +13,14 @@ namespace VMS.Models
      */
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            
+                Applications = new List<Application>();
+                Opportunities = new List<Opportunity>();
+                Posts = new List<Post>();
+             
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string OrganizationName { get; set; }
@@ -27,5 +36,11 @@ namespace VMS.Models
         public string FacebookLink { get; set; }
         public string TwitterLink { get; set; }
         public string OtherWebsite { get; set; }
+
+        public virtual ICollection<Application> Applications { get; set; }
+       
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
+
 }

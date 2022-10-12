@@ -24,7 +24,7 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Volunteer.ToListAsync());
+            return View(await _context.Volunteers.ToListAsync());
         }
 
         // GET: Volunteers/ShowSearchForm
@@ -38,32 +38,32 @@ namespace VMS.Controllers
         [Authorize]
         public async Task<IActionResult> ShowSearchResults(String searchPhrase)
         {
-            return View("Index", await _context.Volunteer.Where(j => j.FirstName.Contains(searchPhrase)).ToListAsync());
+            return View("Index", await _context.Volunteers.Where(j => j.FirstName.Contains(searchPhrase)).ToListAsync());
         }
 
         // /ShowApproved
         public async Task<IActionResult> ShowApproved()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("Y")).ToListAsync());
+            return View("Index", await _context.Volunteers.Where(j => j.ApprovalStatus.Contains("Y")).ToListAsync());
         }
 
         // /ShowDisapproved
         public async Task<IActionResult> ShowDisapproved()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("N")).ToListAsync());
+            return View("Index", await _context.Volunteers.Where(j => j.ApprovalStatus.Contains("N")).ToListAsync());
         }
 
         // /ShowApprovedPending
         public async Task<IActionResult> ShowApprovedPending()
         {
             _ = ShowApproved();
-            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
+            return View("Index", await _context.Volunteers.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
         }
 
         // /ShowPending
         public async Task<IActionResult> ShowPending()
         {
-            return View("Index", await _context.Volunteer.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
+            return View("Index", await _context.Volunteers.Where(j => j.ApprovalStatus.Contains("P")).ToListAsync());
         }
 
 
@@ -76,7 +76,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteer
+            var volunteer = await _context.Volunteers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (volunteer == null)
             {
@@ -95,7 +95,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteer
+            var volunteer = await _context.Volunteers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (volunteer == null)
             {
@@ -139,7 +139,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteer.FindAsync(id);
+            var volunteer = await _context.Volunteers.FindAsync(id);
             if (volunteer == null)
             {
                 return NotFound();
@@ -193,7 +193,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteer
+            var volunteer = await _context.Volunteers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (volunteer == null)
             {
@@ -209,8 +209,8 @@ namespace VMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var volunteer = await _context.Volunteer.FindAsync(id);
-            _context.Volunteer.Remove(volunteer);
+            var volunteer = await _context.Volunteers.FindAsync(id);
+            _context.Volunteers.Remove(volunteer);
             await _context.SaveChangesAsync();
             TempData["message"] = $"Successfully Deleted!";
             return RedirectToAction(nameof(Index));
@@ -218,7 +218,7 @@ namespace VMS.Controllers
 
         private bool VolunteerExists(int id)
         {
-            return _context.Volunteer.Any(e => e.Id == id);
+            return _context.Volunteers.Any(e => e.Id == id);
         }
 
 

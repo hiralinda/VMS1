@@ -39,7 +39,7 @@ namespace VMS.Controllers
 
         public IActionResult VolunTeenBlog(PostsViewModel model)
         {
-            model.Posts = _context.Post.ToList().OrderByDescending(s => s.DatePosted);
+            model.Posts = _context.Posts.ToList().OrderByDescending(s => s.DatePosted);
             return View(model);
         }
 
@@ -59,7 +59,7 @@ namespace VMS.Controllers
             }
 
             post.DatePosted = DateTime.UtcNow;
-            post.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == User.Id());
+            post.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id.ToString() == User.Id());
             post.CreateUserName = post.CreateUser.UserName;
             post.ProfilePicture = post.CreateUser.ProfilePicture;
             post.TotalLikes = 0;
@@ -96,9 +96,9 @@ namespace VMS.Controllers
         public async Task<IActionResult> DeletePost(int id)
         {
 
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Posts.FindAsync(id);
 
-            _context.Post.Remove(post);
+            _context.Posts.Remove(post);
 
             await _context.SaveChangesAsync();
 

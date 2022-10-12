@@ -9,7 +9,7 @@ using VMS.Data;
 
 namespace VMS.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContextBak))]
     [Migration("20220422162950_New_Post_Parameters")]
     partial class New_Post_Parameters
     {

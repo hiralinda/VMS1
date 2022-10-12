@@ -9,7 +9,7 @@ using VMS.Data;
 
 namespace VMS.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContextBak))]
     [Migration("20220215150922_UpdateOpportunityLocation")]
     partial class UpdateOpportunityLocation
     {

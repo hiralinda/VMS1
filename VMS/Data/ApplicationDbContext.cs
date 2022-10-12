@@ -7,9 +7,9 @@ using VMS.Models;
 
 namespace VMS.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContextBak : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContextBak(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }

@@ -18,7 +18,7 @@
                 @application.OppName
             </div>
             <div class="card-body">
-                @if (!application.IsVirtual)
+                @if ((bool)!application.IsVirtual)
                 {
                     <p>Location: @application.OppLocation</p>
                 }
@@ -26,7 +26,7 @@
                 {
                     <p>Location: Remote</p>
                 }
-                @if (application.Opportunity.OnGoing)
+                @if ((bool)application.Opportunity.OnGoing)
                 {
                     <p>Date:  @application.OppDate.Replace("1/1/0001", " on going")</p>
                 }
@@ -34,9 +34,9 @@
                 {
                     <p>Date: @application.OppDate</p>
                 }
-               
 
-                @if (!application.IsVirtual)
+
+                @if ((bool)!application.IsVirtual)
                 {
                     <p>Time: @application.OppTime</p>
                 }

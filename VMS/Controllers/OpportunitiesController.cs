@@ -68,13 +68,13 @@ namespace VMS.Controllers
             {
                 return View(new OpportunitiesListViewModel
                 {
-                    Opportunities = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString)).Where(s => !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing)
+                    Opportunities = _context.Opportunities.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString)).Where(s => (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing)
                     .Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString) && !s.ArchivedStatus && s.EndDate >= DateTime.Today).Where(s => !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.OpportunityName.Contains(searchString) || s.City.Contains(searchString) || s.State.Contains(searchString) || s.Zip.Contains(searchString) || s.Description.Contains(searchString) && (bool)!s.ArchivedStatus && s.EndDate >= DateTime.Today).Where(s => (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
 
                 });
@@ -86,232 +86,232 @@ namespace VMS.Controllers
                 "Virtual" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.Virtual && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => (bool)s.Virtual && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.Virtual && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => (bool)s.Virtual && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Group" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.GroupActivity && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => (bool)s.GroupActivity && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.GroupActivity && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => (bool)s.GroupActivity && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "OneDay" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.TypeOfOpportunity == "One Day" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.TypeOfOpportunity == "One Day" && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.TypeOfOpportunity == "One Day" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.TypeOfOpportunity == "One Day" && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Internship" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.TypeOfOpportunity == "Summer Internship" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.TypeOfOpportunity == "Summer Internship" && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.TypeOfOpportunity == "Summer Internship" && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.TypeOfOpportunity == "Summer Internship" && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Ongoing" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.OnGoing && !s.ArchivedStatus).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => (bool)s.OnGoing && (bool)!s.ArchivedStatus).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.OnGoing && !s.ArchivedStatus).Count()
+                        TotalItems = _context.Opportunities.Where(s => (bool)s.OnGoing && (bool)!s.ArchivedStatus).Count()
                     }
                 }),
                 "Date" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.StartDate).Where(s => !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.StartDate).Where(s => (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today).Count()
+                        TotalItems = _context.Opportunities.Where(s => (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today).Count()
                     }
                 }),
                 "Animals" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Animals") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Animals") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Animals") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Animals") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Support our troops" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Support our troops") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Support our troops") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Support our troops") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Support our troops") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Advocacy & Human Rights" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Advocacy & Human Rights") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Advocacy & Human Rights") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Advocacy & Human Rights") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Advocacy & Human Rights") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Comfort the sick" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Comfort the sick") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Comfort the sick") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Comfort the sick") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Comfort the sick") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Save the Planet" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Save the Planet") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Save the Planet") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Save the Planet") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Save the Planet") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Homeless" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Homeless") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Homeless") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Homeless") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Homeless") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Community Support" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Community Support") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Community Support") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Community Support") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Community Support") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Help Refugees" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Help Refugees") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Help Refugees") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Help Refugees") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Help Refugees") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Computers & Technology" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Computers & Technology") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Computers & Technology") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Computers & Technology") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Computers & Technology") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Donations" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Donations") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Donations") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Donations") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Donations") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Education & Literacy" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Education & Literacy") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Education & Literacy") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Education & Literacy") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Education & Literacy") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Elderly" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Elderly") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Elderly") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Elderly") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Elderly") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Help kids" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Help kids") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Help kids") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Help kids") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Help kids") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 "Fighting Hunger" => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Fighting Hunger") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
+                    Opportunities = _context.Opportunities.OrderBy(s => s.CreateDate).Where(s => s.InterestAreas.Contains("Fighting Hunger") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Skip((page - 1) * PageSize).Take(PageSize),
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => s.InterestAreas.Contains("Fighting Hunger") && !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => s.InterestAreas.Contains("Fighting Hunger") && (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
                 _ => View(new OpportunitiesListViewModel
                 {
 
-                    Opportunities = _context.Opportunity.Where(t => !t.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).OrderByDescending(p => p.CreateDate).Skip((page - 1) * PageSize).Take(PageSize) ,
+                    Opportunities = _context.Opportunities.Where(t => (bool)!t.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).OrderByDescending(p => p.CreateDate).Skip((page - 1) * PageSize).Take(PageSize) ,
                     PagingInfo = new PagingInfo
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalItems = _context.Opportunity.Where(s => !s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || s.OnGoing).Count()
+                        TotalItems = _context.Opportunities.Where(s => (bool)!s.ArchivedStatus).Where(s => s.EndDate >= DateTime.Today || (bool)s.OnGoing).Count()
                     }
                 }),
             };
@@ -322,18 +322,18 @@ namespace VMS.Controllers
         public ActionResult Index(int page = 1)
         {
             /*Original */
-            /*return View(await _context.Opportunity.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
+            /*return View(await _context.Opportunities.Where(t => t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());*/
             
             /*Pagination*/
             return View(new OpportunitiesListViewModel
             {
 
-                Opportunities = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Skip((page - 1) * PageSize).Take(PageSize),
+                Opportunities = _context.Opportunities.Where(t => ((bool)!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Skip((page - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = ManagePostsPageSize,
-                    TotalItems = _context.Opportunity.Where(t => (!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()
+                    TotalItems = _context.Opportunities.Where(t => ((bool)!t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).Count()
                 }
             });
         }
@@ -346,7 +346,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunity
+            var opportunity = await _context.Opportunities
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (opportunity == null)
             {
@@ -364,7 +364,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunity.Include(t => t.CreateUser)
+            var opportunity = await _context.Opportunities.Include(t => t.CreateUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (opportunity == null)
             {
@@ -383,36 +383,36 @@ namespace VMS.Controllers
         // POST: Opportunities/ShowSearchResults
         public async Task<IActionResult> ShowSearchResults(String searchPhrase)
         {
-            return View("Browse", await _context.Opportunity.Where( j => j.OpportunityName.Contains(searchPhrase)).ToListAsync());
+            return View("Browse", await _context.Opportunities.Where( j => j.OpportunityName.Contains(searchPhrase)).ToListAsync());
         }
 
         // POST: Opportunities/MostRecent
         public async Task<IActionResult> Recent()
         {
-            return View("Index", await _context.Opportunity.OrderByDescending(s => s.CreateDate).Include(t => t.CreateUser).ToListAsync());
+            return View("Index", await _context.Opportunities.OrderByDescending(s => s.CreateDate).Include(t => t.CreateUser).ToListAsync());
         }
 
         // POST: Opportunities/MostRecent
         public async Task<IActionResult> BrowseRecent()
         {
-            return View("List", await _context.Opportunity.OrderByDescending(s => s.CreateDate).ToListAsync());
+            return View("List", await _context.Opportunities.OrderByDescending(s => s.CreateDate).ToListAsync());
         }
 
         public async Task<IActionResult> ReverseAlphabetical()
         {
-            return View("Index", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
+            return View("Index", await _context.Opportunities.OrderByDescending(s => s.OpportunityName).ToListAsync());
         }
 
         public async Task<IActionResult> BrowseReverseAlphabetical()
         {
-            return View("List", await _context.Opportunity.OrderByDescending(s => s.OpportunityName).ToListAsync());
+            return View("List", await _context.Opportunities.OrderByDescending(s => s.OpportunityName).ToListAsync());
         }
 
         // GET: Application
         [Authorize]
         public async Task<IActionResult> Apply(Application application, int? oppId)
         {
-            var opp = await _context.Application.Where(t => (t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.Opportunity.Id == oppId)).ToListAsync();
+            var opp = await _context.Applications.Where(t => (t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value) && (t.Opportunity.Id == oppId)).ToListAsync();
             if (opp.Count > 0)
             {
                 TempData["message"] = $"You have already applied to this opportunity!";
@@ -424,7 +424,7 @@ namespace VMS.Controllers
                 {
                     var userId = User.Id();
                     application.Volunteer = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
-                    application.Opportunity = await _context.Opportunity.FindAsync(oppId);
+                    application.Opportunity = await _context.Opportunities.FindAsync(oppId);
                     
                     application.OppName = application.Opportunity.OpportunityName;
                     application.OppId = application.Opportunity.Id;
@@ -504,7 +504,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunity.FindAsync(id);
+            var opportunity = await _context.Opportunities.FindAsync(id);
             if (opportunity == null)
             {
                 return NotFound();
@@ -561,7 +561,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunity
+            var opportunity = await _context.Opportunities
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (opportunity == null)
             {
@@ -577,8 +577,8 @@ namespace VMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var opportunity = await _context.Opportunity.FindAsync(id);
-            _context.Opportunity.Remove(opportunity);
+            var opportunity = await _context.Opportunities.Where(s => s.Id == id).Include(s => s.Applications).FirstOrDefaultAsync();
+            _context.Opportunities.Remove(opportunity);
             await _context.SaveChangesAsync();
             TempData["message"] = $"Successfully Deleted!";
             return RedirectToAction(nameof(Index));
@@ -586,13 +586,13 @@ namespace VMS.Controllers
 
         private bool OpportunityExists(int id)
         {
-            return _context.Opportunity.Any(e => e.Id == id);
+            return _context.Opportunities.Any(e => e.Id == id);
         }
 
         public async Task<IActionResult> ViewApplications()
         {
-            var view = await _context.Application.Where(t => t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value
-                                                        && !t.Opportunity.ArchivedStatus).Include(e => e.Opportunity).ToListAsync();
+            var view = await _context.Applications.Where(t => t.Volunteer.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value
+                                                        && (bool)!t.Opportunity.ArchivedStatus).Include(e => e.Opportunity).ToListAsync();
             return View(view);
 
         }
@@ -600,7 +600,7 @@ namespace VMS.Controllers
         public async Task<IActionResult> ManageApplicants()
         {
 
-            List<Application> applications = await _context.Application.Where(t => t.Opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && !t.Opportunity.ArchivedStatus).OrderByDescending(t => t.OppName).ToListAsync();
+            List<Application> applications = await _context.Applications.Where(t => t.Opportunity.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value && (bool)!t.Opportunity.ArchivedStatus).OrderByDescending(t => t.OppName).ToListAsync();
 
             return View(applications);
         }
@@ -613,11 +613,11 @@ namespace VMS.Controllers
 
             if (ModelState.IsValid)
             {
-                application = await _context.Application
+                application = await _context.Applications
                     .Include(a=>a.Volunteer)
                     .Where(a=>a.Id==applicationId)
                     .FirstOrDefaultAsync();
-                opportunity = await _context.Opportunity
+                opportunity = await _context.Opportunities
                     .Where(o => o.Id == application.OppId)
                     .Include(t => t.CreateUser)
                     .FirstOrDefaultAsync();
@@ -658,11 +658,11 @@ namespace VMS.Controllers
 
             if (ModelState.IsValid)
             {
-                application = await _context.Application
+                application = await _context.Applications
                     .Include(a => a.Volunteer)
                     .Where(a => a.Id == applicationId)
                     .FirstOrDefaultAsync();
-                opportunity = await _context.Opportunity
+                opportunity = await _context.Opportunities
                     .Where(o => o.Id == application.OppId)
                     .Include(t => t.CreateUser)
                     .FirstOrDefaultAsync();
@@ -696,15 +696,15 @@ namespace VMS.Controllers
         public async Task<IActionResult> WithdrawApplication(int id, Opportunity opportunity)
         {
 
-            var application = await _context.Application.FindAsync(id);
-            opportunity = await _context.Opportunity.FindAsync(application.OppId);
+            var application = await _context.Applications.FindAsync(id);
+            opportunity = await _context.Opportunities.FindAsync(application.OppId);
             int volunteersSignedUp = opportunity.VolunteersApplied;
             volunteersSignedUp--;
             opportunity.VolunteersApplied = volunteersSignedUp;
             
 
             _context.Update(opportunity);
-            _context.Application.Remove(application);
+            _context.Applications.Remove(application);
             
             await _context.SaveChangesAsync();
             TempData["message"] = $"Application withdrawn";
@@ -775,7 +775,7 @@ namespace VMS.Controllers
         public async Task<IActionResult> ViewArchived(int page = 1)
         {
 
-            return View(await _context.Opportunity.Where(t => (t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
+            return View(await _context.Opportunities.Where(t => ((bool)t.ArchivedStatus) && t.CreateUser.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToListAsync());
         }
 
         // GET: Opportunities/ViewOrg/5
@@ -786,7 +786,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunity.Include(t => t.CreateUser)
+            var opportunity = await _context.Opportunities.Include(t => t.CreateUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (opportunity == null)
             {
@@ -804,7 +804,7 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var application = await _context.Application.Include(t=>t.Volunteer)
+            var application = await _context.Applications.Include(t=>t.Volunteer)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (application == null)

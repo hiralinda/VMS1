@@ -9,7 +9,7 @@ using VMS.Data;
 
 namespace VMS.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContextBak))]
     [Migration("20220227071804_application_model_update")]
     partial class application_model_update
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using VMS.Models;
 
-namespace VMS.Models
+namespace VMS.Model
 {
-    public class Post
+    public partial class Post
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -21,7 +21,7 @@
                         }
 
                     </h1>
-                    @if (Model.Virtual)
+                    @if ((bool)Model.Virtual)
                     {
                         <p class="lead col-md-8 fs-4">Remote</p>
                     }
@@ -40,7 +40,7 @@
                         <p>Looking for <strong>@(Model.VolunteersNeeded - Model.VolunteersApplied)</strong> volunteers</p>
                     }
 
-                        @if (Model.Virtual)
+                        @if ((bool)Model.Virtual)
                         {
                             <p class="lead col-md-8 fs-4">This is a virtual opportunity</p>
                         }
@@ -91,14 +91,14 @@
                                     <div class="modal-body">
                                         <h5>@Html.DisplayFor(model => model.OpportunityName)</h5>
 
-                                        @if (!Model.Virtual)
+                                        @if ((bool)!Model.Virtual)
                                         {
                                             <h6>
                                                 Start:
                                                 @Model.StartDate.Date.ToString("d")
                                                 @Model.StartTime.ToShortTimeString()
                                             </h6>
-                                            @if (Model.OnGoing)
+                                            @if ((bool)Model.OnGoing)
                                             {
                                                 <h6>
                                                     Ongoing
@@ -120,7 +120,7 @@
                                                 Start:
                                                 @Model.StartDate.Date.ToString("d")
                                             </h6>
-                                            @if (Model.OnGoing)
+                                            @if ((bool)Model.OnGoing)
                                             {
                                                 <h6>
                                                     Ongoing
@@ -192,7 +192,7 @@
                     <p class="col-md-8 fs-6">None</p>
                 }
                 <p class="fs-5 fw-bold">Event start and end dates</p>
-                @if (Model.OnGoing)
+                @if ((bool)Model.OnGoing)
                 {
                     <p class="col-md-8 fs-6 fw-bold">@Model.StartDate.Date.ToString("d") - Ongoing</p>
                 }
@@ -208,7 +208,7 @@
                     }
 
                 }
-                @if (!Model.Virtual)
+                @if ((bool)!Model.Virtual)
                 {
                     <p class="col-md-8 fs-6 fw-bold">@Model.StartTime.ToShortTimeString() - @Model.EndTime.ToShortTimeString()</p>
 
@@ -264,7 +264,7 @@
                 </div>
                 <div class="col-md-6">
                     <p class="fw-bold">Location</p>
-                    @if (!Model.Virtual)
+                    @if ((bool)!Model.Virtual)
                     {
                         <p class="">@Html.DisplayFor(model => model.Address1)</p>
                         @if (Model.Address2 != null)
@@ -283,7 +283,7 @@
                 <div class="col-md-6">
                     <a class="btn btn-info" href="mailto: @Model.CreateUser.Email">Contact</a>
                 </div>
-                @if (!Model.Virtual)
+                @if ((bool)!Model.Virtual)
                 {
                     <div class="col-md-6">
                         <a class="btn btn-info" target="_blank" href="https://www.google.com/maps/search/?api=1&query=@Model.Address1+@Model.City+@Model.State">Map</a>

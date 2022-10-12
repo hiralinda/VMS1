@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using VMS.Models;
 
-namespace VMS.Models
+namespace VMS.Model
 {
-    public class Application
+    public partial class Application
     {
-            
-    public enum ApplicationStatus
-    {
-                Pending,
-                Approved,
-                Denied
-    }
         public int Id { get; set; }
         public string VolunteerId { get; set; }
         public int Status { get; set; }

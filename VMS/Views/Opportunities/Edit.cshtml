@@ -31,7 +31,7 @@
                             <Label>Is this a group activity? </Label>
                         </div>
                     </div>
-                    @if (!Model.Virtual)
+                    @if ((bool)!Model.Virtual)
                     {
                         <!--Location-->
                         <div class="form-group col-md-5">
@@ -461,7 +461,7 @@
                                 <p></p>
                                 <label for="appt">Start time for event:</label>
 
-                                @if (!Model.Virtual)
+                                @if ((bool)!Model.Virtual)
                                 {
                                     <input id="startTimeInput" type="time" value="@Model.StartTime.TimeOfDay" name="StartTime"
                                            min="00:00" max="24:00" required>
@@ -475,14 +475,14 @@
                             </div>
                             <div class="col-sm-4">
 
-                                @if (Model.OnGoing)
+                                @if ((bool)Model.OnGoing)
                                 {
                                 <div id="EndDatePicker">
                                     <label asp-for="EndDate" class="control-label">Event end date:</label>
                                     <input id="DatePicker2" value="" class="EndDateInput" name="EndDate" type="text" disabled required>
                                     <p></p>
                                     <label for="appt">Ending time for event:</label>
-                                    @if (!Model.Virtual)
+                                    @if ((bool)!Model.Virtual)
                                     {
                                         <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
                                                min="00:00" max="24:00">
@@ -505,7 +505,7 @@
                                         <p></p>
                                         <label for="appt">Ending time for event:</label>
 
-                                        @if (!Model.Virtual)
+                                        @if ((bool)!Model.Virtual)
                                             {
                                                 <input id="endTimeInput" class="" type="time" value="@Model.EndTime.TimeOfDay" name="EndTime"
                                                        min="00:00" max="24:00">
@@ -527,12 +527,12 @@
                     <div class="form-group pt-3">
 
 
-                        @if (!Model.ArchivedStatus)
+                        @if ((bool)!Model.ArchivedStatus)
                         {
                             <input type="submit" value="Save" class="btn btn-success mr-3" />
                             <input asp-action="ArchiveOpportunity" asp-route-id="@Model.Id" type="submit" value="Archive" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to move this to your archives?')" />
                         }
-                        else if (Model.ArchivedStatus)
+                        else if ((bool)Model.ArchivedStatus)
                         {
                             <input asp-action="RestoreOpportunity" asp-route-id="@Model.Id" type="submit" value="Restore" class="btn btn-warning mr-3" onclick="return confirm('Are you sure you want to retrieve this?')" />
                         }

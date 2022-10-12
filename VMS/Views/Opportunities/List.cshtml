@@ -87,17 +87,17 @@
                     <p class="fs-4 fw-bolder" style="color: #00224B;">@Html.DisplayFor(modelItem => p.OpportunityName)</p>
 
                     <p class="font-weight-light">
-                        @if (@p.StartDate.Date.ToString("M") == @p.EndDate.Date.ToString("M") && !p.Virtual)
+                        @if (@p.StartDate.Date.ToString("M") == @p.EndDate.Date.ToString("M") && (bool)!p.Virtual)
                         {
                         <p>@p.StartDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
 
                     }
-                    else if (p.OnGoing && !p.Virtual)
+                        else if ((bool)p.OnGoing && (bool)!p.Virtual)
                     {
                         <p>@p.StartDate.Date.ToString("M") - Ongoing <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
 
                     }
-                    else if (!p.Virtual)
+                        else if ((bool)!p.Virtual)
                     {
                         <p>@p.StartDate.Date.ToString("M") - @p.EndDate.Date.ToString("M") <strong class="text-warning">|</strong> @Html.DisplayFor(modelItem => p.City), @Html.DisplayFor(modelItem => p.State), @Html.DisplayFor(modelItem => p.Zip)</p>
                     }
@@ -128,11 +128,11 @@
                             <span class="badge bg-primary">Ages: @Html.DisplayFor(modelItem => p.AgeBracket)</span>
                         }
                         <span class="badge bg-primary">@Html.DisplayFor(modelItem => p.InterestAreas)</span>
-                        @if (p.Virtual)
+                        @if ((bool)p.Virtual)
                         {
                             <span class="badge bg-primary">Virtual</span>
                         }
-                        @if (p.GroupActivity)
+                    @if ((bool)p.GroupActivity)
                         {
                             <span class="badge bg-primary"><i class="fa fa-users fa-sm" aria-hidden="true"></i></span>
                         }

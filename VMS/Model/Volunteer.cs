@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace VMS.Models
+namespace VMS.Model
 {
-    public class Volunteer
+    public partial class Volunteer
     {
         public Volunteer()
         {
@@ -32,6 +30,6 @@ namespace VMS.Models
         public string ApprovalStatus { get; set; }
         public string ActiveStatus { get; set; }
 
-        public virtual ICollection<Opportunity> Opportunities { get; set; }// end constructor
+        public virtual ICollection<Opportunity> Opportunities { get; set; }
     }
 }

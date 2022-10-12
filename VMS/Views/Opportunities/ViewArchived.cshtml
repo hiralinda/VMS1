@@ -35,7 +35,7 @@
                     <tr>
                         <td>@item.OpportunityName</td>
                         <td>@item.ArchivedDate</td>
-                        @if (!item.Virtual)
+                            @if ((bool)!item.Virtual)
                         {
                             <td>@item.City, @item.State</td>
                         }
