@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<VMS.Models.Opportunity>
 
 @{
-    ViewData["Title"] = "Your Archived Posts";
+    ViewData["Title"] = "Your Archived Opportunities";
 }
 
 <style>
@@ -15,7 +15,7 @@
 <div class="card mb-2">
     <div class="card-header">
         <h2>@ViewData["Title"]</h2>
-        <p>These posts are not active.</p>
+        <p>These opportunities are not active.</p>
     </div>
     @if (Model.Any())
     {
