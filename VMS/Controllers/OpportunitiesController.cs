@@ -626,15 +626,7 @@ namespace VMS.Controllers
                 var mailer = new SendEmail();
                 if (volunteersSignedUp < opportunity.VolunteersNeeded)
                 {
-                    if (application.Status == true)
-                    {
-                        application.Status = false;
-                        volunteersSignedUp--;
-                        opportunity.VolunteersApplied = volunteersSignedUp;
-                        mailer.sendEmail(application, opportunity, false); ;
-
-                    }
-                    else
+                    if (application.Status == false)
                     {
                         application.Status = true;
                         volunteersSignedUp++;
@@ -642,6 +634,47 @@ namespace VMS.Controllers
                         mailer.sendEmail(application, opportunity, true);
                         
                     } 
+                }
+                else
+                {
+                     TempData["message"] = $"This opportunity is full!";
+                }
+
+                _context.Update(application);
+                _context.Update(opportunity);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(ManageApplicants));
+            }
+
+            return View(application);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DenyApplicant(int applicationId, Application application, Opportunity opportunity)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                application = await _context.Application
+                    .Include(a => a.Volunteer)
+                    .Where(a => a.Id == applicationId)
+                    .FirstOrDefaultAsync();
+                opportunity = await _context.Opportunity
+                    .Where(o => o.Id == application.OppId)
+                    .Include(t => t.CreateUser)
+                    .FirstOrDefaultAsync();
+
+                int volunteersSignedUp = opportunity.VolunteersApplied;
+                var mailer = new SendEmail();
+                if (application.Status == true)
+                {
+                    application.Status = false;
+                    volunteersSignedUp--;
+                    opportunity.VolunteersApplied = volunteersSignedUp;
+                    mailer.sendEmail(application, opportunity, false); ;
+
                 }
                 else
                 {
