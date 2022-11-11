@@ -59,7 +59,8 @@ namespace VMS.Controllers
             }
 
             post.DatePosted = DateTime.UtcNow;
-            post.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id.ToString() == User.Id());
+            var id = User.Id();
+            post.CreateUser = await _context.Users.FirstOrDefaultAsync(t => t.Id == User.Id());
             post.CreateUserName = post.CreateUser.UserName;
             post.ProfilePicture = post.CreateUser.ProfilePicture;
             post.TotalLikes = 0;
