@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using VMS.Models;
 
+#nullable enable
+
 namespace VMS.Models
 {
     public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -88,6 +90,10 @@ namespace VMS.Models
 
                 entity.Property(e => e.Virtual)
                     .IsRequired()
+                    .HasDefaultValueSql("(CONVERT([bit],(0)))");
+
+                entity.Property(e => e.IsRecurring)
+                    .HasColumnName("Recurring")
                     .HasDefaultValueSql("(CONVERT([bit],(0)))");
 
                 entity.HasOne(d => d.CreateUser)
