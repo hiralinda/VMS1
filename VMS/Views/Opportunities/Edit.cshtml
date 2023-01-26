@@ -20,14 +20,14 @@
                     <div class="row">
                         <!--Virtual-->
                         <div class="col-md-3 form-group">
-                            <input id="isVirtualSelected" type="checkbox" value="True" name="Virtual" asp-for="Virtual" />
+                            <input id="isVirtualSelected" type="checkbox" name="Virtual" asp-for="Virtual" />
                             <Label>Is this a Virtual activity? </Label>
                         </div>
 
 
                         <!--Single or Group activity-->
                         <div class="col-md-3 form-group">
-                            <input type="checkbox" value="True" name="GroupActivity" asp-for="GroupActivity" />
+                            <input type="checkbox" name="GroupActivity" asp-for="GroupActivity" />
                             <Label>Is this a group activity? </Label>
                         </div>
                     </div>
@@ -406,24 +406,21 @@
 
                     <!--Interest-->
                     <div class="form-group">
-                        <div class="col-md-6 form-group">
-                            <label class="control-label">Select a cause area</label>
-                            <select class="form-select col-md-3" aria-label="select" asp-for="InterestAreas" name="InterestAreas" required>
-                                <option value="Advocacy & Human Rights">Advocacy & Human Rights</option>
-                                <option value="Animals">Animals</option>
-                                <option value="Comfort the Sick">Comfort the sick</option>
-                                <option value="Community Support">Community Support</option>
-                                <option value="Computers & Technology">Computers & Technology</option>
-                                <option value="Donations">Donations</option>
-                                <option value="Education & Literacy">Education & Literacy</option>
-                                <option value="Elderly">Elderly</option>
-                                <option value="Help kids">Help kids</option>
-                                <option value="Help Refugees">Help Refugees</option>
-                                <option value="Homeless">Homeless</option>
-                                <option value="Save the Planet">Save the Planet</option>
-                                <option value="Support Our troops">Support our troops</option>
-                                <option value="Fighting Hunger">Fighting Hunger</option>
-                            </select>
+                        <label class="control-label">Select a cause area</label>
+                        <div class="container checkbox-list">
+                            @foreach (SelectListItem interest in ViewBag.AvailableInterestAreas)
+                            {
+                                if (ViewBag.InterestAreas.Contains(interest.Value))
+                                {
+                                    <input type="checkbox" name="InterestAreas" value="@interest.Value", checked="checked"/> @interest.Text
+                                    <br />
+                                }else
+                                {
+                                    <input type="checkbox" name="InterestAreas" value="@interest.Value" /> @interest.Text
+                                    <br />
+                                }
+                                
+                            }
                         </div>
 
                     </div>
@@ -475,7 +472,7 @@
                             </div>
                             <div class="col-sm-4">
 
-                                @if ((bool)Model.OnGoing)
+                                @if (Model.OnGoing)
                                 {
                                 <div id="EndDatePicker">
                                     <label asp-for="EndDate" class="control-label">Event end date:</label>
@@ -519,6 +516,33 @@
                                 }
 
 
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div>
+                                    <label>Recurring Event?</label>
+                                    <input type="checkbox" name="Recurring" id="isRecurringSelected" value="true" asp-for="IsRecurring" />
+                                </div>
+
+                                <div class="form-group" id="recurringDays">
+                                    <div class="container">
+                                        @foreach (SelectListItem day in ViewBag.AvailableRecurringDays)
+                                        {
+                                            if (ViewBag.RecurringDays.Contains(day.Value))
+                                            {
+                                               <input type="checkbox" name="SelectedDays" value="@day.Value" checked="checked" /> @day.Text
+                                                <br /> 
+                                            }else
+                                            {
+                                                <input type="checkbox" name="SelectedDays" value="@day.Value" /> @day.Text
+                                                <br />
+                                            }
+                                            
+                                        }
+                                    </div>
+
+                                </div>
 
                             </div>
                         </div>
@@ -567,6 +591,17 @@
         } else {
             $('.EndDateInput').val('').prop('disabled', false);
             $('.EndDateInput').val('').prop('required', true);
+        }
+    });
+
+    $('#isRecurringSelected').change(function () {
+        if ($('#isRecurringSelected').is(':checked') == true) {
+            $('#recurringDays *').prop('disabled', false);
+            $('#recurringDays *').prop('required', true);
+        } else {
+            $('#recurringDays *').prop('disabled', true);
+            $('#recurringDays *').prop('checked', false)
+
         }
     });
 </script>

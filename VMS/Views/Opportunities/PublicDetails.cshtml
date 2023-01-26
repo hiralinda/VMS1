@@ -165,7 +165,11 @@
                 <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.Description)</p>
 
                 <p class="fs-4 fw-bold">Cause Area</p>
-                <p class="col-md-8 fs-6">@Html.DisplayFor(model => model.InterestAreas)</p>
+
+                @foreach (string area in ViewBag.InterestAreas)
+                {
+                <p class="badge bg-primary">@area</p>
+                }
 
                 @if (Model.TypeOfOpportunity != "Select")
                 {
@@ -208,6 +212,16 @@
                     }
 
                 }
+
+                @if (Model.IsRecurring)
+			    {
+                   <p class="fs-5 fw-bold"> This is a recurring event and it's going to happen every:</p>
+                   foreach (var item in ViewBag.RecurringDays)
+                   {
+                    <p class="badge bg-primary">@item</p>
+                   }
+			    }
+
                 @if ((bool)!Model.Virtual)
                 {
                     <p class="col-md-8 fs-6 fw-bold">@Model.StartTime.ToShortTimeString() - @Model.EndTime.ToShortTimeString()</p>

@@ -169,6 +169,24 @@
                         <p>No</p>
                     }
                 </dd>
+                <dt class="col-sm-3">
+                    Recurring activity?
+                </dt>
+                <dd class="col-sm-8">
+                    @if ((bool)Model.IsRecurring)
+                    {
+                        <p>Yes</p>
+                        <p>Recurring days:</p>
+                        for (int i = 0; i < ViewBag.RecurringDays.Count; i++)
+                        {
+                            <span class="badge bg-primary">@ViewBag.RecurringDays[i]</span>
+                        }
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </dd>
             </dl>
         </div>
     </div>
