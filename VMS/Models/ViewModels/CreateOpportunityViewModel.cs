@@ -28,6 +28,8 @@ namespace VMS.Models.ViewModels
         public bool Virtual { get; set; }
         public bool GroupActivity { get; set; }
         public bool OnGoing { get; set; } // Event is ongoing, no set end date
+        public bool Recurring { get; set; } = false;
+        public IList<string> SelectedRecurringDays { get; set; } = new List<string>();
         public bool ArchivedStatus { get; set; }
         public DateTime ArchivedDate { get; set; }
         public DateTime StartDate { get; set; }
@@ -40,6 +42,7 @@ namespace VMS.Models.ViewModels
         public byte[] CompanyLogo { get; set; }
 
         public IList<SelectListItem> AvailableInterestAreas { get; set; } = new List<SelectListItem>();
+        public IList<SelectListItem> AvailableRecurringDays { get; set; } = new List<SelectListItem>();
 
     }
 
