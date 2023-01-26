@@ -353,6 +353,11 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
+            if (opportunity.IsRecurring)
+            {
+                ViewBag.RecurringDays = opportunity.RecurringDays.Split(',').ToList();
+            }
+
             return View(opportunity);
         }
         
@@ -370,6 +375,10 @@ namespace VMS.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.InterestAreas = opportunity.InterestAreas.Split(",").ToList(); 
+
+           if (opportunity.IsRecurring) ViewBag.RecurringDays = opportunity.RecurringDays.Split(',').ToList();
 
             return View(opportunity);
         }
@@ -463,10 +472,13 @@ namespace VMS.Controllers
         {
             var model = new CreateOpportunityViewModel
             {
-                AvailableInterestAreas = GetInterestAreas()
+                AvailableInterestAreas = GetInterestAreas(),
+                AvailableRecurringDays = GetRecurringDays()
             };
             return View(model);
         }
+
+
 
         // POST: Opportunities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -478,15 +490,24 @@ namespace VMS.Controllers
         //public async Task<IActionResult> Create([Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")]
         public async Task<IActionResult> Create(CreateOpportunityViewModel model)
         {
+
             var opportunity = Mapper.Map<Opportunity>(model);
+
+#if DEBUG
+            var errors = ModelState.Where(x => x.Value.Errors.Any())
+                    .Select(x => new { x.Key, x.Value.Errors }); 
+#endif
 
             if (ModelState.IsValid)
             {
                 var userId = User.Id();
                 opportunity.VolunteersApplied = 0;
                 opportunity.CreateDate = DateTime.UtcNow;
-                opportunity.InterestAreas = String.Join(",", model.SelectedInterestAreas);
+                opportunity.InterestAreas = Request.Form["InterestAreas"].ToString();
+                opportunity.RecurringDays = Request.Form["SelectedDays"].ToString();
+                opportunity.IsRecurring = model.Recurring;
                 opportunity.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+                opportunity.TypeOfOpportunity = model.TypeOfOpportunity[0];
                 _context.Add(opportunity);
                 await _context.SaveChangesAsync();
                 TempData["message"] = $"Created!";
@@ -504,7 +525,12 @@ namespace VMS.Controllers
                 return NotFound();
             }
 
-            var opportunity = await _context.Opportunities.FindAsync(id);
+            var opportunity = await _context.Opportunities.Include(o => o.CreateUser).FirstOrDefaultAsync(o => o.Id == id);
+
+            ViewBag.RecurringDays = opportunity.RecurringDays.Split(',').ToList();
+            ViewBag.InterestAreas = opportunity.InterestAreas.Split(',').ToList();
+            ViewBag.AvailableInterestAreas = GetInterestAreas();
+            ViewBag.AvailableRecurringDays = GetRecurringDays();
             if (opportunity == null)
             {
                 return NotFound();
@@ -518,19 +544,32 @@ namespace VMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,VolunteersNeeded,OpportunityName,Address1,Address2,City,State,Zip,Country,Description,Requirements,AgeBracket,GradeLevel,InterestAreas,TypeOfOpportunity,Virtual,GroupActivity,OnGoing,StartDate,StartTime,EndDate,EndTime,CreateDate,CompanyLogo")] Opportunity opportunity)
+        public async Task<IActionResult> Edit(int id, CreateOpportunityViewModel opportunity)
         {
             if (id != opportunity.Id)
             {
                 return NotFound();
             }
 
+            var opp = Mapper.Map<Opportunity>(opportunity);
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    opportunity.CreateDate = DateTime.UtcNow;
-                    _context.Update(opportunity);
+                    var userId = User.Id();
+                    opp.CreateUser = await _context.Users.SingleOrDefaultAsync(t => t.Id == userId);
+
+                    opp.CreateDate = DateTime.UtcNow;
+                    opp.InterestAreas = Request.Form["InterestAreas"].ToString();
+                    opp.RecurringDays = Request.Form["SelectedDays"].ToString();
+                    opp.IsRecurring = opportunity.Recurring;
+
+                    if (opp.ArchivedStatus == null)
+                    {
+                        opp.ArchivedStatus = false;
+                    }
+                    _context.Update(opp);
                     await _context.SaveChangesAsync();
                     TempData["message"] = $"Changes saved!";
                 }
@@ -815,7 +854,7 @@ namespace VMS.Controllers
             return View(application);
         }
 
-        private IList<SelectListItem> GetInterestAreas()
+        private static IList<SelectListItem> GetInterestAreas()
         {
             return new List<SelectListItem>
             {
@@ -834,6 +873,20 @@ namespace VMS.Controllers
                 new SelectListItem {Text = "Support our Troops", Value = "Support our Troops"},
                 new SelectListItem {Text = "Fighting Hunger", Value = "Fighting Hunger"},
 
+            };
+        }
+
+        private static IList<SelectListItem> GetRecurringDays()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Saturday", Value = "Saturday"},
+                new SelectListItem {Text = "Sunday", Value = "Sunday"},
+                new SelectListItem {Text = "Monday", Value = "Monday"},
+                new SelectListItem {Text = "Tuesday", Value = "Tuesday"},
+                new SelectListItem {Text = "Wednesday", Value = "Wednesday"},
+                new SelectListItem {Text = "Thursday", Value = "Thursday"},
+                new SelectListItem {Text = "Friday", Value = "Friday"} 
             };
         }
     }
