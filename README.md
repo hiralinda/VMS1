@@ -20,9 +20,12 @@ This web application was built for a local not-for-profit organization to connec
 * Mark Barreca
 * Brianna Moreland
 
+
 ###### Developers
 * Angel Santana
 * Mark Barreca
+* Guilherme Santos
+* Ligia Hirata
 
 ###### Team Mentors
 * Danan Hudson
